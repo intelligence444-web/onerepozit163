@@ -459,9 +459,10 @@ a { color: inherit; }
 
 /* Заголовок первого экрана */
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.hero-copy h1 { max-width: 17ch; font-size: clamp(2.2rem, 4vw, 3.3rem); text-wrap: balance; }
+.hero-copy h1 { max-width: none; font-size: clamp(2.8rem, 5vw, 4.1rem); line-height: 1; white-space: nowrap; }
+.h1-sub span { display: block; }
 .h1-main { display: block; }
-.h1-sub { display: block; margin-top: .45em; font-size: .52em; font-weight: 500; line-height: 1.2; letter-spacing: -0.02em; color: var(--graphite); }
+.h1-sub { margin-top: 14px; font-size: clamp(1.25rem, 2.2vw, 1.75rem); font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; color: var(--graphite); text-wrap: balance; }
 
 /* Фон первого экрана: точечная сетка и мягкое свечение за макетом */
 .hero { position: relative; overflow: hidden; }
