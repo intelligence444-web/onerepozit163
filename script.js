@@ -373,3 +373,12 @@ function onScroll() {
 window.addEventListener("scroll", onScroll, { passive: true });
 window.addEventListener("resize", onScroll);
 onScroll();
+
+/* ---------- Шрифты примеров ниш: грузим после страницы, чтобы не тормозить первый экран ---------- */
+
+window.addEventListener("load", () => {
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = "https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&family=Cormorant+Garamond:wght@600;700&family=Unbounded:wght@600&family=Lora:wght@600&display=swap";
+  document.head.append(link);
+});
