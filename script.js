@@ -190,8 +190,9 @@ const TYPES = {
   site: { label: "Многостраничный сайт", price: 80000, days: [21, 28] },
 };
 const EXTRAS = {
-  quizBlock: { label: "Квиз внутри страницы", price: 8000, days: 2 },
-  crm: { label: "Интеграция с CRM", price: 7000, days: 1 },
+  quizBlock: { label: "Квиз внутри страницы", price: 10000, days: 2 },
+  metrika: { label: "Яндекс Метрика и цели", price: 5000, days: 1 },
+  crm: { label: "Заявки в CRM или Telegram", price: 7000, days: 1 },
   motion: { label: "Анимации и интерактив", price: 10000, days: 3 },
   analytics: { label: "Сквозная аналитика", price: 10000, days: 2 },
   direct: { label: "Яндекс Директ", price: 20000, days: 0 },
@@ -200,8 +201,7 @@ const EXTRAS = {
 };
 const PRESETS = {
   start: { type: "quiz", extras: [] },
-  business: { type: "landing", extras: ["quizBlock", "crm"] },
-  traffic: { type: "landing", extras: ["analytics", "direct"] },
+  business: { type: "landing", extras: ["quizBlock"] },
 };
 
 const form = document.getElementById("calc-form");

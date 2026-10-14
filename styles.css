@@ -264,10 +264,21 @@ a { color: inherit; }
 .tags li { padding: 10px 18px; background: var(--paper); border: 1px solid var(--line); border-radius: 999px; font-size: 15px; }
 
 /* Что входит */
-.included { display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px 36px; }
+.included { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px 40px; }
 .included li { padding-top: 20px; border-top: 2px solid var(--ink); }
 .included h3 { margin-bottom: 10px; }
 .included p { color: var(--graphite); font-size: 15px; }
+
+/* Сопровождение */
+.section-flush { padding-top: 0; }
+.addon { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px 64px; padding: clamp(28px, 5vw, 56px); border: 1px solid var(--line); border-radius: 18px; background: var(--paper); }
+.addon-head { display: grid; gap: 20px; align-content: start; justify-items: start; }
+.addon-head h2 { max-width: 14ch; }
+.addon-list { display: grid; gap: 0; }
+.addon-list li { padding: 22px 0; border-top: 1px solid var(--line); }
+.addon-list li:first-child { padding-top: 0; border-top: 0; }
+.addon-list h3 { margin-bottom: 8px; }
+.addon-list p { color: var(--graphite); font-size: 15px; max-width: 40em; }
 
 /* Трафик */
 .traffic-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: center; }
@@ -413,7 +424,7 @@ a { color: inherit; }
 @media (max-width: 900px) {
   .nav { display: none; }
   .header-inner { justify-content: space-between; }
-  .hero-grid, .niches-grid, .traffic-grid, .faq-grid { grid-template-columns: 1fr; gap: 48px; }
+  .hero-grid, .niches-grid, .traffic-grid, .faq-grid, .addon { grid-template-columns: 1fr; gap: 40px; }
   .showcase { max-width: 640px; }
   .toast { left: 10px; }
   .section-head { grid-template-columns: 1fr; margin-bottom: 40px; }
