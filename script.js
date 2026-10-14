@@ -348,19 +348,6 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
-/* ---------- Этапы: линия прогресса при прокрутке ---------- */
-
-const steps = document.getElementById("steps");
-const stepItems = steps ? [...steps.children] : [];
-
-function updateSteps() {
-  const r = steps.getBoundingClientRect();
-  const vh = window.innerHeight;
-  const p = Math.min(1, Math.max(0, (vh * 0.75 - r.top) / (r.height + vh * 0.25)));
-  steps.style.setProperty("--progress", p.toFixed(3));
-  stepItems.forEach((li, i) => li.classList.toggle("is-done", p >= i / stepItems.length + 0.02));
-}
-
 /* ---------- Мобильная панель с кнопкой ---------- */
 
 const mobileCta = document.getElementById("mobile-cta");
@@ -379,7 +366,6 @@ function onScroll() {
   if (ticking) return;
   ticking = true;
   requestAnimationFrame(() => {
-    if (steps) updateSteps();
     updateMobileCta();
     ticking = false;
   });
@@ -387,14 +373,3 @@ function onScroll() {
 window.addEventListener("scroll", onScroll, { passive: true });
 window.addEventListener("resize", onScroll);
 onScroll();
-
-/* ---------- Бенто: анимация полосы загрузки при появлении ---------- */
-
-if ("IntersectionObserver" in window) {
-  const tileObserver = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) { e.target.classList.add("is-in"); tileObserver.unobserve(e.target); }
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll(".tile").forEach((t) => tileObserver.observe(t));
-}
