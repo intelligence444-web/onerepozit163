@@ -11,7 +11,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Rubik:wght@500;700&family=Cormorant+Garamond:wght@600;700&family=Unbounded:wght@600&family=Lora:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -30,7 +30,7 @@
       <a href="#prices">Цены</a>
       <a href="#faq">Вопросы</a>
     </nav>
-    <a class="btn btn-small" href="#brief">Обсудить проект</a>
+    <a class="btn btn-small" href="#calc">Обсудить проект</a>
   </div>
 </header>
 
@@ -43,7 +43,7 @@
         <h1>Сайты и лендинги, которые приносят заявки</h1>
         <p class="lead">Делаю лендинги, сайты и квизы под ключ для любых услуг и товаров. Продумываю структуру и тексты, собираю дизайн, настраиваю аналитику и передачу заявок в CRM или Telegram. Если нужно, сам запускаю рекламу.</p>
         <div class="hero-actions">
-          <a class="btn" href="#brief">Рассчитать стоимость</a>
+          <a class="btn" href="#calc">Рассчитать стоимость</a>
           <a class="btn btn-ghost" href="https://t.me/your_username" target="_blank" rel="noopener">Написать в Telegram</a>
         </div>
         <ul class="hero-facts">
@@ -53,36 +53,68 @@
         </ul>
       </div>
 
-      <div class="blueprint" aria-hidden="true">
-        <div class="bp-frame">
-          <div class="bp-bar"><i></i><i></i><i></i><span class="bp-url">ваш-сайт.рф</span></div>
-          <div class="bp-body">
-            <div class="bp-row bp-nav"><b class="w20"></b><b class="w40 thin"></b></div>
-            <div class="bp-offer">
-              <div>
-                <b class="w90 h-l"></b>
-                <b class="w70 h-l"></b>
-                <b class="w80 thin"></b>
-                <b class="w60 thin"></b>
-                <b class="bp-btn"></b>
+      <div class="showcase">
+        <div class="stage" id="stage" data-state="wire" data-niche="remont">
+          <div class="mock" role="img" aria-label="Пример лендинга для выбранной ниши">
+            <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url" data-k="url">remont-pod-klyuch.rf</span></div>
+            <div class="page">
+              <div class="pg-nav">
+                <span class="t pg-logo" data-k="logo">Ремонт Про</span>
+                <span class="t sub pg-phone" data-k="phone">+7 900 000-00-00</span>
               </div>
-              <div class="bp-img"></div>
+              <div class="pg-offer blk">
+                <span class="note">оффер</span>
+                <div class="pg-offer-text">
+                  <p class="pg-title"><span class="t" data-k="title">Ремонт квартир под ключ с фиксированной сметой</span></p>
+                  <p class="pg-text"><span class="t sub" data-k="text">Смета за 1 день, работы по договору, оплата по этапам.</span></p>
+                  <span class="pg-btn"><span class="t on" data-k="cta">Рассчитать стоимость</span></span>
+                </div>
+                <div class="pg-art" data-k="art"></div>
+              </div>
+              <div class="pg-benefits blk">
+                <span class="note">преимущества</span>
+                <div><span class="t sub" data-k="b0">Смета за 1 день</span></div>
+                <div><span class="t sub" data-k="b1">Гарантия 3 года</span></div>
+                <div><span class="t sub" data-k="b2">Фотоотчёты</span></div>
+              </div>
+              <div class="pg-quiz blk">
+                <span class="note">квиз</span>
+                <p class="pg-q"><span class="t" data-k="q">Какая площадь квартиры?</span></p>
+                <div class="pg-opts">
+                  <span><span class="t sub" data-k="o0">до 40 м²</span></span>
+                  <span class="sel"><span class="t sub" data-k="o1">40–70 м²</span></span>
+                  <span><span class="t sub" data-k="o2">70–100 м²</span></span>
+                  <span><span class="t sub" data-k="o3">100+ м²</span></span>
+                </div>
+              </div>
+              <div class="pg-form blk">
+                <span class="note">форма заявки</span>
+                <span class="pg-input"><span class="t sub">Имя</span></span>
+                <span class="pg-input"><span class="t sub">Телефон</span></span>
+                <span class="pg-btn"><span class="t on" data-k="formBtn">Получить смету</span></span>
+              </div>
             </div>
-            <div class="bp-cols"><span></span><span></span><span></span></div>
-            <div class="bp-quiz">
-              <b class="w50 thin"></b>
-              <div class="bp-options"><span></span><span class="on"></span><span></span><span></span></div>
-            </div>
-            <div class="bp-form"><span></span><span></span><b class="bp-btn"></b></div>
+          </div>
+          <div class="toast" aria-live="polite">
+            <span class="toast-dot"></span>
+            <div><strong>Новая заявка с сайта</strong><span data-k="toast">Ремонт 2-комнатной, 54 м²</span></div>
           </div>
         </div>
-        <span class="note n1">оффер и выгода</span>
-        <span class="note n2">преимущества</span>
-        <span class="note n3">квиз</span>
-        <span class="note n4">форма заявки</span>
-        <div class="toast">
-          <span class="toast-dot"></span>
-          <div><strong>Новая заявка с сайта</strong><span>Отправлена в CRM и Telegram</span></div>
+
+        <div class="switcher">
+          <p class="switcher-label" id="niche-label">Примерьте на свою нишу</p>
+          <div class="niches" role="group" aria-labelledby="niche-label">
+            <button type="button" data-niche="remont" aria-pressed="true">Ремонт</button>
+            <button type="button" data-niche="dental" aria-pressed="false">Стоматология</button>
+            <button type="button" data-niche="realty" aria-pressed="false">Недвижимость</button>
+            <button type="button" data-niche="school" aria-pressed="false">Онлайн-школа</button>
+            <button type="button" data-niche="mebel" aria-pressed="false">Мебель</button>
+          </div>
+          <label class="wire-toggle">
+            <input type="checkbox" id="wire-toggle">
+            <span class="wire-track" aria-hidden="true"></span>
+            Показать чертёж
+          </label>
         </div>
       </div>
     </div>
@@ -172,7 +204,7 @@
       <div>
         <h2>Сайт без трафика — это просто визитка</h2>
         <p>Я специалист по рекламе, поэтому делаю сайт сразу под конкретный источник трафика. После запуска могу взять рекламу на себя: настрою кампании, буду отслеживать стоимость заявки и улучшать страницу по данным, а не по ощущениям.</p>
-        <a class="btn btn-light" href="#brief">Обсудить сайт и рекламу</a>
+        <a class="btn btn-light" href="#calc">Обсудить сайт и рекламу</a>
       </div>
       <ul class="channels">
         <li><strong>Яндекс Директ</strong><span>Поиск, РСЯ, Мастер кампаний</span></li>
@@ -218,7 +250,7 @@
             <li>Метрика и цели</li>
             <li>Заявки в Telegram</li>
           </ul>
-          <a class="btn btn-ghost" href="#brief" data-plan="Старт">Выбрать Старт</a>
+          <a class="btn btn-ghost" href="#calc" data-preset="start">Выбрать Старт</a>
         </article>
         <article class="plan plan-main">
           <h3>Бизнес</h3>
@@ -231,7 +263,7 @@
             <li>Защита от спама</li>
             <li>Готовность к Директу и ВК</li>
           </ul>
-          <a class="btn" href="#brief" data-plan="Бизнес">Выбрать Бизнес</a>
+          <a class="btn" href="#calc" data-preset="business">Выбрать Бизнес</a>
         </article>
         <article class="plan">
           <h3>Сайт + трафик</h3>
@@ -243,7 +275,7 @@
             <li>Сквозная аналитика</li>
             <li>Ведение рекламы первый месяц</li>
           </ul>
-          <a class="btn btn-ghost" href="#brief" data-plan="Сайт + трафик">Выбрать Сайт + трафик</a>
+          <a class="btn btn-ghost" href="#calc" data-preset="traffic">Выбрать Сайт + трафик</a>
         </article>
       </div>
       <aside class="bonus">
@@ -289,47 +321,77 @@
     </div>
   </section>
 
-  <!-- Заявка -->
-  <section class="section section-tint" id="brief">
-    <div class="wrap brief-grid">
-      <div>
-        <h2>Расскажите о задаче</h2>
-        <p class="muted">Отвечу в течение часа в рабочее время и предложу время для созвона. Можно сразу написать в мессенджер.</p>
-        <ul class="contacts">
-          <li><a href="https://t.me/your_username" target="_blank" rel="noopener">Telegram: @your_username</a></li>
-          <li><a href="tel:+79000000000">+7 900 000-00-00</a></li>
-        </ul>
+  <!-- Калькулятор и заявка -->
+  <section class="section section-tint" id="calc">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Сколько будет стоить ваш сайт</h2>
+        <p>Выберите, что нужно, и увидите ориентировочную цену и срок. Точную сумму зафиксируем в договоре после созвона.</p>
       </div>
 
-      <form class="brief" id="brief-form" novalidate>
-        <fieldset>
-          <legend>Что нужно сделать?</legend>
-          <div class="chips">
-            <label><input type="radio" name="type" value="Лендинг" checked><span>Лендинг</span></label>
-            <label><input type="radio" name="type" value="Квиз"><span>Квиз</span></label>
-            <label><input type="radio" name="type" value="Многостраничный сайт"><span>Сайт</span></label>
-            <label><input type="radio" name="type" value="Каталог"><span>Каталог</span></label>
-            <label><input type="radio" name="type" value="Сайт + реклама"><span>Сайт + реклама</span></label>
+      <form class="calc" id="calc-form" novalidate>
+        <div class="calc-steps">
+          <fieldset class="calc-step">
+            <legend><span class="step-n">1</span>Что делаем</legend>
+            <div class="opt-grid">
+              <label class="opt"><input type="radio" name="type" value="quiz"><span><b>Квиз</b><small>от 25 000 ₽, 5–7 дней</small></span></label>
+              <label class="opt"><input type="radio" name="type" value="landing" checked><span><b>Лендинг</b><small>от 35 000 ₽, 7–10 дней</small></span></label>
+              <label class="opt"><input type="radio" name="type" value="catalog"><span><b>Каталог</b><small>от 60 000 ₽, 14–21 день</small></span></label>
+              <label class="opt"><input type="radio" name="type" value="site"><span><b>Многостраничный сайт</b><small>от 80 000 ₽, 21–28 дней</small></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="calc-step">
+            <legend><span class="step-n">2</span>Что добавить к сайту</legend>
+            <div class="opt-grid">
+              <label class="opt" data-hide-for="quiz"><input type="checkbox" name="extra" value="quizBlock"><span><b>Квиз внутри страницы</b><small>+8 000 ₽</small></span></label>
+              <label class="opt"><input type="checkbox" name="extra" value="crm"><span><b>Заявки в amoCRM или Bitrix24</b><small>+7 000 ₽</small></span></label>
+              <label class="opt"><input type="checkbox" name="extra" value="motion"><span><b>Анимации и интерактив</b><small>+10 000 ₽</small></span></label>
+              <label class="opt"><input type="checkbox" name="extra" value="analytics"><span><b>Сквозная аналитика</b><small>+10 000 ₽</small></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="calc-step">
+            <legend><span class="step-n">3</span>Запуск рекламы</legend>
+            <div class="opt-grid three">
+              <label class="opt"><input type="checkbox" name="extra" value="direct"><span><b>Яндекс Директ</b><small>+20 000 ₽</small></span></label>
+              <label class="opt"><input type="checkbox" name="extra" value="vk"><span><b>ВКонтакте</b><small>+15 000 ₽</small></span></label>
+              <label class="opt"><input type="checkbox" name="extra" value="avito"><span><b>Авито</b><small>+12 000 ₽</small></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="calc-step">
+            <legend><span class="step-n">4</span>Сроки</legend>
+            <div class="opt-grid">
+              <label class="opt"><input type="radio" name="speed" value="normal" checked><span><b>Обычные</b><small>без доплаты</small></span></label>
+              <label class="opt"><input type="radio" name="speed" value="fast"><span><b>Срочно</b><small>быстрее на 40%, +30% к цене</small></span></label>
+            </div>
+          </fieldset>
+        </div>
+
+        <aside class="summary" aria-labelledby="sum-title">
+          <h3 id="sum-title">Ваш проект</h3>
+          <ul class="sum-list" id="sum-list"></ul>
+          <div class="sum-total">
+            <div><span>Стоимость</span><output id="sum-price">от 35 000 ₽</output></div>
+            <div><span>Срок</span><output id="sum-days">7–10 дней</output></div>
           </div>
-        </fieldset>
-        <div class="field">
-          <label for="f-name">Имя</label>
-          <input id="f-name" name="name" type="text" autocomplete="name" required>
-        </div>
-        <div class="field">
-          <label for="f-contact">Телефон или Telegram</label>
-          <input id="f-contact" name="contact" type="text" autocomplete="tel" required>
-        </div>
-        <div class="field">
-          <label for="f-about">Что продаёте <span class="optional">(необязательно)</span></label>
-          <textarea id="f-about" name="about" rows="3"></textarea>
-        </div>
-        <input type="hidden" name="plan" value="">
-        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button class="btn btn-wide" type="submit">Отправить заявку</button>
-        <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
-        <p class="form-status" role="status" aria-live="polite"></p>
+          <div class="field">
+            <label for="f-name">Имя</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-contact">Телефон или Telegram</label>
+            <input id="f-contact" name="contact" type="text" autocomplete="tel" required>
+          </div>
+          <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn-wide" type="submit">Получить точный расчёт</button>
+          <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </aside>
       </form>
+
+      <p class="calc-alt">Удобнее голосом или в мессенджере? <a href="https://t.me/your_username" target="_blank" rel="noopener">Telegram: @your_username</a> или <a href="tel:+79000000000">+7 900 000-00-00</a></p>
     </div>
   </section>
 
