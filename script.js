@@ -304,13 +304,13 @@ form.addEventListener("submit", async (event) => {
     if (empty && !firstInvalid) firstInvalid = input;
   });
   if (firstInvalid) {
-    setStatus("Укажите имя и телефон или Telegram, чтобы я мог прислать расчёт.", "err");
+    setStatus("Укажите имя и телефон или Telegram, чтобы мы могли прислать расчёт.", "err");
     firstInvalid.focus();
     return;
   }
 
   if (!CONFIG.formEndpoint) {
-    setStatus("Форма ещё не подключена. Напишите мне в Telegram, отвечу в течение часа.", "err");
+    setStatus("Форма ещё не подключена. Напишите нам в Telegram, ответим в течение часа.", "err");
     return;
   }
 
@@ -338,7 +338,7 @@ form.addEventListener("submit", async (event) => {
     if (!response.ok) throw new Error(response.status);
     form.elements.name.value = "";
     form.elements.contact.value = "";
-    setStatus("Заявка отправлена. Пришлю точный расчёт в течение часа в рабочее время.", "ok");
+    setStatus("Заявка отправлена. Пришлём точный расчёт в течение часа в рабочее время.", "ok");
     if (CONFIG.metrikaId && window.ym) window.ym(CONFIG.metrikaId, "reachGoal", "lead");
   } catch {
     setStatus("Заявка не отправилась. Проверьте интернет и попробуйте ещё раз или напишите в Telegram.", "err");
@@ -347,3 +347,54 @@ form.addEventListener("submit", async (event) => {
     button.textContent = "Получить точный расчёт";
   }
 });
+
+/* ---------- Этапы: линия прогресса при прокрутке ---------- */
+
+const steps = document.getElementById("steps");
+const stepItems = steps ? [...steps.children] : [];
+
+function updateSteps() {
+  const r = steps.getBoundingClientRect();
+  const vh = window.innerHeight;
+  const p = Math.min(1, Math.max(0, (vh * 0.75 - r.top) / (r.height + vh * 0.25)));
+  steps.style.setProperty("--progress", p.toFixed(3));
+  stepItems.forEach((li, i) => li.classList.toggle("is-done", p >= i / stepItems.length + 0.02));
+}
+
+/* ---------- Мобильная панель с кнопкой ---------- */
+
+const mobileCta = document.getElementById("mobile-cta");
+const hero = document.querySelector(".hero");
+const calcSection = document.getElementById("calc");
+
+function updateMobileCta() {
+  const pastHero = hero.getBoundingClientRect().bottom < 0;
+  const c = calcSection.getBoundingClientRect();
+  const calcVisible = c.top < window.innerHeight && c.bottom > 0;
+  mobileCta.classList.toggle("is-visible", pastHero && !calcVisible);
+}
+
+let ticking = false;
+function onScroll() {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    if (steps) updateSteps();
+    updateMobileCta();
+    ticking = false;
+  });
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+window.addEventListener("resize", onScroll);
+onScroll();
+
+/* ---------- Бенто: анимация полосы загрузки при появлении ---------- */
+
+if ("IntersectionObserver" in window) {
+  const tileObserver = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add("is-in"); tileObserver.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll(".tile").forEach((t) => tileObserver.observe(t));
+}
