@@ -59,7 +59,7 @@ a { color: inherit; }
 .btn-ghost:hover { background: var(--paper); border-color: var(--ink); }
 .btn-light { background: #fff; color: var(--ink); border-color: #fff; }
 .btn-light:hover { background: var(--accent-soft); border-color: var(--accent-soft); }
-.btn-small { min-height: 42px; padding: 0 18px; font-size: 15px; }
+.btn-small { min-height: 42px; padding: 0 18px; font-size: 15px; white-space: nowrap; }
 .btn-wide { width: 100%; }
 
 /* Шапка */
@@ -70,7 +70,13 @@ a { color: inherit; }
   border-bottom: 1px solid var(--line);
 }
 .header-inner { display: flex; align-items: center; gap: 32px; height: 68px; }
-.logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; text-decoration: none; letter-spacing: -0.02em; }
+.logo { display: flex; align-items: center; gap: 10px; margin: 0; text-decoration: none; }
+.logo img { display: block; width: 34px; height: auto; }
+.wordmark { font-size: 17px; font-weight: 300; letter-spacing: .08em; white-space: nowrap; color: var(--ink); }
+.wordmark b { font-weight: 700; }
+.footer-brand { display: grid; gap: 6px; }
+.byline { margin-left: 44px; font-size: 11px; letter-spacing: .24em; color: var(--graphite); }
+.footer-brand .muted { margin-top: 10px; }
 .nav { display: flex; gap: 28px; margin-left: auto; font-size: 15px; }
 .nav a { text-decoration: none; color: var(--graphite); }
 .nav a:hover { color: var(--ink); }
@@ -434,6 +440,10 @@ a { color: inherit; }
   .service, .service:nth-child(even) { padding: 28px 0; border-left: 0; }
   .steps { grid-template-columns: 1fr; }
   .hero-actions .btn { flex: 1 1 100%; }
+  .header-inner { gap: 12px; }
+  .site-header .logo img { width: 28px; }
+  .site-header .wordmark { font-size: 14px; letter-spacing: .06em; }
+  .site-header .btn-small { min-height: 40px; padding: 0 14px; font-size: 14px; }
   .hero-facts { grid-template-columns: 1fr 1fr; gap: 16px 24px; }
   .page { padding: 12px 12px 16px; gap: 12px; font-size: 10.5px; }
   .pg-title { font-size: calc(var(--m-size, 19px) * .8); }

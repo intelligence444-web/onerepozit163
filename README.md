@@ -23,4 +23,5 @@
 - `index.html`: разметка и тексты
 - `styles.css`: стили и адаптив
 - `script.js`: витрина с примеркой ниш, калькулятор и отправка заявки
-- `assets/favicon.svg`: иконка
+- `assets/logo-mark.png`: знак Land Engine для шапки и подвала
+- `assets/favicon.png`, `assets/apple-touch-icon.png`: иконки сайта
