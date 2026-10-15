@@ -196,11 +196,17 @@ const EXTRAS = {
   direct: { label: "Яндекс Директ", price: 35000, days: 0 },
   vk: { label: "Реклама ВКонтакте", price: 25000, days: 0 },
   avito: { label: "Авито", price: 25000, days: 0 },
+  // Ведение рекламы в первый месяц стоит столько же, сколько настройка выбранных каналов
+  manage: { label: "Ведение рекламы, первый месяц", price: 0, days: 0 },
 };
 const PRESETS = {
   start: { type: "quiz", extras: [] },
   business: { type: "landing", extras: ["quizBlock"] },
+  traffic: { type: "landing", extras: ["quizBlock", "direct", "analytics", "manage"] },
 };
+const AD_CHANNELS = ["direct", "vk", "avito"];
+const extraPrice = (e, extras) =>
+  e === "manage" ? extras.filter((x) => AD_CHANNELS.includes(x)).reduce((s, x) => s + EXTRAS[x].price, 0) : EXTRAS[e].price;
 
 const form = document.getElementById("calc-form");
 const sumList = document.getElementById("sum-list");
@@ -219,12 +225,13 @@ function daysWord(n) {
 
 function readCalc() {
   const type = form.elements.type.value;
-  const extras = [...form.querySelectorAll('input[name="extra"]:checked')]
+  let extras = [...form.querySelectorAll('input[name="extra"]:checked')]
     .map((i) => i.value)
     .filter((v) => !(type === "quiz" && v === "quizBlock"));
+  if (!extras.some((e) => AD_CHANNELS.includes(e))) extras = extras.filter((e) => e !== "manage");
   const fast = form.elements.speed.value === "fast";
   const t = TYPES[type];
-  let price = t.price + extras.reduce((s, e) => s + EXTRAS[e].price, 0);
+  let price = t.price + extras.reduce((s, e) => s + extraPrice(e, extras), 0);
   let [dMin, dMax] = t.days;
   const addDays = extras.reduce((s, e) => s + EXTRAS[e].days, 0);
   dMin += addDays; dMax += addDays;
@@ -255,7 +262,12 @@ function renderCalc() {
   const c = readCalc();
   form.querySelectorAll("[data-hide-for]").forEach((el) => { el.hidden = el.dataset.hideFor === c.type; });
   const rows = [[TYPES[c.type].label, rub(TYPES[c.type].price)]];
-  c.extras.forEach((e) => rows.push([EXTRAS[e].label, `+${rub(EXTRAS[e].price)}`]));
+  c.extras.forEach((e) => rows.push([EXTRAS[e].label, `+${rub(extraPrice(e, c.extras))}`]));
+  // Ведение доступно, только когда выбран хотя бы один рекламный канал; цена = сумма настройки каналов
+  const adsSum = extraPrice("manage", [...form.querySelectorAll('input[name="extra"]:checked')].map((i) => i.value));
+  const manage = form.querySelector('input[value="manage"]');
+  manage.disabled = adsSum === 0;
+  manage.closest(".opt").querySelector("small").textContent = adsSum ? `+${rub(adsSum)}, как настройка каналов` : "Сначала выберите канал рекламы";
   if (c.fast) rows.push(["Срочный запуск", "+30%"]);
   sumList.innerHTML = "";
   rows.forEach(([a, b]) => {
