@@ -191,18 +191,18 @@ const TYPES = {
 };
 const EXTRAS = {
   quizBlock: { label: "Квиз внутри страницы", price: 10000, days: 2 },
-  motion: { label: "Анимации и интерактив", price: 10000, days: 3 },
-  support: { label: "Сопровождение сайта", price: 10000, days: 0 },
+  motion: { label: "Анимации и интерактив", price: 30000, days: 3 },
+  support: { label: "Сопровождение сайта", price: 20000, days: 0 },
   analytics: { label: "Сквозная аналитика", price: 15000, days: 2, monthly: true },
-  direct: { label: "Яндекс Директ", price: 35000, days: 0, monthly: true },
-  vk: { label: "Реклама ВКонтакте", price: 25000, days: 0, monthly: true },
-  avito: { label: "Авито", price: 25000, days: 0, monthly: true },
+  direct: { label: "Яндекс Директ", price: 45000, days: 0, monthly: true },
+  vk: { label: "Реклама ВКонтакте", price: 35000, days: 0, monthly: true },
+  avito: { label: "Авито", price: 35000, days: 0, monthly: true },
 };
 // Тарифы: фиксированная цена, состав отмечается в калькуляторе
 const PRESETS = {
   start: { type: "quiz", extras: [], plan: { name: "Старт", price: 25000 } },
   business: { type: "landing", extras: ["quizBlock", "support"], plan: { name: "Бизнес", price: 65000 } },
-  traffic: { type: "landing", extras: ["direct", "analytics", "support"], plan: { name: "Сайт + трафик", price: 150000 } },
+  traffic: { type: "landing", extras: ["quizBlock", "direct", "analytics", "support"], plan: { name: "Лендинг + Трафик", price: 150000 } },
 };
 let activePlan = null;
 
