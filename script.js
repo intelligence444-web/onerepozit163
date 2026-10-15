@@ -391,7 +391,9 @@ function updateSteps() {
   // поэтому в один ряд на компьютере шаги загораются по очереди, а не все сразу
   const vh = window.innerHeight;
   const n = stepItems.length;
-  stepItems.forEach((li, i) => li.classList.toggle("is-done", li.getBoundingClientRect().top < vh * (0.8 - 0.4 * i / n)));
+  // Сначала читаем все позиции, потом меняем классы: так браузер не пересчитывает раскладку на каждом шаге
+  const tops = stepItems.map((li) => li.getBoundingClientRect().top);
+  stepItems.forEach((li, i) => li.classList.toggle("is-done", tops[i] < vh * (0.8 - 0.4 * i / n)));
 }
 
 /* ---------- Мобильная панель с кнопкой ---------- */
