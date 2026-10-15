@@ -378,6 +378,12 @@ a { color: inherit; }
 .plan li::before { content: ""; position: absolute; left: 2px; top: .45em; width: 11px; height: 6px; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); }
 .plan .btn { margin-top: auto; }
 
+.plan-support { display: grid; grid-template-columns: 1fr auto auto; gap: 16px 40px; align-items: center; margin-top: 20px; padding: 28px 32px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); }
+.plan-support h3 { font-size: 1.25rem; margin-bottom: 6px; }
+.plan-support > div p { color: var(--graphite); font-size: 15px; max-width: 46em; }
+.plan-support .price { margin: 0; font-size: 1.6rem; white-space: nowrap; }
+.plan-support .price span { font-size: 15px; font-weight: 400; color: var(--graphite); letter-spacing: 0; }
+@media (max-width: 900px) { .plan-support { grid-template-columns: 1fr auto; } .plan-support > div { grid-column: 1 / -1; } }
 .bonus { display: flex; gap: 24px; align-items: flex-start; margin-top: 20px; padding: 28px 32px; background: var(--accent-soft); border-radius: var(--r-card); color: var(--accent); }
 .bonus svg { flex: none; }
 .bonus h3 { color: var(--ink); margin-bottom: 6px; }
@@ -525,6 +531,7 @@ a { color: inherit; }
   .wire-toggle { margin-left: 0; }
   .opt-grid, .opt-grid.three { grid-template-columns: 1fr; }
   .bonus { flex-direction: column; gap: 14px; padding: 24px; }
+  .plan-support { grid-template-columns: 1fr; padding: 24px; }
   .channels li { flex-direction: column; gap: 4px; }
   .channels span { text-align: left; }
   .faq details p { padding-right: 0; }

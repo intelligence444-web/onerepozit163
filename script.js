@@ -192,6 +192,7 @@ const TYPES = {
 const EXTRAS = {
   quizBlock: { label: "Квиз внутри страницы", price: 10000, days: 2 },
   motion: { label: "Анимации и интерактив", price: 10000, days: 3 },
+  support: { label: "Сопровождение, первый месяц", price: 10000, days: 0 },
   analytics: { label: "Сквозная аналитика", price: 15000, days: 2 },
   direct: { label: "Яндекс Директ", price: 35000, days: 0 },
   vk: { label: "Реклама ВКонтакте", price: 25000, days: 0 },
@@ -202,7 +203,7 @@ const EXTRAS = {
 const PRESETS = {
   start: { type: "quiz", extras: [] },
   business: { type: "landing", extras: ["quizBlock"] },
-  traffic: { type: "landing", extras: ["quizBlock", "direct", "analytics", "manage"] },
+  traffic: { type: "landing", extras: ["quizBlock", "direct", "analytics", "manage", "support"] },
 };
 const AD_CHANNELS = ["direct", "vk", "avito"];
 const extraPrice = (e, extras) =>
@@ -289,6 +290,14 @@ document.querySelectorAll("[data-preset]").forEach((link) => {
     const p = PRESETS[link.dataset.preset];
     form.querySelector(`input[name="type"][value="${p.type}"]`).checked = true;
     form.querySelectorAll('input[name="extra"]').forEach((i) => { i.checked = p.extras.includes(i.value); });
+    renderCalc();
+  });
+});
+
+// «Добавить к расчёту»: отмечает пункт, не сбрасывая остальной выбор
+document.querySelectorAll("[data-add]").forEach((link) => {
+  link.addEventListener("click", () => {
+    form.querySelector(`input[name="extra"][value="${link.dataset.add}"]`).checked = true;
     renderCalc();
   });
 });
