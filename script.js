@@ -185,7 +185,7 @@ if (reduceMotion) {
 
 const TYPES = {
   quiz: { label: "Квиз", price: 25000, days: [5, 7] },
-  landing: { label: "Лендинг", price: 40000, days: [7, 14] },
+  landing: { label: "Лендинг", price: 45000, days: [7, 14] },
   catalog: { label: "Каталог", price: 60000, days: [14, 21] },
   site: { label: "Многостраничный сайт", price: 110000, days: [21, 28] },
 };
