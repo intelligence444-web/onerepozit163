@@ -652,3 +652,29 @@ a { color: inherit; }
 
 /* H1 в одну строку на узких экранах: шрифт по ширине экрана */
 @media (max-width: 640px) { .hero-copy h1 { font-size: min(2.8rem, calc((100vw - 2 * var(--gutter)) / 8.7)); } }
+
+/* Кто отвечает */
+.founder { display: grid; grid-template-columns: minmax(220px, 300px) 1fr; gap: clamp(32px, 5vw, 64px); align-items: center; padding: clamp(28px, 5vw, 56px); border: 1px solid var(--line); border-radius: var(--r-card); background: var(--paper); }
+.founder-photo { display: grid; place-items: center; aspect-ratio: 4 / 5; border-radius: 16px; background: radial-gradient(120% 90% at 30% 20%, #fff 0%, var(--accent-soft) 55%, #d3dbfd 100%); color: var(--accent); }
+.founder-photo span { font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 600; letter-spacing: .02em; }
+.founder-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+.founder-kicker { color: var(--accent); font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.founder-role { color: var(--graphite); margin-top: 8px; }
+.founder-text { margin-top: 24px; max-width: 38em; }
+.founder-stats { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 16px 48px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+.founder-stats b { display: block; font-size: 1.35rem; font-weight: 600; }
+.founder-stats span { color: var(--graphite); font-size: 14px; }
+.founder-links { margin-top: 24px; color: var(--graphite); font-size: 15px; }
+.founder-links a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--control-line); text-underline-offset: 3px; }
+.founder-links a:hover { color: var(--accent); text-decoration-color: currentColor; }
+@media (max-width: 900px) {
+  .founder { grid-template-columns: 1fr; }
+  .founder-photo { width: 132px; aspect-ratio: 1; border-radius: 50%; }
+  .founder-photo span { font-size: 2.6rem; }
+}
+@media (max-width: 640px) {
+  .founder-stats { grid-template-columns: 1fr; gap: 14px; }
+}
+@media (max-width: 380px) {
+  .addon-head h2 { font-size: 1.7rem; }
+}
