@@ -656,7 +656,7 @@ a { color: inherit; }
 
 /* Кто отвечает */
 .founder { display: grid; grid-template-columns: minmax(220px, 300px) 1fr; gap: clamp(32px, 5vw, 64px); align-items: center; padding: clamp(28px, 5vw, 56px); border: 1px solid var(--line); border-radius: var(--r-card); background: var(--paper); }
-.founder-photo { display: grid; place-items: center; aspect-ratio: 4 / 5; border-radius: 16px; background: radial-gradient(120% 90% at 30% 20%, #fff 0%, var(--accent-soft) 55%, #d3dbfd 100%); color: var(--accent); }
+.founder-photo { display: grid; place-items: center; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 16px; background: radial-gradient(120% 90% at 30% 20%, #fff 0%, var(--accent-soft) 55%, #d3dbfd 100%); color: var(--accent); }
 .founder-photo span { font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 600; letter-spacing: .02em; }
 .founder-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
 .founder-kicker { color: var(--accent); font-size: 14px; font-weight: 600; margin-bottom: 12px; }
@@ -670,8 +670,8 @@ a { color: inherit; }
 .founder-links a:hover { color: var(--accent); text-decoration-color: currentColor; }
 @media (max-width: 900px) {
   .founder { grid-template-columns: 1fr; }
-  .founder-photo { width: 132px; aspect-ratio: 1; border-radius: 50%; }
-  .founder-photo span { font-size: 2.6rem; }
+  .founder-photo { width: 100%; max-width: 420px; aspect-ratio: 1; }
+  .founder-photo img { object-position: 50% 15%; }
 }
 @media (max-width: 640px) {
   .founder-stats { grid-template-columns: 1fr; gap: 14px; }
