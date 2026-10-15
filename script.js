@@ -193,7 +193,7 @@ const EXTRAS = {
   quizBlock: { label: "Квиз внутри страницы", price: 10000, days: 2 },
   motion: { label: "Анимации и интерактив", price: 30000, days: 3 },
   support: { label: "Сопровождение сайта", price: 20000, days: 0 },
-  analytics: { label: "Сквозная аналитика", price: 15000, days: 2, monthly: true },
+  analytics: { label: "Сквозная аналитика", price: 15000, days: 2 },
   direct: { label: "Яндекс Директ", price: 45000, days: 0, monthly: true },
   vk: { label: "Реклама ВКонтакте", price: 35000, days: 0, monthly: true },
   avito: { label: "Авито", price: 35000, days: 0, monthly: true },
