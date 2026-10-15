@@ -649,3 +649,6 @@ a { color: inherit; }
 
 /* Выделение текста в цветах сайта */
 ::selection { background: var(--accent-soft); color: var(--ink); }
+
+/* H1 в одну строку на узких экранах: шрифт по ширине экрана */
+@media (max-width: 640px) { .hero-copy h1 { font-size: min(2.8rem, calc((100vw - 2 * var(--gutter)) / 8.7)); } }
