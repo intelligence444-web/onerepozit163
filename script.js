@@ -200,7 +200,7 @@ const EXTRAS = {
 };
 // Тарифы: фиксированная цена, состав отмечается в калькуляторе
 const PRESETS = {
-  start: { type: "quiz", extras: [], plan: { name: "Старт", price: 25000 } },
+  start: { type: "quiz", extras: [], plan: { name: "Старт", price: 30000 } },
   business: { type: "landing", extras: ["quizBlock", "support"], plan: { name: "Лендинг под ключ", price: 65000 } },
   traffic: { type: "landing", extras: ["quizBlock", "direct", "analytics", "support"], plan: { name: "Бизнес", price: 120000 } },
 };
