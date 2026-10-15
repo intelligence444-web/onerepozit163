@@ -348,6 +348,19 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
+/* ---------- Этапы: заполняются при прокрутке ---------- */
+
+const steps = document.getElementById("steps");
+const stepItems = steps ? [...steps.children] : [];
+
+function updateSteps() {
+  // Шаг заполняется, когда его кружок проходит линию на экране; линия для каждого следующего шага чуть выше,
+  // поэтому в один ряд на компьютере шаги загораются по очереди, а не все сразу
+  const vh = window.innerHeight;
+  const n = stepItems.length;
+  stepItems.forEach((li, i) => li.classList.toggle("is-done", li.getBoundingClientRect().top < vh * (0.8 - 0.4 * i / n)));
+}
+
 /* ---------- Мобильная панель с кнопкой ---------- */
 
 const mobileCta = document.getElementById("mobile-cta");
@@ -366,6 +379,7 @@ function onScroll() {
   if (ticking) return;
   ticking = true;
   requestAnimationFrame(() => {
+    if (steps) updateSteps();
     updateMobileCta();
     ticking = false;
   });
