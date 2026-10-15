@@ -28,7 +28,7 @@ const NICHES = {
     b: ["Смета за 1 день", "Гарантия 3 года", "Фотоотчёты"],
     q: "Какая площадь квартиры?", o: ["до 40 м²", "40–70 м²", "70–100 м²", "100+ м²"],
     formBtn: "Получить смету", toast: "Ремонт 2-комнатной, 54 м²",
-    theme: { bg: "#fbf7f2", ink: "#2a2118", accent: "#e2622a", on: "#fff", soft: "#f2e4d4", line: "rgba(42,33,24,.14)", field: "#fff", display: '"Rubik", var(--font)' },
+    theme: { bg: "#fbf7f2", ink: "#2a2118", accent: "#c2501c", on: "#fff", soft: "#f2e4d4", line: "rgba(42,33,24,.14)", field: "#fff", display: '"Rubik", var(--font)' },
   },
   dental: {
     url: "smile-clinic.rf", logo: "Smile Clinic", phone: "+7 900 000-00-00",
@@ -76,7 +76,7 @@ const stage = document.getElementById("stage");
 const mock = stage.querySelector(".mock");
 const page = stage.querySelector(".page");
 const toast = stage.querySelector(".toast");
-const nicheGroup = document.querySelector(".niches");
+const nicheGroup = document.querySelector(".niche-chips");
 const nicheButtons = [...nicheGroup.querySelectorAll("button")];
 const wireToggle = document.getElementById("wire-toggle");
 const order = Object.keys(NICHES);
@@ -290,6 +290,16 @@ function setStatus(text, kind) {
   status.className = `form-status ${kind}`;
 }
 
+// Ошибка поля пропадает, как только человек начинает печатать
+["name", "contact"].forEach((name) => {
+  form.elements[name].addEventListener("input", (e) => {
+    if (!e.target.value.trim()) return;
+    e.target.closest(".field").classList.remove("has-error");
+    e.target.setAttribute("aria-invalid", "false");
+    document.getElementById(`err-${name}`).hidden = true;
+  });
+});
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   status.textContent = "";
@@ -301,20 +311,28 @@ form.addEventListener("submit", async (event) => {
     const empty = !input.value.trim();
     input.closest(".field").classList.toggle("has-error", empty);
     input.setAttribute("aria-invalid", String(empty));
+    document.getElementById(`err-${name}`).hidden = !empty;
     if (empty && !firstInvalid) firstInvalid = input;
   });
   if (firstInvalid) {
-    setStatus("Укажите имя и телефон или Telegram, чтобы мы могли прислать расчёт.", "err");
     firstInvalid.focus();
     return;
   }
 
+  const c = readCalc();
+
   if (!CONFIG.formEndpoint) {
-    setStatus("Форма ещё не подключена. Напишите нам в Telegram, ответим в течение часа.", "err");
+    // Пока отправка не подключена: предлагаем написать в Telegram и показываем расчёт, чтобы его можно было скопировать
+    const tg = document.querySelector('a[href^="https://t.me/"]');
+    status.className = "form-status info";
+    status.replaceChildren(
+      `Ваш расчёт: ${TYPES[c.type].label}, от ${rub(c.price)}, ${c.dMin}–${c.dMax} ${daysWord(c.dMax)}. Отправьте его нам в `,
+      Object.assign(document.createElement("a"), { href: tg ? tg.href : "#calc", textContent: "Telegram", target: "_blank", rel: "noopener" }),
+      ", ответим в течение часа."
+    );
     return;
   }
 
-  const c = readCalc();
   const payload = {
     name: form.elements.name.value.trim(),
     contact: form.elements.contact.value.trim(),
