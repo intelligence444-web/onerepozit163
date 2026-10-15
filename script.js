@@ -185,7 +185,7 @@ if (reduceMotion) {
 
 const TYPES = {
   quiz: { label: "Квиз", price: 25000, days: [5, 7] },
-  landing: { label: "Лендинг", price: 40000, days: [7, 10] },
+  landing: { label: "Лендинг", price: 40000, days: [7, 14] },
   catalog: { label: "Каталог", price: 60000, days: [14, 21] },
   site: { label: "Многостраничный сайт", price: 110000, days: [21, 28] },
 };
@@ -198,11 +198,13 @@ const EXTRAS = {
   vk: { label: "Реклама ВКонтакте", price: 25000, days: 0, monthly: true },
   avito: { label: "Авито", price: 25000, days: 0, monthly: true },
 };
+// Тарифы: фиксированная цена, состав отмечается в калькуляторе
 const PRESETS = {
-  start: { type: "quiz", extras: [] },
-  business: { type: "landing", extras: ["quizBlock", "support"] },
-  traffic: { type: "landing", extras: ["quizBlock", "direct", "analytics", "support"] },
+  start: { type: "quiz", extras: [], plan: { name: "Старт", price: 25000 } },
+  business: { type: "landing", extras: ["quizBlock", "support"], plan: { name: "Бизнес", price: 65000 } },
+  traffic: { type: "landing", extras: ["direct", "analytics", "support"], plan: { name: "Сайт + трафик", price: 150000 } },
 };
+let activePlan = null;
 
 
 const form = document.getElementById("calc-form");
@@ -227,7 +229,8 @@ function readCalc() {
     .filter((v) => !(type === "quiz" && v === "quizBlock"));
   const fast = form.elements.speed.value === "fast";
   const t = TYPES[type];
-  let price = t.price + extras.reduce((s, e) => s + EXTRAS[e].price, 0);
+  const plan = activePlan;
+  let price = plan ? plan.price : t.price + extras.reduce((s, e) => s + EXTRAS[e].price, 0);
   let [dMin, dMax] = t.days;
   const addDays = extras.reduce((s, e) => s + EXTRAS[e].days, 0);
   dMin += addDays; dMax += addDays;
@@ -236,19 +239,22 @@ function readCalc() {
     dMin = Math.max(3, Math.round(dMin * 0.6));
     dMax = Math.max(dMin + 1, Math.round(dMax * 0.6));
   }
-  return { type, extras, fast, price, dMin, dMax };
+  return { type, extras, fast, price, dMin, dMax, plan };
 }
 
-function animatePrice(to) {
+// У тарифа цена точная, у собранного вручную набора — «от»
+const priceText = (c) => `${c.plan ? "" : "от "}${rub(c.price)}`;
+
+function animatePrice(to, prefix) {
   const from = shownPrice;
   shownPrice = to;
-  if (reduceMotion || from === 0) { sumPrice.textContent = `от ${rub(to)}`; return; }
+  if (reduceMotion || from === 0) { sumPrice.textContent = `${prefix}${rub(to)}`; return; }
   const start = performance.now();
   const step = (now) => {
     const k = Math.min(1, (now - start) / 450);
     const eased = 1 - Math.pow(1 - k, 3);
     const val = Math.round((from + (to - from) * eased) / 100) * 100;
-    sumPrice.textContent = `от ${rub(val)}`;
+    sumPrice.textContent = `${prefix}${rub(val)}`;
     if (k < 1 && shownPrice === to) requestAnimationFrame(step);
   };
   requestAnimationFrame(step);
@@ -257,8 +263,9 @@ function animatePrice(to) {
 function renderCalc() {
   const c = readCalc();
   form.querySelectorAll("[data-hide-for]").forEach((el) => { el.hidden = el.dataset.hideFor === c.type; });
-  const rows = [[TYPES[c.type].label, rub(TYPES[c.type].price)]];
-  c.extras.forEach((e) => rows.push([EXTRAS[e].label, `+${rub(EXTRAS[e].price)}${EXTRAS[e].monthly ? " в мес." : ""}`]));
+  const rows = c.plan
+    ? [[`Тариф «${c.plan.name}»`, rub(c.plan.price)], [TYPES[c.type].label, "входит"], ...c.extras.map((e) => [EXTRAS[e].label, "входит"])]
+    : [[TYPES[c.type].label, rub(TYPES[c.type].price)], ...c.extras.map((e) => [EXTRAS[e].label, `+${rub(EXTRAS[e].price)}${EXTRAS[e].monthly ? " в мес." : ""}`])];
   if (c.fast) rows.push(["Срочный запуск", "+30%"]);
   sumList.innerHTML = "";
   rows.forEach(([a, b]) => {
@@ -268,16 +275,22 @@ function renderCalc() {
     li.append(s1, s2);
     sumList.append(li);
   });
-  animatePrice(c.price);
+  animatePrice(c.price, c.plan ? "" : "от ");
   sumDays.textContent = `${c.dMin}–${c.dMax} ${daysWord(c.dMax)}`;
 }
 
-form.addEventListener("change", renderCalc);
+form.addEventListener("change", (e) => {
+  // Любое изменение состава превращает тариф в собственный набор; срочность тариф не сбрасывает
+  if (e.target.name !== "speed") activePlan = null;
+  renderCalc();
+});
 renderCalc();
 
 document.querySelectorAll("[data-preset]").forEach((link) => {
   link.addEventListener("click", () => {
     const p = PRESETS[link.dataset.preset];
+    activePlan = p.plan;
+    form.querySelector('input[name="speed"][value="normal"]').checked = true;
     form.querySelector(`input[name="type"][value="${p.type}"]`).checked = true;
     form.querySelectorAll('input[name="extra"]').forEach((i) => { i.checked = p.extras.includes(i.value); });
     renderCalc();
@@ -327,7 +340,7 @@ form.addEventListener("submit", async (event) => {
     const tg = document.querySelector('a[href^="https://t.me/"]');
     status.className = "form-status info";
     status.replaceChildren(
-      `Ваш расчёт: ${TYPES[c.type].label}, от ${rub(c.price)}, ${c.dMin}–${c.dMax} ${daysWord(c.dMax)}. Отправьте его нам в `,
+      `Ваш расчёт: ${c.plan ? `тариф «${c.plan.name}»` : TYPES[c.type].label}, ${priceText(c)}, ${c.dMin}–${c.dMax} ${daysWord(c.dMax)}. Отправьте его нам в `,
       Object.assign(document.createElement("a"), { href: tg ? tg.href : "#calc", textContent: "Telegram", target: "_blank", rel: "noopener" }),
       ", ответим в течение часа."
     );
@@ -337,10 +350,11 @@ form.addEventListener("submit", async (event) => {
   const payload = {
     name: form.elements.name.value.trim(),
     contact: form.elements.contact.value.trim(),
+    plan: c.plan ? c.plan.name : null,
     project: TYPES[c.type].label,
     extras: c.extras.map((e) => EXTRAS[e].label),
     urgent: c.fast,
-    estimate: `от ${rub(c.price)}, ${c.dMin}–${c.dMax} ${daysWord(c.dMax)}`,
+    estimate: `${priceText(c)}, ${c.dMin}–${c.dMax} ${daysWord(c.dMax)}`,
     page: location.href,
     utm: location.search,
   };

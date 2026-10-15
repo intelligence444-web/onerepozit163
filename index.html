@@ -16,7 +16,7 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=17">
+  <link rel="stylesheet" href="styles.css?v=18">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -141,11 +141,12 @@
           <p>Посетитель отвечает на&nbsp;4–6 вопросов и&nbsp;получает расчёт или&nbsp;подборку. Удобно для&nbsp;ниш, где цена зависит от&nbsp;параметров: ремонт, мебель, окна, недвижимость.</p>
           <dl><div><dt>Срок</dt><dd>5–7 дней</dd></div><div><dt>Стоимость</dt><dd>от&nbsp;25 000 ₽</dd></div></dl>
         </article>
-        <article class="service">
+        <article class="service service-main">
+          <span class="badge">Выбор многих</span>
           <div class="viz fmt fmt-land" aria-hidden="true"><span class="pg"><i class="h"></i><i></i><i class="s"></i><b></b><u></u><u></u><u></u></span></div>
           <h3>Лендинг</h3>
           <p>Одна страница под&nbsp;одну услугу или&nbsp;товар. Подходит для&nbsp;рекламы: человек приходит с&nbsp;объявления, видит ответ на&nbsp;свой запрос и&nbsp;оставляет заявку.</p>
-          <dl><div><dt>Срок</dt><dd>7–10 дней</dd></div><div><dt>Стоимость</dt><dd>от&nbsp;40 000 ₽</dd></div></dl>
+          <dl><div><dt>Срок</dt><dd>7–14 дней</dd></div><div><dt>Стоимость</dt><dd>от&nbsp;40 000 ₽</dd></div></dl>
         </article>
         <article class="service">
           <div class="viz fmt fmt-cat" aria-hidden="true"><span class="grid"><b></b><b></b><b></b><b></b><b></b><b></b></span></div>
@@ -279,10 +280,10 @@
       <div class="plans">
         <article class="plan">
           <h3>Старт</h3>
-          <p class="price">от&nbsp;25 000 ₽</p>
-          <p class="plan-desc">Квиз или&nbsp;простой лендинг, чтобы быстро проверить спрос.</p>
+          <p class="price">25&nbsp;000&nbsp;₽</p>
+          <p class="plan-desc">Квиз-лендинг, чтобы быстро проверить спрос.</p>
           <ul>
-            <li>До&nbsp;6 блоков или&nbsp;6 вопросов квиза</li>
+            <li>До&nbsp;3 блоков + квиз</li>
             <li>Тексты и&nbsp;дизайн</li>
             <li>Мобильная версия</li>
             <li>Запуск на&nbsp;вашем домене</li>
@@ -291,28 +292,29 @@
         </article>
         <article class="plan plan-main">
           <h3>Бизнес</h3>
-          <p class="price">от&nbsp;60 000 ₽</p>
+          <p class="price">65&nbsp;000&nbsp;₽</p>
           <p class="plan-desc">Полноценный продающий лендинг под&nbsp;рекламу.</p>
           <ul>
             <li>До&nbsp;12 блоков, встроенный квиз</li>
             <li>Анализ конкурентов и&nbsp;оффер</li>
             <li>Тексты и&nbsp;индивидуальный дизайн</li>
-            <li>Структура под&nbsp;рекламу в&nbsp;Директе и&nbsp;ВК</li>
-            <li>Сопровождение сайта</li>
+            <li>Метатеги для&nbsp;рекламы в&nbsp;Яндекс Директе, чтобы правильно работал автотаргетинг</li>
+            <li>Оформление и&nbsp;подключение домена</li>
+            <li>Сопровождение сайта на&nbsp;месяц: за&nbsp;это время поможем подключить Метрику и&nbsp;сквозную аналитику</li>
           </ul>
           <a class="btn" href="#calc" data-preset="business">Выбрать Бизнес</a>
         </article>
         <article class="plan">
           <h3>Сайт + трафик</h3>
-          <p class="price">от&nbsp;145 000 ₽</p>
-          <p class="plan-desc">Сайт и&nbsp;запуск рекламы в&nbsp;одних руках.</p>
+          <p class="price">150&nbsp;000&nbsp;₽</p>
+          <p class="plan-desc">Лендинг и&nbsp;запуск рекламы в&nbsp;одних руках.</p>
           <ul>
-            <li>Сайт или&nbsp;лендинг под&nbsp;ключ</li>
-            <li>Настройка Яндекс Директ</li>
+            <li>Лендинг под&nbsp;ключ</li>
             <li>Яндекс Метрика и&nbsp;цели</li>
-            <li>Сквозная аналитика</li>
+            <li>Настройка Яндекс Директ</li>
+            <li>Сквозная аналитика: amoCRM или&nbsp;Битрикс24</li>
             <li>Ведение рекламы первый месяц</li>
-            <li>Сопровождение сайта</li>
+            <li>Сопровождение лендинга</li>
           </ul>
           <a class="btn btn-ghost" href="#calc" data-preset="traffic">Выбрать Сайт + трафик</a>
         </article>
@@ -374,7 +376,7 @@
             <legend><span class="step-n">1</span>Что&nbsp;делаем</legend>
             <div class="opt-grid">
               <label class="opt"><input type="radio" name="type" value="quiz"><span><b>Квиз</b><small>от&nbsp;25 000 ₽, 5–7 дней</small></span></label>
-              <label class="opt"><input type="radio" name="type" value="landing" checked><span><b>Лендинг</b><small>от&nbsp;40 000 ₽, 7–10 дней</small></span></label>
+              <label class="opt"><input type="radio" name="type" value="landing" checked><span><b>Лендинг</b><small>от&nbsp;40 000 ₽, 7–14 дней</small></span></label>
               <label class="opt"><input type="radio" name="type" value="catalog"><span><b>Каталог</b><small>от&nbsp;60 000 ₽, 14–21 день</small></span></label>
               <label class="opt"><input type="radio" name="type" value="site"><span><b>Многостраничный сайт</b><small>от&nbsp;110 000 ₽, 21–28 дней</small></span></label>
             </div>
@@ -413,7 +415,7 @@
           <ul class="sum-list" id="sum-list"></ul>
           <div class="sum-total">
             <div><span>Стоимость</span><output id="sum-price">от&nbsp;40 000 ₽</output></div>
-            <div><span>Срок</span><output id="sum-days">7–10 дней</output></div>
+            <div><span>Срок</span><output id="sum-days">7–14 дней</output></div>
           </div>
           <div class="field">
             <label for="f-name">Имя</label>
@@ -460,6 +462,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=17"></script>
+<script src="script.js?v=18"></script>
 </body>
 </html>
