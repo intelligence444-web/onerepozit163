@@ -185,19 +185,17 @@ if (reduceMotion) {
 
 const TYPES = {
   quiz: { label: "Квиз", price: 25000, days: [5, 7] },
-  landing: { label: "Лендинг", price: 35000, days: [7, 10] },
+  landing: { label: "Лендинг", price: 40000, days: [7, 10] },
   catalog: { label: "Каталог", price: 60000, days: [14, 21] },
-  site: { label: "Многостраничный сайт", price: 80000, days: [21, 28] },
+  site: { label: "Многостраничный сайт", price: 110000, days: [21, 28] },
 };
 const EXTRAS = {
   quizBlock: { label: "Квиз внутри страницы", price: 10000, days: 2 },
-  metrika: { label: "Яндекс Метрика и цели", price: 5000, days: 1 },
-  crm: { label: "Заявки в CRM или Telegram", price: 7000, days: 1 },
   motion: { label: "Анимации и интерактив", price: 10000, days: 3 },
-  analytics: { label: "Сквозная аналитика", price: 10000, days: 2 },
-  direct: { label: "Яндекс Директ", price: 20000, days: 0 },
-  vk: { label: "Реклама ВКонтакте", price: 15000, days: 0 },
-  avito: { label: "Авито", price: 12000, days: 0 },
+  analytics: { label: "Сквозная аналитика", price: 15000, days: 2 },
+  direct: { label: "Яндекс Директ", price: 35000, days: 0 },
+  vk: { label: "Реклама ВКонтакте", price: 25000, days: 0 },
+  avito: { label: "Авито", price: 25000, days: 0 },
 };
 const PRESETS = {
   start: { type: "quiz", extras: [] },
