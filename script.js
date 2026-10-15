@@ -431,3 +431,11 @@ window.addEventListener("load", () => {
   link.href = "https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&family=Cormorant+Garamond:wght@600;700&family=Unbounded:wght@600&family=Lora:wght@600&display=swap";
   document.head.append(link);
 });
+
+/* ---------- Бегущие строки ниш: крутятся только на экране ---------- */
+
+const marquees = document.querySelector(".marquees");
+if (marquees && "IntersectionObserver" in window) {
+  marquees.classList.add("is-off");
+  new IntersectionObserver(([entry]) => marquees.classList.toggle("is-off", !entry.isIntersecting)).observe(marquees);
+}
