@@ -28,7 +28,7 @@ const NICHES = {
     b: ["Смета за 1 день", "Гарантия 3 года", "Фотоотчёты"],
     q: "Какая площадь квартиры?", o: ["до 40 м²", "40–70 м²", "70–100 м²", "100+ м²"],
     formBtn: "Получить смету", toast: "Ремонт 2-комнатной, 54 м²",
-    theme: { bg: "#fbf7f2", ink: "#2a2118", accent: "#c2501c", on: "#fff", soft: "#f2e4d4", line: "rgba(42,33,24,.14)", field: "#fff", display: '"Rubik", var(--font)' },
+    theme: { bg: "#fbf7f2", ink: "#2a2118", accent: "#c2501c", on: "#fff", soft: "#f2e4d4", line: "rgba(42,33,24,.14)", field: "#fff", display: 'var(--font)' },
   },
   dental: {
     url: "smile-clinic.rf", logo: "Smile Clinic", phone: "+7 900 000-00-00",
@@ -48,7 +48,7 @@ const NICHES = {
     b: ["Без комиссии", "Ипотека от 6%", "Онлайн-показ"],
     q: "Сколько комнат нужно?", o: ["Студия", "1 комната", "2 комнаты", "3 и больше"],
     formBtn: "Получить подборку", toast: "Подбор 2-комнатной у моря",
-    theme: { bg: "#101c2e", ink: "#f2ede3", accent: "#c9a45c", on: "#101c2e", soft: "#1b2a42", line: "rgba(242,237,227,.16)", field: "#16243a", display: '"Cormorant Garamond", Georgia, serif', size: "25px" },
+    theme: { bg: "#101c2e", ink: "#f2ede3", accent: "#c9a45c", on: "#101c2e", soft: "#1b2a42", line: "rgba(242,237,227,.16)", field: "#16243a", display: 'Georgia, "Times New Roman", serif', size: "22px" },
   },
   school: {
     url: "design-school.online", logo: "Design School", phone: "+7 900 000-00-00",
@@ -58,7 +58,7 @@ const NICHES = {
     b: ["4 месяца", "Наставник", "Диплом"],
     q: "Какой у вас опыт в дизайне?", o: ["Нет опыта", "Пробовал сам", "Есть заказы", "Работаю"],
     formBtn: "Получить программу", toast: "Заявка на бесплатный урок",
-    theme: { bg: "#ffffff", ink: "#16181d", accent: "#1f9d55", on: "#fff", soft: "#e6f5ec", line: "rgba(22,24,29,.12)", field: "#fff", display: '"Unbounded", var(--font)', size: "17px" },
+    theme: { bg: "#ffffff", ink: "#16181d", accent: "#1f9d55", on: "#fff", soft: "#e6f5ec", line: "rgba(22,24,29,.12)", field: "#fff", display: 'var(--font)', size: "18px" },
   },
   mebel: {
     url: "kuhni-na-zakaz.rf", logo: "Кухни Мастер", phone: "+7 900 000-00-00",
@@ -68,7 +68,7 @@ const NICHES = {
     b: ["Замер бесплатно", "3D-проект", "Своё производство"],
     q: "Какой формы кухня?", o: ["Прямая", "Угловая", "П-образная", "С островом"],
     formBtn: "Получить расчёт", toast: "Расчёт угловой кухни",
-    theme: { bg: "#f7f5f0", ink: "#22261f", accent: "#4a6741", on: "#fff", soft: "#e4e8db", line: "rgba(34,38,31,.14)", field: "#fff", display: '"Lora", Georgia, serif', size: "20px" },
+    theme: { bg: "#f7f5f0", ink: "#22261f", accent: "#4a6741", on: "#fff", soft: "#e4e8db", line: "rgba(34,38,31,.14)", field: "#fff", display: 'Georgia, "Times New Roman", serif', size: "20px" },
   },
 };
 
@@ -422,15 +422,6 @@ function onScroll() {
 window.addEventListener("scroll", onScroll, { passive: true });
 window.addEventListener("resize", onScroll);
 onScroll();
-
-/* ---------- Шрифты примеров ниш: грузим после страницы, чтобы не тормозить первый экран ---------- */
-
-window.addEventListener("load", () => {
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.href = "https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&family=Cormorant+Garamond:wght@600;700&family=Unbounded:wght@600&family=Lora:wght@600&display=swap";
-  document.head.append(link);
-});
 
 /* ---------- Бегущие строки ниш: крутятся только на экране ---------- */
 
