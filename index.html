@@ -17,7 +17,7 @@
   <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-ruble.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=43">
+  <link rel="stylesheet" href="styles.css?v=44">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -32,7 +32,7 @@
       <a href="#services">Услуги</a>
       <a href="#included">Что&nbsp;входит</a>
       <a href="#support">Сопровождение</a>
-      <a href="#cases">Кейсы</a>
+      <a href="#cases">Работы</a>
       <a href="#process">Как&nbsp;работаем</a>
       <a href="#prices">Тарифы</a>
       <a href="#faq">Вопросы</a>
@@ -267,112 +267,115 @@
     </div>
   </section>
 
-  <!-- Кейсы. ЧЕРНОВИК: цифры примерные, заменить на реальные перед публикацией -->
+  <!-- Примеры работ: концепты сайтов, исходники в portfolio/, сборка tools/build_concepts.py -->
   <section class="section" id="cases">
     <div class="wrap">
       <div class="section-head">
-        <h2>Кейсы</h2>
-        <p>Показываем не&nbsp;только сайт, но&nbsp;и&nbsp;что&nbsp;он дал: сколько заявок, по&nbsp;какой цене и&nbsp;через сколько после запуска.</p>
+        <h2>Примеры работ</h2>
+        <p>Концепты сайтов для&nbsp;ниш, с&nbsp;которыми работаем чаще всего. Так мы&nbsp;строим структуру: оффер, квиз или&nbsp;калькулятор, каталог и&nbsp;форма заявки.</p>
       </div>
-      <p class="draft-note">Черновик: цифры примерные, заменим на&nbsp;реальные</p>
 
       <div class="case-filter" role="group" aria-label="Ниша">
         <button type="button" data-filter="all" aria-pressed="true">Все</button>
         <button type="button" data-filter="realty" aria-pressed="false">Недвижимость</button>
         <button type="button" data-filter="doma" aria-pressed="false">Строительство домов</button>
-        <button type="button" data-filter="kitchen" aria-pressed="false">Кухни на&nbsp;заказ</button>
+        <button type="button" data-filter="kitchen" aria-pressed="false">Кухни и мебель</button>
         <button type="button" data-filter="remont" aria-pressed="false">Ремонт</button>
+        <button type="button" data-filter="banya" aria-pressed="false">Бани</button>
+        <button type="button" data-filter="dental" aria-pressed="false">Стоматология</button>
+        <button type="button" data-filter="land" aria-pressed="false">Ландшафт и заборы</button>
       </div>
 
-      <ul class="cases" id="cases-list">
-        <li class="case" data-niche="realty" style="--case: #2747f5">
-          <div class="case-shot" aria-hidden="true">
-            <span class="cs-bar"><i></i><i></i><i></i></span>
-            <span class="cs-page"><b>Подберём квартиру в&nbsp;новостройке без&nbsp;комиссии</b><em>Какой бюджет?</em><span class="cs-opts"><u>до&nbsp;6&nbsp;млн</u><u class="on">6–10&nbsp;млн</u><u>10+&nbsp;млн</u></span></span>
-          </div>
-          <div class="case-body">
-            <p class="case-tags"><span>Недвижимость</span><span>Самара</span><span>Квиз + Директ</span></p>
-            <h3>Агентство новостроек: заявки с&nbsp;чеком от&nbsp;5 до&nbsp;45&nbsp;млн&nbsp;₽</h3>
-            <dl class="case-metrics">
-              <div><dt>заявок в&nbsp;месяц</dt><dd>34</dd></div>
-              <div><dt>цена заявки</dt><dd>1&nbsp;450&nbsp;₽</dd></div>
-              <div><dt>доехали на&nbsp;показ</dt><dd>9</dd></div>
-            </dl>
-            <ul class="case-done">
-              <li>Квиз-подбор по&nbsp;бюджету, району и&nbsp;сроку сдачи</li>
-              <li>Директ: поиск по&nbsp;ЖК и&nbsp;застройщикам, РСЯ</li>
-              <li>Заявки сразу в&nbsp;CRM, антибот на&nbsp;форме</li>
-            </ul>
+      <ul class="works" id="cases-list">
+        <li class="work work-wide" data-niche="realty">
+          <button type="button" class="work-shot" data-full="assets/works/realty-full.webp" aria-label="Смотреть сайт «Высота» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/realty.webp" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Высота»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Недвижимость</span><span>Квиз-лендинг</span><span class="work-concept">Концепт</span></p>
+            <h3>«Высота» — агентство новостроек</h3>
+            <ul class="work-done"><li>Квиз-подбор квартиры по комнатам, бюджету и району</li><li>Каталог ЖК с ценами и сроками сдачи</li><li>Подарок за ответы: подборка и расчёт ипотеки</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/realty-full.webp">Смотреть сайт целиком</button>
           </div>
         </li>
-
-        <li class="case" data-niche="doma" style="--case: #1f8a5b">
-          <div class="case-shot" aria-hidden="true">
-            <span class="cs-bar"><i></i><i></i><i></i></span>
-            <span class="cs-page"><b>Дома из&nbsp;газобетона под&nbsp;ключ с&nbsp;фиксированной сметой</b><em>Площадь дома?</em><span class="cs-opts"><u>до&nbsp;100&nbsp;м²</u><u class="on">100–150&nbsp;м²</u><u>150+&nbsp;м²</u></span></span>
-          </div>
-          <div class="case-body">
-            <p class="case-tags"><span>Строительство домов</span><span>Самарская обл.</span><span>Лендинг + Директ</span></p>
-            <h3>Строительная компания: смета дома вместо «цена по&nbsp;запросу»</h3>
-            <dl class="case-metrics">
-              <div><dt>заявок в&nbsp;месяц</dt><dd>27</dd></div>
-              <div><dt>цена заявки</dt><dd>2&nbsp;100&nbsp;₽</dd></div>
-              <div><dt>договоров за&nbsp;квартал</dt><dd>6</dd></div>
-            </dl>
-            <ul class="case-done">
-              <li>Каталог проектов с&nbsp;ценой «от» и&nbsp;сроком</li>
-              <li>Калькулятор сметы по&nbsp;площади и&nbsp;материалу</li>
-              <li>Директ: поиск по&nbsp;технологиям и&nbsp;проектам</li>
-            </ul>
+        <li class="work" data-niche="doma">
+          <button type="button" class="work-shot" data-full="assets/works/doma-full.webp" aria-label="Смотреть сайт «Дом на века» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/doma.webp" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Дом на века»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Строительство домов</span><span>Лендинг + калькулятор</span><span class="work-concept">Концепт</span></p>
+            <h3>«Дом на века» — строительная компания</h3>
+            <ul class="work-done"><li>Оффер про фиксированную смету</li><li>Калькулятор стоимости дома по материалу</li><li>Каталог проектов с площадью и ценой</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/doma-full.webp">Смотреть сайт целиком</button>
           </div>
         </li>
-
-        <li class="case" data-niche="kitchen" style="--case: #c2531b">
-          <div class="case-shot" aria-hidden="true">
-            <span class="cs-bar"><i></i><i></i><i></i></span>
-            <span class="cs-page"><b>Кухня на&nbsp;заказ по&nbsp;вашим размерам за&nbsp;21&nbsp;день</b><em>Форма кухни?</em><span class="cs-opts"><u>Прямая</u><u class="on">Угловая</u><u>П-образная</u></span></span>
-          </div>
-          <div class="case-body">
-            <p class="case-tags"><span>Кухни на&nbsp;заказ</span><span>Тольятти</span><span>Квиз + Директ + ВК</span></p>
-            <h3>Мебельное производство: замер и&nbsp;расчёт кухни через квиз</h3>
-            <dl class="case-metrics">
-              <div><dt>заявок в&nbsp;месяц</dt><dd>58</dd></div>
-              <div><dt>цена заявки</dt><dd>690&nbsp;₽</dd></div>
-              <div><dt>конверсия сайта</dt><dd>11%</dd></div>
-            </dl>
-            <ul class="case-done">
-              <li>Квиз: форма, размеры, фасады, бюджет</li>
-              <li>Подарок за&nbsp;прохождение: 3D-проект кухни</li>
-              <li>Директ и&nbsp;таргет ВКонтакте с&nbsp;лид-формой</li>
-            </ul>
+        <li class="work" data-niche="kitchen">
+          <button type="button" class="work-shot" data-full="assets/works/kitchen-full.webp" aria-label="Смотреть сайт «Кухни Тепло» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/kitchen.webp" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Кухни Тепло»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Кухни и мебель</span><span>Квиз-лендинг</span><span class="work-concept">Концепт</span></p>
+            <h3>«Кухни Тепло» — кухни на заказ</h3>
+            <ul class="work-done"><li>Квиз по форме кухни с картинками</li><li>Подарок: 3D-проект и скидка</li><li>Галерея работ с ценой и материалами</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/kitchen-full.webp">Смотреть сайт целиком</button>
           </div>
         </li>
-
-        <li class="case" data-niche="remont" style="--case: #7a3fd1">
-          <div class="case-shot" aria-hidden="true">
-            <span class="cs-bar"><i></i><i></i><i></i></span>
-            <span class="cs-page"><b>Ремонт квартир под&nbsp;ключ со&nbsp;сметой за&nbsp;1&nbsp;день</b><em>Тип ремонта?</em><span class="cs-opts"><u>Косметический</u><u class="on">Капитальный</u><u>Дизайнерский</u></span></span>
+        <li class="work" data-niche="remont">
+          <button type="button" class="work-shot" data-full="assets/works/remont-full.webp" aria-label="Смотреть сайт «Ремонт Про» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/remont.webp" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Ремонт Про»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Ремонт</span><span>Лендинг</span><span class="work-concept">Концепт</span></p>
+            <h3>«Ремонт Про» — ремонт квартир</h3>
+            <ul class="work-done"><li>Смета за 1 день как главный оффер</li><li>Тарифы ремонта с ценой за м²</li><li>Шаги работы и гарантии</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/remont-full.webp">Смотреть сайт целиком</button>
           </div>
-          <div class="case-body">
-            <p class="case-tags"><span>Ремонт</span><span>Самара</span><span>Лендинг + Директ + Авито</span></p>
-            <h3>Бригада ремонта: стабильный поток объектов вместо сарафана</h3>
-            <dl class="case-metrics">
-              <div><dt>заявок в&nbsp;месяц</dt><dd>41</dd></div>
-              <div><dt>цена заявки</dt><dd>980&nbsp;₽</dd></div>
-              <div><dt>запуск</dt><dd>9&nbsp;дней</dd></div>
-            </dl>
-            <ul class="case-done">
-              <li>Лендинг с&nbsp;фото объектов и&nbsp;сметой по&nbsp;площади</li>
-              <li>Директ по&nbsp;районам города</li>
-              <li>Объявления на&nbsp;Авито с&nbsp;ведением в&nbsp;CRM</li>
-            </ul>
+        </li>
+        <li class="work" data-niche="banya">
+          <button type="button" class="work-shot" data-full="assets/works/banya-full.webp" aria-label="Смотреть сайт «Бочка Лес» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/banya.webp" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Бочка Лес»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Бани</span><span>Лендинг-каталог</span><span class="work-concept">Концепт</span></p>
+            <h3>«Бочка Лес» — производство бань</h3>
+            <ul class="work-done"><li>Каталог моделей с вместимостью и ценой</li><li>Квиз-подбор под участок</li><li>Доставка и монтаж за 1 день</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/banya-full.webp">Смотреть сайт целиком</button>
+          </div>
+        </li>
+        <li class="work" data-niche="dental">
+          <button type="button" class="work-shot" data-full="assets/works/dental-full.webp" aria-label="Смотреть сайт «Дента Смайл» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/dental.webp" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Дента Смайл»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Стоматология</span><span>Лендинг</span><span class="work-concept">Концепт</span></p>
+            <h3>«Дента Смайл» — стоматологическая клиника</h3>
+            <ul class="work-done"><li>Оффер: имплантация с ценой «под ключ»</li><li>Квиз «что беспокоит» для записи</li><li>Услуги с ценами и отзывы пациентов</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/dental-full.webp">Смотреть сайт целиком</button>
+          </div>
+        </li>
+        <li class="work" data-niche="land">
+          <button type="button" class="work-shot" data-full="assets/works/land-full.webp" aria-label="Смотреть сайт «Зелёный участок» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/land.webp" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Зелёный участок»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Ландшафт и заборы</span><span>Лендинг + калькулятор</span><span class="work-concept">Концепт</span></p>
+            <h3>«Зелёный участок» — заборы и благоустройство</h3>
+            <ul class="work-done"><li>Цена за метр с монтажом на первом экране</li><li>Калькулятор забора по типу и длине</li><li>Решения с ценами: заборы, ворота, газон</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/land-full.webp">Смотреть сайт целиком</button>
           </div>
         </li>
       </ul>
 
       <div class="cases-cta">
         <p>Нет вашей ниши? Расскажите о&nbsp;задаче — покажем похожие проекты на&nbsp;созвоне.</p>
-        <a class="btn" href="#calc" data-modal data-need="Лендинг и реклама">Хочу так&nbsp;же</a>
+        <a class="btn" href="#calc" data-modal>Обсудить свой сайт</a>
       </div>
     </div>
   </section>
@@ -610,6 +613,11 @@
 
 </main>
 
+<dialog class="work-modal" id="work-modal" aria-label="Сайт целиком">
+  <button type="button" class="work-close" data-close aria-label="Закрыть">&times;</button>
+  <div class="work-scroll"><img id="work-full" alt="" width="1100" height="3000"></div>
+</dialog>
+
 <dialog class="modal" id="lead-modal" aria-labelledby="modal-title">
   <form class="modal-box" id="lead-form" novalidate>
     <button class="modal-close" type="button" data-close aria-label="Закрыть"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
@@ -685,6 +693,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=41"></script>
+<script src="script.js?v=42"></script>
 </body>
 </html>

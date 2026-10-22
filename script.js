@@ -520,9 +520,6 @@ function openModal(mode, link) {
     list.replaceChildren(...[...link.closest(".plan").querySelectorAll("li")].map((li) => li.cloneNode(true)));
   } else {
     modalTitle.textContent = "Обсудим ваш проект";
-    // Кнопка может сразу отметить нужный формат, например «Лендинг и реклама» из кейсов
-    const need = [...modalForm.elements.need].find((r) => r.value === (link.dataset.need || ""));
-    if (need) need.checked = true;
   }
   modalForm.querySelector(".form-status").textContent = "";
   modal.showModal();
@@ -592,15 +589,31 @@ if (marquees && "IntersectionObserver" in window) {
   new IntersectionObserver(([entry]) => marquees.classList.toggle("is-off", !entry.isIntersecting)).observe(marquees);
 }
 
-// Кейсы: фильтр по нише
+// Примеры работ: фильтр по нише
 const caseFilter = document.querySelector(".case-filter");
 if (caseFilter) {
   caseFilter.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-filter]");
     if (!btn) return;
     caseFilter.querySelectorAll("[data-filter]").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
-    document.querySelectorAll("#cases-list .case").forEach((c) => {
+    document.querySelectorAll("#cases-list .work").forEach((c) => {
       c.hidden = btn.dataset.filter !== "all" && c.dataset.niche !== btn.dataset.filter;
     });
   });
 }
+
+// Сайт целиком: полный скриншот в окне с прокруткой
+const workModal = document.getElementById("work-modal");
+const workImg = document.getElementById("work-full");
+document.querySelectorAll("[data-full]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const work = btn.closest(".work");
+    workImg.src = btn.dataset.full;
+    workImg.alt = `Сайт «${work.querySelector("h3").textContent.split("»")[0].slice(1)}» целиком`;
+    workModal.querySelector(".work-scroll").scrollTop = 0;
+    if (workModal.showModal) workModal.showModal(); else window.open(btn.dataset.full, "_blank");
+  });
+});
+workModal.addEventListener("click", (e) => {
+  if (e.target === workModal || e.target.closest("[data-close]")) workModal.close();
+});
