@@ -520,6 +520,9 @@ function openModal(mode, link) {
     list.replaceChildren(...[...link.closest(".plan").querySelectorAll("li")].map((li) => li.cloneNode(true)));
   } else {
     modalTitle.textContent = "Обсудим ваш проект";
+    // Кнопка может сразу отметить нужный формат, например «Лендинг и реклама» из кейсов
+    const need = [...modalForm.elements.need].find((r) => r.value === (link.dataset.need || ""));
+    if (need) need.checked = true;
   }
   modalForm.querySelector(".form-status").textContent = "";
   modal.showModal();
@@ -587,4 +590,17 @@ const marquees = document.querySelector(".marquees");
 if (marquees && "IntersectionObserver" in window) {
   marquees.classList.add("is-off");
   new IntersectionObserver(([entry]) => marquees.classList.toggle("is-off", !entry.isIntersecting)).observe(marquees);
+}
+
+// Кейсы: фильтр по нише
+const caseFilter = document.querySelector(".case-filter");
+if (caseFilter) {
+  caseFilter.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-filter]");
+    if (!btn) return;
+    caseFilter.querySelectorAll("[data-filter]").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+    document.querySelectorAll("#cases-list .case").forEach((c) => {
+      c.hidden = btn.dataset.filter !== "all" && c.dataset.niche !== btn.dataset.filter;
+    });
+  });
 }
