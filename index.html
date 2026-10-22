@@ -17,7 +17,7 @@
   <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-ruble.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=34">
+  <link rel="stylesheet" href="styles.css?v=35">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -401,6 +401,20 @@
         <h2>Сколько будет стоить ваш сайт</h2>
         <p>Выберите, что&nbsp;нужно, и&nbsp;увидите ориентировочную цену и&nbsp;срок. Точную сумму зафиксируем в&nbsp;договоре после созвона.</p>
       </div>
+
+      <aside class="calc-deal" aria-labelledby="deal-title">
+        <span class="calc-deal-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M3 12.5V4a1 1 0 011-1h8.5l8.5 8.5-9 9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.8" fill="currentColor"/></svg></span>
+        <div class="calc-deal-text">
+          <h3 id="deal-title">Тарифы: в&nbsp;комплексе выгоднее</h3>
+          <p>Готовые наборы стоят столько&nbsp;же или&nbsp;дешевле, чем те&nbsp;же услуги по&nbsp;отдельности, и&nbsp;сумма не&nbsp;меняется после утверждения.</p>
+          <ul class="calc-deal-plans">
+            <li>Старт <b>30&nbsp;000&nbsp;₽</b></li>
+            <li>Лендинг под&nbsp;ключ <b>65&nbsp;000&nbsp;₽</b></li>
+            <li>Бизнес <b>120&nbsp;000&nbsp;₽</b></li>
+          </ul>
+        </div>
+        <a class="btn calc-deal-btn" href="#prices">Смотреть тарифы</a>
+      </aside>
 
       <form class="calc" id="calc-form" novalidate>
         <div class="calc-steps">
