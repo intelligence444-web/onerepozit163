@@ -336,7 +336,6 @@ document.querySelectorAll("[data-preset]").forEach((link) => {
 function calcLead() {
   const c = readCalc();
   return {
-    label: "Ваш расчёт",
     summary: `${c.plan ? `тариф «${c.plan.name}»` : TYPES[c.type].label}, ${priceText(c)}, ${c.dMin}–${c.dMax} ${daysWord(c.dMax)}`,
     fields: {
       plan: c.plan ? c.plan.name : null,
@@ -383,19 +382,6 @@ function leadForm(el, getLead) {
     }
 
     const lead = getLead();
-
-    if (!CONFIG.formEndpoint) {
-      // Пока отправка не подключена: предлагаем написать в Telegram и показываем расчёт, чтобы его можно было скопировать
-      const tg = document.querySelector('a[href^="https://t.me/"]');
-      status.className = "form-status info";
-      status.replaceChildren(
-        `${lead.label}: ${lead.summary}. Отправьте это нам в `,
-        Object.assign(document.createElement("a"), { href: tg ? tg.href : "#calc", textContent: "Telegram", target: "_blank", rel: "noopener" }),
-        ", ответим в течение часа."
-      );
-      return;
-    }
-
     const payload = {
       name: el.elements.name.value.trim(),
       contact: el.elements.contact.value.trim(),
@@ -404,6 +390,27 @@ function leadForm(el, getLead) {
       utm: location.search,
       consent: new Date().toISOString(), // когда человек отметил согласие на обработку данных
     };
+
+    // Все формы ведут на страницу благодарности. sent: false — приём заявок ещё не подключён,
+    // и страница попросит продублировать заявку в мессенджер, чтобы она не потерялась.
+    const toThanks = (sent) => {
+      try {
+        sessionStorage.setItem("lead", JSON.stringify({ name: payload.name, contact: payload.contact, summary: lead.summary, sent }));
+      } catch {}
+      const go = () => location.assign("thanks.html");
+      if (CONFIG.metrikaId && window.ym) {
+        // Ждём, пока Метрика отправит цель, но не дольше секунды
+        const timer = setTimeout(go, 1000);
+        window.ym(CONFIG.metrikaId, "reachGoal", "lead", {}, () => { clearTimeout(timer); go(); });
+      } else {
+        go();
+      }
+    };
+
+    if (!CONFIG.formEndpoint) {
+      toThanks(false);
+      return;
+    }
 
     button.disabled = true;
     button.textContent = "Отправляю…";
@@ -414,17 +421,8 @@ function leadForm(el, getLead) {
         body: JSON.stringify(payload),
       });
       if (!response.ok) throw new Error(response.status);
-      // Имя и суть заявки показываем на странице благодарности
-      try { sessionStorage.setItem("lead", JSON.stringify({ name: payload.name, summary: lead.summary })); } catch {}
       setStatus("Заявка отправлена.", "ok");
-      const toThanks = () => location.assign("thanks.html");
-      if (CONFIG.metrikaId && window.ym) {
-        // Ждём, пока Метрика отправит цель, но не дольше секунды
-        const timer = setTimeout(toThanks, 1000);
-        window.ym(CONFIG.metrikaId, "reachGoal", "lead", {}, () => { clearTimeout(timer); toThanks(); });
-      } else {
-        toThanks();
-      }
+      toThanks(true);
       return;
     } catch {
       setStatus("Заявка не отправилась. Проверьте интернет и попробуйте ещё раз или напишите в Telegram.", "err");
@@ -446,7 +444,6 @@ const modalTitle = document.getElementById("modal-title");
 function generalLead() {
   const need = modalForm.elements.need.value;
   return {
-    label: "Ваша заявка",
     summary: need ? need.toLowerCase() : "обсудить проект",
     fields: { request: need || "Пока не знаю", source: "Попап «Обсудить проект»" },
   };

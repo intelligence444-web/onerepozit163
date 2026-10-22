@@ -8,7 +8,7 @@
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=37">
+  <link rel="stylesheet" href="styles.css?v=38">
 </head>
 <body>
 
@@ -26,10 +26,18 @@
   <div class="wrap thanks-wrap">
     <section class="thanks-hero">
       <span class="thanks-mark" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 32 32"><path d="M8 16.5l5.5 5.5L24 11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <p class="legal-kicker">Заявка принята</p>
+      <p class="legal-kicker" id="thanks-kicker">Заявка принята</p>
       <h1 id="thanks-title">Спасибо за&nbsp;заявку!</h1>
-      <p class="thanks-lead">Свяжемся с&nbsp;вами в&nbsp;течение часа в&nbsp;рабочее время по&nbsp;телефону или&nbsp;в&nbsp;Telegram, который вы&nbsp;указали.</p>
+      <p class="thanks-lead" id="thanks-lead">Свяжемся с&nbsp;вами в&nbsp;течение часа в&nbsp;рабочее время по&nbsp;телефону или&nbsp;в&nbsp;Telegram, который вы&nbsp;указали.</p>
       <p class="thanks-summary" id="thanks-summary" hidden></p>
+      <div class="thanks-manual" id="thanks-manual" hidden>
+        <pre class="thanks-msg" id="thanks-msg"></pre>
+        <div class="hero-actions">
+          <a class="btn" href="https://t.me/a_pochivalov" target="_blank" rel="noopener" data-copy>Скопировать и&nbsp;открыть Telegram</a>
+          <a class="btn btn-ghost" href="https://max.ru/u/f9LHodD0cOIEXmDghMJe8XzrIIAUtrgSVoxWeF1K5f7LX4LCp95hYXRwVlU" target="_blank" rel="noopener" data-copy>Скопировать и&nbsp;открыть MAX</a>
+        </div>
+        <p class="thanks-copied" id="thanks-copied" role="status" aria-live="polite"></p>
+      </div>
     </section>
 
     <section class="thanks-block" aria-labelledby="next-title">
@@ -125,14 +133,35 @@
 </footer>
 
 <script>
-  // Имя и суть заявки сохраняет форма перед переходом сюда
+  // Имя и суть заявки сохраняет форма перед переходом сюда.
+  // sent: false — приём заявок на сайте ещё не подключён: просим продублировать заявку в мессенджер.
   try {
     const lead = JSON.parse(sessionStorage.getItem("lead") || "null");
-    if (lead && lead.name) document.getElementById("thanks-title").textContent = `${lead.name}, спасибо за заявку!`;
-    if (lead && lead.summary) {
-      const el = document.getElementById("thanks-summary");
-      el.textContent = `Ваша заявка: ${lead.summary}`;
-      el.hidden = false;
+    const $ = (id) => document.getElementById(id);
+    if (lead && lead.sent === false) {
+      const text = [
+        `Здравствуйте!${lead.name ? ` Меня зовут ${lead.name}.` : ""}`,
+        `Заявка с сайта Land Engine: ${lead.summary}.`,
+        lead.contact ? `Мой контакт: ${lead.contact}` : "",
+      ].filter(Boolean).join("\n");
+      $("thanks-kicker").textContent = "Остался один шаг";
+      $("thanks-title").textContent = lead.name ? `${lead.name}, отправьте заявку нам в мессенджер` : "Отправьте заявку нам в мессенджер";
+      $("thanks-lead").textContent = "Нажмите кнопку: текст заявки скопируется, а Telegram или MAX откроется в новой вкладке. Вставьте текст и отправьте — ответим в течение часа в рабочее время.";
+      $("thanks-msg").textContent = text;
+      $("thanks-manual").hidden = false;
+      document.querySelectorAll("[data-copy]").forEach((link) => {
+        link.addEventListener("click", () => {
+          // Ссылка открывается сама, копирование идёт параллельно
+          const done = () => { $("thanks-copied").textContent = "Текст заявки скопирован, вставьте его в чат"; };
+          if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, () => {});
+        });
+      });
+    } else {
+      if (lead && lead.name) $("thanks-title").textContent = `${lead.name}, спасибо за заявку!`;
+      if (lead && lead.summary) {
+        $("thanks-summary").textContent = `Ваша заявка: ${lead.summary}`;
+        $("thanks-summary").hidden = false;
+      }
     }
   } catch {}
 </script>
