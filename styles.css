@@ -529,6 +529,7 @@ a { color: inherit; }
 .social-yt .social-icon { color: #ff0033; }
 .social-rt .social-icon { color: #100943; }
 .social-vk .social-icon { color: #0077ff; }
+.social-tc .social-icon { color: #ff5a1f; }
 .social-text { display: grid; gap: 2px; min-width: 0; flex: 1; }
 .social-text b { font-weight: 600; }
 .social-text small { color: var(--graphite); font-size: 13px; line-height: 1.4; }
