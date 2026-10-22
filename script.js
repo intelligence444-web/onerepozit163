@@ -352,7 +352,12 @@ function calcLead() {
 const looksLikePhone = (v) => /^[\s(+]*\d/.test(v) || v.trim() === "+";
 function formatPhone(v) {
   let d = v.replace(/\D/g, "");
-  if (v.trim().startsWith("+7")) d = "7" + v.trim().slice(2).replace(/\D/g, ""); // «+7» — код страны, дальше номер
+  if (v.trim().startsWith("+7")) {
+    // «+7» — код страны, дальше номер. Набрали после «+7» ещё 8 или 7 по привычке — лишняя цифра в начале отбрасывается
+    let rest = v.trim().slice(2).replace(/\D/g, "");
+    if (rest.length > 10 && (rest[0] === "8" || rest[0] === "7")) rest = rest.slice(1);
+    d = "7" + rest;
+  }
   else if (d[0] === "8" || d[0] === "7") d = "7" + d.slice(1);
   else d = "7" + d;
   d = d.slice(0, 11);
@@ -372,13 +377,24 @@ function contactError(v) {
   return /^(@|https?:\/\/t\.me\/|t\.me\/)?[a-zA-Z0-9_]{4,32}$/.test(v) ? null : "Ник в Telegram — латиница, цифры и «_», например @username";
 }
 function phoneMask(input) {
+  const onlyCode = () => input.value.replace(/\D/g, "") === "7" && input.value.trim().startsWith("+7");
+  // Пустое поле при фокусе сразу получает «+7 », дальше человек набирает номер
+  input.addEventListener("focus", () => {
+    if (input.value.trim()) return;
+    input.value = "+7 ";
+    requestAnimationFrame(() => input.setSelectionRange(input.value.length, input.value.length));
+  });
   input.addEventListener("input", (e) => {
+    // Вместо номера начали писать ник в Telegram — убираем подставленный «+7»
+    const nick = input.value.match(/^\+7[\s(]*([@a-zA-Z_].*)$/);
+    if (nick) { input.value = nick[1]; return; }
     // При стирании не переформатируем, иначе скобки и дефисы не дают удалить цифру
     if (e.inputType && e.inputType.startsWith("delete")) return;
     if (looksLikePhone(input.value) && /\d/.test(input.value)) input.value = formatPhone(input.value);
   });
   input.addEventListener("blur", () => {
-    if (looksLikePhone(input.value) && input.value.replace(/\D/g, "").length > 1) input.value = formatPhone(input.value);
+    if (onlyCode()) input.value = ""; // номер так и не начали — поле снова пустое
+    else if (looksLikePhone(input.value) && input.value.replace(/\D/g, "").length > 1) input.value = formatPhone(input.value);
   });
 }
 
