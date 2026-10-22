@@ -336,6 +336,7 @@ document.querySelectorAll("[data-preset]").forEach((link) => {
 function calcLead() {
   const c = readCalc();
   return {
+    label: "Ваш расчёт",
     summary: `${c.plan ? `тариф «${c.plan.name}»` : TYPES[c.type].label}, ${priceText(c)}, ${c.dMin}–${c.dMax} ${daysWord(c.dMax)}`,
     fields: {
       plan: c.plan ? c.plan.name : null,
@@ -347,8 +348,9 @@ function calcLead() {
   };
 }
 
-// Общая логика формы заявки: проверка полей, согласие, отправка. Используется калькулятором и попапом тарифа.
-function leadForm(el) {
+// Общая логика формы заявки: проверка полей, согласие, отправка. Используется калькулятором и попапом.
+// getLead возвращает, что именно человек заказывает: подпись и текст для сообщения и поля для заявки.
+function leadForm(el, getLead) {
   const status = el.querySelector(".form-status");
   const button = el.querySelector('button[type="submit"]');
   const buttonText = button.textContent;
@@ -380,14 +382,14 @@ function leadForm(el) {
       return;
     }
 
-    const lead = calcLead();
+    const lead = getLead();
 
     if (!CONFIG.formEndpoint) {
       // Пока отправка не подключена: предлагаем написать в Telegram и показываем расчёт, чтобы его можно было скопировать
       const tg = document.querySelector('a[href^="https://t.me/"]');
       status.className = "form-status info";
       status.replaceChildren(
-        `Ваш расчёт: ${lead.summary}. Отправьте его нам в `,
+        `${lead.label}: ${lead.summary}. Отправьте это нам в `,
         Object.assign(document.createElement("a"), { href: tg ? tg.href : "#calc", textContent: "Telegram", target: "_blank", rel: "noopener" }),
         ", ответим в течение часа."
       );
@@ -412,9 +414,18 @@ function leadForm(el) {
         body: JSON.stringify(payload),
       });
       if (!response.ok) throw new Error(response.status);
-      fields.forEach((i) => { if (i.type === "checkbox") i.checked = false; else i.value = ""; });
-      setStatus("Заявка отправлена. Пришлём точный расчёт в течение часа в рабочее время.", "ok");
-      if (CONFIG.metrikaId && window.ym) window.ym(CONFIG.metrikaId, "reachGoal", "lead");
+      // Имя и суть заявки показываем на странице благодарности
+      try { sessionStorage.setItem("lead", JSON.stringify({ name: payload.name, summary: lead.summary })); } catch {}
+      setStatus("Заявка отправлена.", "ok");
+      const toThanks = () => location.assign("thanks.html");
+      if (CONFIG.metrikaId && window.ym) {
+        // Ждём, пока Метрика отправит цель, но не дольше секунды
+        const timer = setTimeout(toThanks, 1000);
+        window.ym(CONFIG.metrikaId, "reachGoal", "lead", {}, () => { clearTimeout(timer); toThanks(); });
+      } else {
+        toThanks();
+      }
+      return;
     } catch {
       setStatus("Заявка не отправилась. Проверьте интернет и попробуйте ещё раз или напишите в Telegram.", "err");
     } finally {
@@ -424,36 +435,53 @@ function leadForm(el) {
   });
 }
 
-leadForm(form);
+leadForm(form, calcLead);
 
-/* ---------- Попап заявки на тариф ---------- */
+/* ---------- Попап заявки: тариф или общий запрос с первого экрана ---------- */
 
-const modal = document.getElementById("plan-modal");
-const modalForm = document.getElementById("plan-form");
-leadForm(modalForm);
+const modal = document.getElementById("lead-modal");
+const modalForm = document.getElementById("lead-form");
+const modalTitle = document.getElementById("modal-title");
 
-function openPlanModal(link) {
-  const c = readCalc();
-  document.getElementById("modal-title").textContent = c.plan.name;
-  document.getElementById("modal-price").textContent = rub(c.plan.price);
-  document.getElementById("modal-days").textContent = `${c.dMin}–${c.dMax} ${daysWord(c.dMax)}`;
-  // Состав берём из карточки тарифа, чтобы не дублировать тексты
-  const list = document.getElementById("modal-list");
-  list.replaceChildren(...[...link.closest(".plan").querySelectorAll("li")].map((li) => li.cloneNode(true)));
+function generalLead() {
+  const need = modalForm.elements.need.value;
+  return {
+    label: "Ваша заявка",
+    summary: need ? need.toLowerCase() : "обсудить проект",
+    fields: { request: need || "Пока не знаю", source: "Попап «Обсудить проект»" },
+  };
+}
+leadForm(modalForm, () => (modal.dataset.mode === "plan" ? calcLead() : generalLead()));
+
+function openModal(mode, link) {
+  modal.dataset.mode = mode;
+  modal.querySelectorAll("[data-mode]").forEach((el) => { el.hidden = el.dataset.mode !== mode; });
+  if (mode === "plan") {
+    const c = readCalc();
+    modalTitle.textContent = c.plan.name;
+    document.getElementById("modal-price").textContent = rub(c.plan.price);
+    document.getElementById("modal-days").textContent = `${c.dMin}–${c.dMax} ${daysWord(c.dMax)}`;
+    // Состав берём из карточки тарифа, чтобы не дублировать тексты
+    const list = document.getElementById("modal-list");
+    list.replaceChildren(...[...link.closest(".plan").querySelectorAll("li")].map((li) => li.cloneNode(true)));
+  } else {
+    modalTitle.textContent = "Обсудим ваш проект";
+  }
   modalForm.querySelector(".form-status").textContent = "";
   modal.showModal();
 }
 
-document.querySelectorAll("[data-preset]").forEach((link) => {
+// Старый браузер без <dialog>: ссылки просто ведут к калькулятору
+document.querySelectorAll("[data-preset], [data-modal]").forEach((link) => {
   link.addEventListener("click", (e) => {
-    if (!modal.showModal) return; // старый браузер без <dialog>: просто переходим к калькулятору
+    if (!modal.showModal) return;
     e.preventDefault();
-    openPlanModal(link);
+    openModal(link.dataset.preset ? "plan" : "general", link);
   });
 });
 
 modal.addEventListener("click", (e) => {
-  // Закрываем по крестику и по клику на затемнение вокруг окна
+  // Закрываем по крестику, по клику на затемнение вокруг окна и по ссылке на калькулятор
   if (e.target === modal || e.target.closest("[data-close]")) modal.close();
 });
 

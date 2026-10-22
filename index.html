@@ -17,7 +17,7 @@
   <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-ruble.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=33">
+  <link rel="stylesheet" href="styles.css?v=34">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -37,7 +37,7 @@
       <a href="#faq">Вопросы</a>
       <a href="#calc">Калькулятор</a>
     </nav>
-    <a class="btn btn-small" href="#calc">Обсудить проект</a>
+    <a class="btn btn-small" href="#calc" data-modal>Обсудить проект</a>
   </div>
 </header>
 
@@ -51,7 +51,7 @@
         <p class="h1-sub"><span>Готовый к&nbsp;заявкам.</span> <span>Запуск за&nbsp;7&nbsp;дней, от&nbsp;25&nbsp;000&nbsp;₽</span></p>
         <p class="lead">Делаем лендинги, сайты и&nbsp;квизы под&nbsp;ключ для&nbsp;любых услуг и&nbsp;товаров. Продумываем структуру для&nbsp;правильной работы автотаргетинга в&nbsp;Яндекс Директ, пишем тексты, собираем дизайн и&nbsp;запускаем сайт на&nbsp;домене.</p>
         <div class="hero-actions">
-          <a class="btn" href="#calc">Рассчитать стоимость</a>
+          <a class="btn" href="#calc" data-modal>Обсудить проект</a>
           <a class="btn btn-ghost" href="https://t.me/your_username" target="_blank" rel="noopener">Написать в&nbsp;Telegram</a>
         </div>
         <ul class="hero-facts">
@@ -476,19 +476,31 @@
 
 </main>
 
-<dialog class="modal" id="plan-modal" aria-labelledby="modal-title">
-  <form class="modal-box" id="plan-form" novalidate>
+<dialog class="modal" id="lead-modal" aria-labelledby="modal-title">
+  <form class="modal-box" id="lead-form" novalidate>
     <button class="modal-close" type="button" data-close aria-label="Закрыть"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-    <p class="modal-kicker">Заявка на&nbsp;тариф</p>
+    <p class="modal-kicker" data-mode="plan">Заявка на&nbsp;тариф</p>
+    <p class="modal-kicker" data-mode="general" hidden>Бесплатная консультация</p>
     <h3 id="modal-title">Лендинг под&nbsp;ключ</h3>
-    <div class="sum-total modal-total">
+    <div class="sum-total modal-total" data-mode="plan">
       <div><span>Стоимость</span><output id="modal-price">65 000 ₽</output></div>
       <div><span>Срок</span><output id="modal-days">7–14 дней</output></div>
     </div>
-    <details class="modal-details">
+    <details class="modal-details" data-mode="plan">
       <summary>Что входит в&nbsp;тариф</summary>
       <ul class="modal-list" id="modal-list"></ul>
     </details>
+    <div class="modal-general" data-mode="general" hidden>
+      <p class="modal-text">Оставьте контакты: свяжемся в&nbsp;течение часа в&nbsp;рабочее время, зададим пару вопросов и&nbsp;пришлём смету за&nbsp;1&nbsp;день.</p>
+      <fieldset class="chips">
+        <legend>Что нужно <span class="optional">(необязательно)</span></legend>
+        <label class="chip"><input type="radio" name="need" value="Лендинг"><span>Лендинг</span></label>
+        <label class="chip"><input type="radio" name="need" value="Квиз"><span>Квиз</span></label>
+        <label class="chip"><input type="radio" name="need" value="Многостраничный сайт"><span>Сайт</span></label>
+        <label class="chip"><input type="radio" name="need" value="Лендинг и реклама"><span>Лендинг + реклама</span></label>
+        <label class="chip"><input type="radio" name="need" value="" checked><span>Пока не&nbsp;знаю</span></label>
+      </fieldset>
+    </div>
     <div class="field">
       <label for="m-name">Имя</label>
       <input id="m-name" name="name" type="text" autocomplete="name" required aria-describedby="m-err-name">
@@ -507,6 +519,7 @@
     <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
     <button class="btn btn-wide" type="submit">Оставить заявку</button>
     <p class="form-status" role="status" aria-live="polite"></p>
+    <p class="modal-alt" data-mode="general" hidden>Хотите сами прикинуть цену? <a href="#calc" data-close>Соберите проект в&nbsp;калькуляторе</a></p>
   </form>
 </dialog>
 
@@ -536,6 +549,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=33"></script>
+<script src="script.js?v=35"></script>
 </body>
 </html>
