@@ -473,8 +473,9 @@ a { color: inherit; }
 .field-err::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: currentColor; transform: translateY(-1px); }
 .field-err[hidden], .field.has-error .field-hint { display: none; }
 .check { display: flex; gap: 10px; align-items: flex-start; margin: 0; font-size: 13px; font-weight: 400; line-height: 1.45; color: var(--graphite); cursor: pointer; }
-.field .check { margin-bottom: 0; font-size: 13px; font-weight: 400; }
-.check input { flex: none; width: 20px; height: 20px; margin: 0; accent-color: var(--accent); cursor: pointer; }
+.field .check { display: flex; margin-bottom: 0; font-size: 13px; font-weight: 400; }
+.check input { flex: none; width: 18px; height: 18px; margin: 0; accent-color: var(--accent); cursor: pointer; }
+.check span { flex: 1; min-width: 0; }
 .check a { color: var(--ink); text-underline-offset: 2px; }
 .field.has-error .check input { outline: 2px solid #c62828; outline-offset: 1px; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; }
