@@ -487,6 +487,34 @@ a { color: inherit; }
 .form-status.info { background: var(--accent-soft); color: var(--ink); }
 .form-status a { color: var(--accent); font-weight: 600; text-underline-offset: 3px; }
 
+/* Попап заявки на тариф */
+.modal {
+  width: min(460px, calc(100% - 32px)); max-height: calc(100dvh - 32px);
+  padding: 0; border: 0; border-radius: var(--r-card);
+  background: var(--paper); color: var(--ink);
+  box-shadow: 0 40px 80px -30px rgba(21, 23, 26, .45);
+  overscroll-behavior: contain;
+}
+.modal::backdrop { background: rgba(21, 23, 26, .55); }
+.modal[open] { animation: modal-in .22s ease-out; }
+@keyframes modal-in { from { opacity: 0; transform: translateY(12px); } }
+body:has(.modal[open]) { overflow: hidden; }
+.modal-box { position: relative; display: grid; gap: 16px; padding: clamp(22px, 5vw, 32px); }
+.modal-close {
+  position: absolute; top: 10px; right: 10px;
+  display: grid; place-items: center; width: 44px; height: 44px;
+  background: none; border: 0; border-radius: 50%; color: var(--graphite); cursor: pointer;
+}
+.modal-close:hover { background: var(--mist); color: var(--ink); }
+.modal-kicker { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.modal h3 { margin-top: -8px; padding-right: 36px; font-size: 1.5rem; line-height: 1.2; }
+.modal-total { padding: 14px 0; }
+.modal-details summary { cursor: pointer; font-size: 15px; font-weight: 500; color: var(--accent); }
+.modal-list { display: grid; gap: 8px; margin-top: 12px; font-size: 14px; color: var(--graphite); }
+.modal-list li { position: relative; padding-left: 24px; }
+.modal-list li::before { content: ""; position: absolute; left: 2px; top: .45em; width: 10px; height: 5px; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); }
+@media (prefers-reduced-motion: reduce) { .modal[open] { animation: none; } }
+
 /* Подвал */
 .site-footer { padding: 48px 0; border-top: 1px solid var(--line); font-size: 15px; }
 .footer-inner { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; align-items: flex-start; }

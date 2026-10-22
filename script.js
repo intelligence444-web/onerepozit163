@@ -244,7 +244,6 @@ const form = document.getElementById("calc-form");
 const sumList = document.getElementById("sum-list");
 const sumPrice = document.getElementById("sum-price");
 const sumDays = document.getElementById("sum-days");
-const status = form.querySelector(".form-status");
 const rub = (n) => `${n.toLocaleString("ru-RU")} ₽`;
 let shownPrice = 0;
 
@@ -333,98 +332,129 @@ document.querySelectorAll("[data-preset]").forEach((link) => {
 
 /* ---------- Отправка заявки ---------- */
 
-function setStatus(text, kind) {
-  status.textContent = text;
-  status.className = `form-status ${kind}`;
+// Что ушло бы в заявку по текущему расчёту калькулятора (тариф из попапа тоже выставлен в калькуляторе)
+function calcLead() {
+  const c = readCalc();
+  return {
+    summary: `${c.plan ? `тариф «${c.plan.name}»` : TYPES[c.type].label}, ${priceText(c)}, ${c.dMin}–${c.dMax} ${daysWord(c.dMax)}`,
+    fields: {
+      plan: c.plan ? c.plan.name : null,
+      project: TYPES[c.type].label,
+      extras: c.extras.map((e) => EXTRAS[e].label),
+      urgent: c.fast,
+      estimate: `${priceText(c)}, ${c.dMin}–${c.dMax} ${daysWord(c.dMax)}`,
+    },
+  };
 }
 
-const consent = form.elements.consent;
-function markConsent() {
-  consent.closest(".field").classList.toggle("has-error", !consent.checked);
-  consent.setAttribute("aria-invalid", String(!consent.checked));
-  document.getElementById("err-consent").hidden = consent.checked;
-}
-consent.addEventListener("change", () => { if (consent.checked) markConsent(); });
+// Общая логика формы заявки: проверка полей, согласие, отправка. Используется калькулятором и попапом тарифа.
+function leadForm(el) {
+  const status = el.querySelector(".form-status");
+  const button = el.querySelector('button[type="submit"]');
+  const buttonText = button.textContent;
+  const fields = [el.elements.name, el.elements.contact, el.elements.consent];
+  const filled = (i) => (i.type === "checkbox" ? i.checked : i.value.trim() !== "");
+  const mark = (i) => {
+    const ok = filled(i);
+    i.closest(".field").classList.toggle("has-error", !ok);
+    i.setAttribute("aria-invalid", String(!ok));
+    i.closest(".field").querySelector(".field-err").hidden = ok;
+    return ok;
+  };
+  const setStatus = (text, kind) => {
+    status.textContent = text;
+    status.className = `form-status ${kind}`;
+  };
 
-// Ошибка поля пропадает, как только человек начинает печатать
-["name", "contact"].forEach((name) => {
-  form.elements[name].addEventListener("input", (e) => {
-    if (!e.target.value.trim()) return;
-    e.target.closest(".field").classList.remove("has-error");
-    e.target.setAttribute("aria-invalid", "false");
-    document.getElementById(`err-${name}`).hidden = true;
+  // Ошибка поля пропадает, как только человек начинает печатать или ставит галочку
+  fields.forEach((i) => i.addEventListener(i.type === "checkbox" ? "change" : "input", () => { if (filled(i)) mark(i); }));
+
+  el.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    status.textContent = "";
+    if (el.elements.website.value) return; // скрытое поле заполнил бот
+
+    const firstInvalid = fields.filter((i) => !mark(i))[0];
+    if (firstInvalid) {
+      firstInvalid.focus();
+      return;
+    }
+
+    const lead = calcLead();
+
+    if (!CONFIG.formEndpoint) {
+      // Пока отправка не подключена: предлагаем написать в Telegram и показываем расчёт, чтобы его можно было скопировать
+      const tg = document.querySelector('a[href^="https://t.me/"]');
+      status.className = "form-status info";
+      status.replaceChildren(
+        `Ваш расчёт: ${lead.summary}. Отправьте его нам в `,
+        Object.assign(document.createElement("a"), { href: tg ? tg.href : "#calc", textContent: "Telegram", target: "_blank", rel: "noopener" }),
+        ", ответим в течение часа."
+      );
+      return;
+    }
+
+    const payload = {
+      name: el.elements.name.value.trim(),
+      contact: el.elements.contact.value.trim(),
+      ...lead.fields,
+      page: location.href,
+      utm: location.search,
+      consent: new Date().toISOString(), // когда человек отметил согласие на обработку данных
+    };
+
+    button.disabled = true;
+    button.textContent = "Отправляю…";
+    try {
+      const response = await fetch(CONFIG.formEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) throw new Error(response.status);
+      fields.forEach((i) => { if (i.type === "checkbox") i.checked = false; else i.value = ""; });
+      setStatus("Заявка отправлена. Пришлём точный расчёт в течение часа в рабочее время.", "ok");
+      if (CONFIG.metrikaId && window.ym) window.ym(CONFIG.metrikaId, "reachGoal", "lead");
+    } catch {
+      setStatus("Заявка не отправилась. Проверьте интернет и попробуйте ещё раз или напишите в Telegram.", "err");
+    } finally {
+      button.disabled = false;
+      button.textContent = buttonText;
+    }
+  });
+}
+
+leadForm(form);
+
+/* ---------- Попап заявки на тариф ---------- */
+
+const modal = document.getElementById("plan-modal");
+const modalForm = document.getElementById("plan-form");
+leadForm(modalForm);
+
+function openPlanModal(link) {
+  const c = readCalc();
+  document.getElementById("modal-title").textContent = c.plan.name;
+  document.getElementById("modal-price").textContent = rub(c.plan.price);
+  document.getElementById("modal-days").textContent = `${c.dMin}–${c.dMax} ${daysWord(c.dMax)}`;
+  // Состав берём из карточки тарифа, чтобы не дублировать тексты
+  const list = document.getElementById("modal-list");
+  list.replaceChildren(...[...link.closest(".plan").querySelectorAll("li")].map((li) => li.cloneNode(true)));
+  modalForm.querySelector(".form-status").textContent = "";
+  modal.showModal();
+}
+
+document.querySelectorAll("[data-preset]").forEach((link) => {
+  link.addEventListener("click", (e) => {
+    if (!modal.showModal) return; // старый браузер без <dialog>: просто переходим к калькулятору
+    e.preventDefault();
+    openPlanModal(link);
   });
 });
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  status.textContent = "";
-  if (form.elements.website.value) return; // скрытое поле заполнил бот
-
-  let firstInvalid = null;
-  ["name", "contact"].forEach((name) => {
-    const input = form.elements[name];
-    const empty = !input.value.trim();
-    input.closest(".field").classList.toggle("has-error", empty);
-    input.setAttribute("aria-invalid", String(empty));
-    document.getElementById(`err-${name}`).hidden = !empty;
-    if (empty && !firstInvalid) firstInvalid = input;
-  });
-  markConsent();
-  if (!consent.checked && !firstInvalid) firstInvalid = consent;
-  if (firstInvalid) {
-    firstInvalid.focus();
-    return;
-  }
-
-  const c = readCalc();
-
-  if (!CONFIG.formEndpoint) {
-    // Пока отправка не подключена: предлагаем написать в Telegram и показываем расчёт, чтобы его можно было скопировать
-    const tg = document.querySelector('a[href^="https://t.me/"]');
-    status.className = "form-status info";
-    status.replaceChildren(
-      `Ваш расчёт: ${c.plan ? `тариф «${c.plan.name}»` : TYPES[c.type].label}, ${priceText(c)}, ${c.dMin}–${c.dMax} ${daysWord(c.dMax)}. Отправьте его нам в `,
-      Object.assign(document.createElement("a"), { href: tg ? tg.href : "#calc", textContent: "Telegram", target: "_blank", rel: "noopener" }),
-      ", ответим в течение часа."
-    );
-    return;
-  }
-
-  const payload = {
-    name: form.elements.name.value.trim(),
-    contact: form.elements.contact.value.trim(),
-    plan: c.plan ? c.plan.name : null,
-    project: TYPES[c.type].label,
-    extras: c.extras.map((e) => EXTRAS[e].label),
-    urgent: c.fast,
-    estimate: `${priceText(c)}, ${c.dMin}–${c.dMax} ${daysWord(c.dMax)}`,
-    page: location.href,
-    utm: location.search,
-    consent: new Date().toISOString(), // когда человек отметил согласие на обработку данных
-  };
-
-  const button = form.querySelector('button[type="submit"]');
-  button.disabled = true;
-  button.textContent = "Отправляю…";
-  try {
-    const response = await fetch(CONFIG.formEndpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    if (!response.ok) throw new Error(response.status);
-    form.elements.name.value = "";
-    form.elements.contact.value = "";
-    consent.checked = false;
-    setStatus("Заявка отправлена. Пришлём точный расчёт в течение часа в рабочее время.", "ok");
-    if (CONFIG.metrikaId && window.ym) window.ym(CONFIG.metrikaId, "reachGoal", "lead");
-  } catch {
-    setStatus("Заявка не отправилась. Проверьте интернет и попробуйте ещё раз или напишите в Telegram.", "err");
-  } finally {
-    button.disabled = false;
-    button.textContent = "Получить точный расчёт";
-  }
+modal.addEventListener("click", (e) => {
+  // Закрываем по крестику и по клику на затемнение вокруг окна
+  if (e.target === modal || e.target.closest("[data-close]")) modal.close();
 });
 
 /* ---------- Этапы: заполняются при прокрутке ---------- */
