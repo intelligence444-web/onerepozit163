@@ -394,7 +394,7 @@ function leadForm(el, getLead) {
     // Все формы ведут на страницу благодарности; имя и суть заявки она показывает в заголовке
     const toThanks = () => {
       try { sessionStorage.setItem("lead", JSON.stringify({ name: payload.name, summary: lead.summary })); } catch {}
-      const go = () => location.assign("thanks.html");
+      const go = () => location.assign("thanks.html?v=2"); // версия в адресе, чтобы браузер не показал старую копию страницы
       if (CONFIG.metrikaId && window.ym) {
         // Ждём, пока Метрика отправит цель, но не дольше секунды
         const timer = setTimeout(go, 1000);
