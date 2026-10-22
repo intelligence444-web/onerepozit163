@@ -514,12 +514,6 @@ a { color: inherit; }
 .thanks-lead { max-width: 34em; font-size: 1.125rem; color: var(--graphite); }
 .thanks-summary { padding: 10px 14px; background: var(--accent-soft); border-radius: var(--r-control); font-size: 15px; }
 .thanks-summary[hidden] { display: none; }
-.thanks-manual { display: grid; gap: 16px; width: 100%; margin-top: 8px; }
-.thanks-manual[hidden] { display: none; }
-.thanks-msg { margin: 0; padding: 16px 18px; background: var(--mist); border-radius: var(--r-control); font: 400 15px/1.55 var(--font); white-space: pre-wrap; overflow-wrap: anywhere; }
-.thanks-manual .hero-actions { margin-top: 0; }
-.thanks-copied { font-size: 14px; color: #11603a; }
-.thanks-copied:empty { display: none; }
 .thanks-block h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
 .thanks-sub { margin-top: 10px; color: var(--graphite); }
 .thanks-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; counter-reset: step; }

@@ -391,12 +391,9 @@ function leadForm(el, getLead) {
       consent: new Date().toISOString(), // когда человек отметил согласие на обработку данных
     };
 
-    // Все формы ведут на страницу благодарности. sent: false — приём заявок ещё не подключён,
-    // и страница попросит продублировать заявку в мессенджер, чтобы она не потерялась.
-    const toThanks = (sent) => {
-      try {
-        sessionStorage.setItem("lead", JSON.stringify({ name: payload.name, contact: payload.contact, summary: lead.summary, sent }));
-      } catch {}
+    // Все формы ведут на страницу благодарности; имя и суть заявки она показывает в заголовке
+    const toThanks = () => {
+      try { sessionStorage.setItem("lead", JSON.stringify({ name: payload.name, summary: lead.summary })); } catch {}
       const go = () => location.assign("thanks.html");
       if (CONFIG.metrikaId && window.ym) {
         // Ждём, пока Метрика отправит цель, но не дольше секунды
@@ -408,7 +405,7 @@ function leadForm(el, getLead) {
     };
 
     if (!CONFIG.formEndpoint) {
-      toThanks(false);
+      toThanks(); // приём заявок ещё не подключён — сразу на страницу благодарности
       return;
     }
 
@@ -422,7 +419,7 @@ function leadForm(el, getLead) {
       });
       if (!response.ok) throw new Error(response.status);
       setStatus("Заявка отправлена.", "ok");
-      toThanks(true);
+      toThanks();
       return;
     } catch {
       setStatus("Заявка не отправилась. Проверьте интернет и попробуйте ещё раз или напишите в Telegram.", "err");
