@@ -84,6 +84,7 @@ a { color: inherit; }
 .footer-brand { display: grid; gap: 6px; }
 .byline { margin-left: 44px; font-size: 11px; letter-spacing: .24em; color: var(--graphite); }
 .footer-brand .muted { margin-top: 10px; }
+.footer-req { font-size: 13px; color: var(--graphite); }
 .nav { display: flex; gap: 28px; margin-left: auto; font-size: 15px; }
 .nav a { text-decoration: none; color: var(--graphite); }
 .nav a:hover { color: var(--ink); }
