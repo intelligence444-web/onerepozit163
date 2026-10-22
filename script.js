@@ -347,19 +347,62 @@ function calcLead() {
   };
 }
 
+// Маска телефона. Поле общее для телефона и Telegram: если человек начинает с цифры или «+», форматируем
+// номер как +7 (900) 123-45-67, а ник в Telegram (@username) оставляем как есть.
+const looksLikePhone = (v) => /^[\s(+]*\d/.test(v) || v.trim() === "+";
+function formatPhone(v) {
+  let d = v.replace(/\D/g, "");
+  if (v.trim().startsWith("+7")) d = "7" + v.trim().slice(2).replace(/\D/g, ""); // «+7» — код страны, дальше номер
+  else if (d[0] === "8" || d[0] === "7") d = "7" + d.slice(1);
+  else d = "7" + d;
+  d = d.slice(0, 11);
+  let out = "+7";
+  if (d.length > 1) out += ` (${d.slice(1, 4)}`;
+  if (d.length >= 4) out += ")";
+  if (d.length > 4) out += ` ${d.slice(4, 7)}`;
+  if (d.length > 7) out += `-${d.slice(7, 9)}`;
+  if (d.length > 9) out += `-${d.slice(9, 11)}`;
+  return out;
+}
+// Что не так с контактом: null — всё в порядке
+function contactError(v) {
+  v = v.trim();
+  if (!v) return "Оставьте телефон или ник в Telegram, чтобы мы прислали расчёт";
+  if (looksLikePhone(v)) return v.replace(/\D/g, "").length === 11 ? null : "Номер неполный: нужно 10 цифр после +7";
+  return /^(@|https?:\/\/t\.me\/|t\.me\/)?[a-zA-Z0-9_]{4,32}$/.test(v) ? null : "Ник в Telegram — латиница, цифры и «_», например @username";
+}
+function phoneMask(input) {
+  input.addEventListener("input", (e) => {
+    // При стирании не переформатируем, иначе скобки и дефисы не дают удалить цифру
+    if (e.inputType && e.inputType.startsWith("delete")) return;
+    if (looksLikePhone(input.value) && /\d/.test(input.value)) input.value = formatPhone(input.value);
+  });
+  input.addEventListener("blur", () => {
+    if (looksLikePhone(input.value) && input.value.replace(/\D/g, "").length > 1) input.value = formatPhone(input.value);
+  });
+}
+
 // Общая логика формы заявки: проверка полей, согласие, отправка. Используется калькулятором и попапом.
-// getLead возвращает, что именно человек заказывает: подпись и текст для сообщения и поля для заявки.
-function leadForm(el, getLead) {
+// getLead возвращает, что именно человек заказывает: текст для страницы благодарности и поля для заявки.
+function leadForm(el, getLead, onSent) {
   const status = el.querySelector(".form-status");
   const button = el.querySelector('button[type="submit"]');
   const buttonText = button.textContent;
-  const fields = [el.elements.name, el.elements.contact, el.elements.consent];
-  const filled = (i) => (i.type === "checkbox" ? i.checked : i.value.trim() !== "");
+  const contact = el.elements.contact;
+  const fields = [el.elements.name, contact, el.elements.consent];
+  phoneMask(contact);
+  const problem = (i) => {
+    if (i === contact) return contactError(i.value);
+    return (i.type === "checkbox" ? i.checked : i.value.trim() !== "") ? null : "";
+  };
   const mark = (i) => {
-    const ok = filled(i);
+    const err = problem(i);
+    const ok = err === null;
+    const errEl = i.closest(".field").querySelector(".field-err");
     i.closest(".field").classList.toggle("has-error", !ok);
     i.setAttribute("aria-invalid", String(!ok));
-    i.closest(".field").querySelector(".field-err").hidden = ok;
+    if (err) errEl.textContent = err;
+    errEl.hidden = ok;
     return ok;
   };
   const setStatus = (text, kind) => {
@@ -367,8 +410,8 @@ function leadForm(el, getLead) {
     status.className = `form-status ${kind}`;
   };
 
-  // Ошибка поля пропадает, как только человек начинает печатать или ставит галочку
-  fields.forEach((i) => i.addEventListener(i.type === "checkbox" ? "change" : "input", () => { if (filled(i)) mark(i); }));
+  // Ошибка поля пропадает, как только значение становится правильным
+  fields.forEach((i) => i.addEventListener(i.type === "checkbox" ? "change" : "input", () => { if (problem(i) === null) mark(i); }));
 
   el.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -384,28 +427,30 @@ function leadForm(el, getLead) {
     const lead = getLead();
     const payload = {
       name: el.elements.name.value.trim(),
-      contact: el.elements.contact.value.trim(),
+      contact: contact.value.trim(),
       ...lead.fields,
       page: location.href,
       utm: location.search,
       consent: new Date().toISOString(), // когда человек отметил согласие на обработку данных
     };
 
-    // Все формы ведут на страницу благодарности; имя и суть заявки она показывает в заголовке
-    const toThanks = () => {
-      try { sessionStorage.setItem("lead", JSON.stringify({ name: payload.name, summary: lead.summary })); } catch {}
-      const go = () => location.assign("thanks.html?v=2"); // версия в адресе, чтобы браузер не показал старую копию страницы
-      if (CONFIG.metrikaId && window.ym) {
-        // Ждём, пока Метрика отправит цель, но не дольше секунды
-        const timer = setTimeout(go, 1000);
-        window.ym(CONFIG.metrikaId, "reachGoal", "lead", {}, () => { clearTimeout(timer); go(); });
-      } else {
-        go();
-      }
+    // Страница благодарности открывается в новой вкладке. Вкладку открываем сразу, пока идёт нажатие
+    // кнопки, — иначе браузер заблокирует её как всплывающее окно. Если всё же заблокировал, откроем здесь же.
+    const tab = window.open("", "_blank");
+    const url = "thanks.html?v=3"; // версия в адресе, чтобы браузер не показал старую копию страницы
+    const done = () => {
+      // Имя и суть заявки страница благодарности берёт из localStorage — он общий для вкладок сайта
+      try { localStorage.setItem("lead", JSON.stringify({ name: payload.name, summary: lead.summary })); } catch {}
+      if (CONFIG.metrikaId && window.ym) window.ym(CONFIG.metrikaId, "reachGoal", "lead");
+      fields.forEach((i) => { if (i.type === "checkbox") i.checked = false; else i.value = ""; });
+      setStatus("Заявка отправлена, спасибо! Свяжемся в течение часа в рабочее время.", "ok");
+      if (onSent) onSent();
+      if (tab) tab.location.href = url;
+      else location.assign(url);
     };
 
     if (!CONFIG.formEndpoint) {
-      toThanks(); // приём заявок ещё не подключён — сразу на страницу благодарности
+      done(); // приём заявок ещё не подключён — сразу на страницу благодарности
       return;
     }
 
@@ -418,10 +463,9 @@ function leadForm(el, getLead) {
         body: JSON.stringify(payload),
       });
       if (!response.ok) throw new Error(response.status);
-      setStatus("Заявка отправлена.", "ok");
-      toThanks();
-      return;
+      done();
     } catch {
+      if (tab) tab.close();
       setStatus("Заявка не отправилась. Проверьте интернет и попробуйте ещё раз или напишите в Telegram.", "err");
     } finally {
       button.disabled = false;
@@ -445,7 +489,7 @@ function generalLead() {
     fields: { request: need || "Пока не знаю", source: "Попап «Обсудить проект»" },
   };
 }
-leadForm(modalForm, () => (modal.dataset.mode === "plan" ? calcLead() : generalLead()));
+leadForm(modalForm, () => (modal.dataset.mode === "plan" ? calcLead() : generalLead()), () => modal.close());
 
 function openModal(mode, link) {
   modal.dataset.mode = mode;

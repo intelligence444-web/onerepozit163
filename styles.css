@@ -18,7 +18,7 @@
   --font: "Onest", "Onest Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
   --wrap: 1160px;
   --gutter: clamp(16px, 4vw, 40px);
-  --section: clamp(80px, 11vw, 144px);
+  --section: clamp(56px, 7vw, 96px);
   --r-control: 8px;
   --r-card: 20px;
 }
@@ -262,7 +262,7 @@ a { color: inherit; }
 .section { padding: var(--section) 0; }
 .section-tint { background: var(--mist); }
 .section-ink { background: var(--ink); color: #fff; }
-.section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 64px; align-items: end; margin-bottom: 64px; }
+.section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 64px; align-items: end; margin-bottom: 48px; }
 .section-head p { color: var(--graphite); max-width: 32em; }
 
 /* Услуги: список с ценой и сроком */
@@ -642,7 +642,7 @@ body:has(.modal[open]) { overflow: hidden; }
   .hero-grid, .niches-head, .traffic-grid, .faq-grid, .addon { grid-template-columns: 1fr; gap: 40px; }
   .showcase { max-width: 640px; }
   .toast { left: 10px; }
-  .section-head { grid-template-columns: 1fr; margin-bottom: 40px; }
+  .section-head { grid-template-columns: 1fr; margin-bottom: 32px; }
   .plans { grid-template-columns: 1fr; }
 }
 

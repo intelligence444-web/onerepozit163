@@ -8,7 +8,7 @@
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=39">
+  <link rel="stylesheet" href="styles.css?v=40">
 </head>
 <body>
 
@@ -127,7 +127,8 @@
 <script>
   // Имя и суть заявки сохраняет форма перед переходом сюда
   try {
-    const lead = JSON.parse(sessionStorage.getItem("lead") || "null");
+    const lead = JSON.parse(localStorage.getItem("lead") || "null");
+    localStorage.removeItem("lead"); // показали один раз — больше не храним
     if (lead && lead.name) document.getElementById("thanks-title").textContent = `${lead.name}, спасибо за заявку!`;
     if (lead && lead.summary) {
       const el = document.getElementById("thanks-summary");
