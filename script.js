@@ -313,6 +313,7 @@ function renderCalc() {
 }
 
 form.addEventListener("change", (e) => {
+  if (!["type", "extra", "speed"].includes(e.target.name)) return; // поля контактов и согласие расчёт не меняют
   // Любое изменение состава превращает тариф в собственный набор; срочность тариф не сбрасывает
   if (e.target.name !== "speed") activePlan = null;
   renderCalc();
@@ -336,6 +337,14 @@ function setStatus(text, kind) {
   status.textContent = text;
   status.className = `form-status ${kind}`;
 }
+
+const consent = form.elements.consent;
+function markConsent() {
+  consent.closest(".field").classList.toggle("has-error", !consent.checked);
+  consent.setAttribute("aria-invalid", String(!consent.checked));
+  document.getElementById("err-consent").hidden = consent.checked;
+}
+consent.addEventListener("change", () => { if (consent.checked) markConsent(); });
 
 // Ошибка поля пропадает, как только человек начинает печатать
 ["name", "contact"].forEach((name) => {
@@ -361,6 +370,8 @@ form.addEventListener("submit", async (event) => {
     document.getElementById(`err-${name}`).hidden = !empty;
     if (empty && !firstInvalid) firstInvalid = input;
   });
+  markConsent();
+  if (!consent.checked && !firstInvalid) firstInvalid = consent;
   if (firstInvalid) {
     firstInvalid.focus();
     return;
@@ -390,6 +401,7 @@ form.addEventListener("submit", async (event) => {
     estimate: `${priceText(c)}, ${c.dMin}–${c.dMax} ${daysWord(c.dMax)}`,
     page: location.href,
     utm: location.search,
+    consent: new Date().toISOString(), // когда человек отметил согласие на обработку данных
   };
 
   const button = form.querySelector('button[type="submit"]');
@@ -404,6 +416,7 @@ form.addEventListener("submit", async (event) => {
     if (!response.ok) throw new Error(response.status);
     form.elements.name.value = "";
     form.elements.contact.value = "";
+    consent.checked = false;
     setStatus("Заявка отправлена. Пришлём точный расчёт в течение часа в рабочее время.", "ok");
     if (CONFIG.metrikaId && window.ym) window.ym(CONFIG.metrikaId, "reachGoal", "lead");
   } catch {

@@ -17,7 +17,7 @@
   <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-ruble.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=29">
+  <link rel="stylesheet" href="styles.css?v=30">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -460,9 +460,12 @@
             <p class="field-hint" id="hint-contact">Например, +7 900 123-45-67 или @username</p>
             <p class="field-err" id="err-contact" hidden>Оставьте телефон или&nbsp;ник в&nbsp;Telegram, чтобы мы&nbsp;прислали расчёт</p>
           </div>
+          <div class="field consent">
+            <label class="check"><input id="f-consent" name="consent" type="checkbox" required aria-describedby="err-consent"><span>Даю <a href="consent.html" target="_blank">согласие на&nbsp;обработку персональных данных</a> и&nbsp;принимаю <a href="privacy.html" target="_blank">политику конфиденциальности</a></span></label>
+            <p class="field-err" id="err-consent" hidden>Без согласия мы&nbsp;не&nbsp;сможем принять заявку</p>
+          </div>
           <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button class="btn btn-wide" type="submit">Получить точный расчёт</button>
-          <p class="form-note">Нажимая кнопку, вы&nbsp;соглашаетесь на&nbsp;обработку персональных данных.</p>
           <p class="form-status" role="status" aria-live="polite"></p>
         </aside>
       </form>
@@ -491,9 +494,13 @@
       <li><a href="https://youtube.com/" target="_blank" rel="noopener">YouTube</a></li>
       <li><a href="https://vk.com/video" target="_blank" rel="noopener">VK Видео</a></li>
     </ul>
+    <ul class="footer-legal">
+      <li><a href="privacy.html">Политика конфиденциальности</a></li>
+      <li><a href="consent.html">Согласие на&nbsp;обработку данных</a></li>
+    </ul>
   </div>
 </footer>
 
-<script src="script.js?v=29"></script>
+<script src="script.js?v=30"></script>
 </body>
 </html>
