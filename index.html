@@ -17,7 +17,7 @@
   <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-ruble.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=42">
+  <link rel="stylesheet" href="styles.css?v=43">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -32,6 +32,7 @@
       <a href="#services">Услуги</a>
       <a href="#included">Что&nbsp;входит</a>
       <a href="#support">Сопровождение</a>
+      <a href="#cases">Работы</a>
       <a href="#process">Как&nbsp;работаем</a>
       <a href="#prices">Тарифы</a>
       <a href="#faq">Вопросы</a>
@@ -267,6 +268,79 @@
   </section>
 
   <!-- Как работаем -->
+  <section class="section" id="cases">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Примеры работ</h2>
+        <p>Концепты сайтов для&nbsp;ниш, с&nbsp;которыми работаем чаще всего. Так мы&nbsp;строим структуру: оффер, квиз или&nbsp;калькулятор, каталог с&nbsp;фото и&nbsp;форма заявки.</p>
+      </div>
+
+      <div class="case-filter" role="group" aria-label="Ниша">
+        <button type="button" data-filter="all" aria-pressed="true">Все</button>
+        <button type="button" data-filter="realty" aria-pressed="false">Недвижимость</button>
+        <button type="button" data-filter="doma" aria-pressed="false">Строительство домов</button>
+        <button type="button" data-filter="kitchen" aria-pressed="false">Кухни&nbsp;и мебель</button>
+        <button type="button" data-filter="remont" aria-pressed="false">Ремонт</button>
+      </div>
+
+      <ul class="works" id="cases-list">
+        <li class="work" data-niche="realty">
+          <button type="button" class="work-shot" data-full="assets/works/realty-full.webp" aria-label="Смотреть сайт «Высота» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/realty.webp" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Высота»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Недвижимость</span><span>Квиз-лендинг</span><span class="work-concept">Концепт</span></p>
+            <h3>«Высота» — агентство новостроек</h3>
+            <ul class="work-done"><li>Квиз-подбор квартиры по комнатам, бюджету и району</li><li>Каталог ЖК с ценами и сроками сдачи</li><li>Подарок за ответы: подборка и расчёт ипотеки</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/realty-full.webp">Смотреть сайт целиком</button>
+          </div>
+        </li>
+        <li class="work" data-niche="doma">
+          <button type="button" class="work-shot" data-full="assets/works/doma-full.webp" aria-label="Смотреть сайт «Дом на века» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/doma.webp" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Дом на века»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Строительство домов</span><span>Лендинг + калькулятор</span><span class="work-concept">Концепт</span></p>
+            <h3>«Дом на века» — строительная компания</h3>
+            <ul class="work-done"><li>Оффер про фиксированную смету</li><li>Калькулятор стоимости дома по материалу</li><li>Проекты с площадью и ценой, фото стройки</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/doma-full.webp">Смотреть сайт целиком</button>
+          </div>
+        </li>
+        <li class="work" data-niche="kitchen">
+          <button type="button" class="work-shot" data-full="assets/works/kitchen-full.webp" aria-label="Смотреть сайт «Кухни Тепло» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/kitchen.webp" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Кухни Тепло»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Кухни и мебель</span><span>Квиз-лендинг</span><span class="work-concept">Концепт</span></p>
+            <h3>«Кухни Тепло» — кухни на заказ</h3>
+            <ul class="work-done"><li>Квиз по форме кухни с картинками</li><li>Подарок: 3D-проект и скидка</li><li>Галерея работ с ценой и материалами</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/kitchen-full.webp">Смотреть сайт целиком</button>
+          </div>
+        </li>
+        <li class="work" data-niche="remont">
+          <button type="button" class="work-shot" data-full="assets/works/remont-full.webp" aria-label="Смотреть сайт «Ремонт Про» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/remont.webp" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Ремонт Про»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Ремонт</span><span>Лендинг</span><span class="work-concept">Концепт</span></p>
+            <h3>«Ремонт Про» — ремонт квартир</h3>
+            <ul class="work-done"><li>Смета за 1 день как главный оффер</li><li>Тарифы с ценой за м² и фото «до и после»</li><li>Прораб на объекте и гарантии</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/remont-full.webp">Смотреть сайт целиком</button>
+          </div>
+        </li>
+      </ul>
+
+      <div class="cases-cta">
+        <p>Нет вашей ниши? Расскажите о&nbsp;задаче — покажем похожие проекты на&nbsp;созвоне.</p>
+        <a class="btn" href="#calc" data-modal>Обсудить свой сайт</a>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="process">
     <div class="wrap">
       <div class="section-head">
@@ -499,6 +573,11 @@
 
 </main>
 
+<dialog class="work-modal" id="work-modal" aria-label="Сайт целиком">
+  <button type="button" class="work-close" data-close aria-label="Закрыть">&times;</button>
+  <div class="work-scroll"><img id="work-full" alt="" width="1100" height="4000"></div>
+</dialog>
+
 <dialog class="modal" id="lead-modal" aria-labelledby="modal-title">
   <form class="modal-box" id="lead-form" novalidate>
     <button class="modal-close" type="button" data-close aria-label="Закрыть"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
@@ -574,6 +653,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=40"></script>
+<script src="script.js?v=41"></script>
 </body>
 </html>
