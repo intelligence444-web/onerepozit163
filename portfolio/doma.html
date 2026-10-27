@@ -84,7 +84,7 @@ body { background: var(--bg); color: var(--ink); font-family: "Manrope", sans-se
 
 .final { margin: 0 24px 24px; padding: 90px 0; border-radius: 36px; background: var(--green); color: #fff; }
 .final .w { display: grid; grid-template-columns: 1fr 440px; gap: 80px; align-items: center; }
-.final h2 { color: #fff; }
+.final h2 { color: #fff; font-size: 50px; }
 .final p { margin-top: 18px; color: rgba(255,255,255,.75); }
 .form { display: grid; gap: 12px; }
 .inp { height: 58px; padding: 0 20px; display: flex; align-items: center; border-radius: 16px; background: rgba(255,255,255,.12); color: rgba(255,255,255,.7); }
@@ -92,6 +92,50 @@ body { background: var(--bg); color: var(--ink); font-family: "Manrope", sans-se
 .form small { color: rgba(255,255,255,.6); font-size: 12px; }
 footer { padding: 32px 0 44px; color: var(--muted); font-size: 14px; }
 footer .w { display: flex; justify-content: space-between; align-items: center; }
+
+/* Длинный сайт-каталог: технологии, комплектации, объекты, ипотека, вопросы */
+.subnav { position: sticky; top: 0; z-index: 3; margin-top: 90px; background: rgba(243,241,234,.94); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.subnav .w { display: flex; gap: 36px; height: 60px; align-items: center; font-weight: 600; font-size: 15px; color: var(--muted); }
+.subnav .on { color: var(--green); box-shadow: inset 0 -2px 0 var(--green); line-height: 58px; }
+.tech { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--card); border-radius: 28px; overflow: hidden; font-size: 16px; }
+.tech th, .tech td { padding: 20px 26px; text-align: left; border-bottom: 1px solid var(--line); }
+.tech thead th { background: var(--soft); color: var(--green); font-weight: 800; font-size: 15px; }
+.tech tbody th { font-weight: 800; }
+.tech tr:last-child > * { border-bottom: 0; }
+.tech .best { color: var(--green); font-weight: 800; }
+.pkgs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.pkg { display: flex; flex-direction: column; padding: 36px 32px; border-radius: 28px; background: var(--card); }
+.pkg.main { background: var(--ink); color: #fff; }
+.pkg h3 { font-weight: 800; font-size: 26px; }
+.pkg .p { margin-top: 8px; color: var(--muted); }
+.pkg.main .p { color: rgba(255,255,255,.65); }
+.pkg ul { display: grid; gap: 12px; margin: 26px 0 30px; font-size: 15px; }
+.pkg li::before { content: "✓"; margin-right: 10px; color: var(--green); font-weight: 800; }
+.pkg.main li::before { color: #9fd18b; }
+.pkg .price { margin-top: auto; font-weight: 800; font-size: 32px; letter-spacing: -0.03em; }
+.pkg .price small { font-size: 16px; font-weight: 600; }
+.objects { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.obj img { width: 100%; height: 260px; border-radius: 22px; object-fit: cover; }
+.obj h3 { margin-top: 14px; font-weight: 800; font-size: 17px; }
+.obj p { color: var(--muted); font-size: 14px; }
+.counter { display: flex; gap: 60px; margin-bottom: 40px; }
+.counter b { display: block; font-weight: 800; font-size: 54px; letter-spacing: -0.04em; color: var(--green); line-height: 1; }
+.counter span { color: var(--muted); }
+.mort { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 36px; overflow: hidden; background: var(--soft); }
+.mort .t { padding: 64px; }
+.mort .banks { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.mort .banks span { padding: 10px 16px; border-radius: 12px; background: #fff; font-weight: 600; font-size: 14px; }
+.mort .pay { display: flex; flex-direction: column; justify-content: center; padding: 64px; background: var(--card); }
+.mort .row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+.mort .row b { color: var(--ink); }
+.mort .sum { margin-top: 26px; font-weight: 800; font-size: 44px; letter-spacing: -0.03em; }
+.mort .sum small { display: block; color: var(--muted); font-size: 15px; font-weight: 600; letter-spacing: 0; }
+.faq { display: grid; grid-template-columns: 380px 1fr; gap: 80px; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { display: flex; justify-content: space-between; padding: 24px 0; font-weight: 800; font-size: 19px; list-style: none; }
+.faq summary::after { content: "+"; color: var(--green); font-size: 26px; line-height: 1; }
+.faq details[open] summary::after { content: "−"; }
+.faq details p { padding-bottom: 24px; color: var(--muted); }
 </style></head>
 <body>
 <header><div class="w hd"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg>Дом на века</span><nav class="nav"><span>Проекты</span><span>Технологии</span><span>Ипотека</span><span>Объекты</span></nav><span class="ph">+7 900 000-00-02<small>Пн–Сб 9:00–19:00</small></span><a class="btn" href="#f">Заказать звонок</a></div></header>
@@ -115,12 +159,34 @@ footer .w { display: flex; justify-content: space-between; align-items: center; 
   </div>
 </section>
 
-<section class="sec" id="c"><div class="w">
+<nav class="subnav"><div class="w"><span class="on">Проекты</span><span>Технологии</span><span>Комплектации</span><span>Как строим</span><span>Объекты</span><span>Ипотека</span><span>Вопросы</span></div></nav>
+
+<section class="sec" id="c" style="padding-top:80px"><div class="w">
   <div class="head"><h2>Популярные проекты</h2><p>Каждый проект можно изменить под ваш участок и бюджет — бесплатно.</p></div>
   <div class="mosaic">
     <article class="proj"><img src="img/doma-1.webp" alt="Одноэтажный дом с панорамными окнами"><span class="tag">Хит сезона</span><div class="info"><div><h3>Проект «Лесной»</h3><p>118 м² · 3 спальни · 1 этаж</p></div><b>от 4,9 млн ₽</b></div></article>
     <article class="proj"><img src="img/doma-2.webp" alt="Двухэтажный дом с гаражом"><div class="info"><div><h3>«Семейный»</h3><p>146 м² · 4 спальни</p></div><b>от 6,3 млн ₽</b></div></article>
     <article class="proj"><img src="img/doma-4.webp" alt="Гостиная с камином"><div class="info"><div><h3>«Компакт»</h3><p>84 м² · 2 спальни</p></div><b>от 3,6 млн ₽</b></div></article>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="w">
+  <div class="head"><h2>Из чего строить</h2><p>Сравнили технологии по цене, сроку и тому, что важно в жизни. Поможем выбрать на консультации.</p></div>
+  <table class="tech"><thead><tr><th></th><th>Газобетон</th><th>Кирпич</th><th>Брус</th><th>Каркас</th></tr></thead><tbody>
+    <tr><th>Цена под ключ, м²</th><td>от 35 500 ₽</td><td>от 48 000 ₽</td><td>от 39 000 ₽</td><td class="best">от 29 000 ₽</td></tr>
+    <tr><th>Срок стройки</th><td>4–5 мес.</td><td>6–8 мес.</td><td>5–6 мес.</td><td class="best">2–3 мес.</td></tr>
+    <tr><th>Можно жить зимой</th><td>да</td><td>да</td><td>да</td><td>да</td></tr>
+    <tr><th>Усадка</th><td class="best">нет</td><td class="best">нет</td><td>до 6 месяцев</td><td class="best">нет</td></tr>
+    <tr><th>Срок службы</th><td>100+ лет</td><td class="best">150+ лет</td><td>70+ лет</td><td>60+ лет</td></tr>
+  </tbody></table>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="w">
+  <div class="head"><h2>Комплектации</h2><p>Цена за м² фиксируется в договоре. Можно начать с коробки и доделать позже.</p></div>
+  <div class="pkgs">
+    <div class="pkg"><h3>Коробка</h3><p class="p">Стены, перекрытия и кровля</p><ul><li>Фундамент — монолитная плита</li><li>Стены и перегородки</li><li>Кровля с утеплением</li></ul><p class="price">22 000 ₽<small>/м²</small></p></div>
+    <div class="pkg main"><h3>Тёплый контур</h3><p class="p">Можно начинать отделку</p><ul><li>Всё из «Коробки»</li><li>Окна и входная дверь</li><li>Фасад и отмостка</li><li>Ввод коммуникаций</li></ul><p class="price">29 500 ₽<small>/м²</small></p></div>
+    <div class="pkg"><h3>Под ключ</h3><p class="p">Заезжаете с вещами</p><ul><li>Всё из «Тёплого контура»</li><li>Отопление, вода, электрика</li><li>Чистовая отделка</li><li>Санузлы с сантехникой</li></ul><p class="price">35 500 ₽<small>/м²</small></p></div>
   </div>
 </div></section>
 
@@ -139,10 +205,39 @@ footer .w { display: flex; justify-content: space-between; align-items: center; 
 </div></section>
 
 <section class="sec" style="padding-top:0"><div class="w">
+  <div class="head"><h2>Построенные дома</h2><p>Приезжайте посмотреть на живые объекты — договоримся с хозяевами.</p></div>
+  <div class="counter"><div><b>230+</b><span>домов сдано</span></div><div><b>14</b><span>посёлков области</span></div><div><b>38</b><span>домов в работе сейчас</span></div></div>
+  <div class="objects">
+    <div class="obj"><img src="img/doma-1.webp" alt=""><h3>Дом 118 м², Курумоч</h3><p>Газобетон · 5 месяцев</p></div>
+    <div class="obj"><img src="img/doma-2.webp" alt=""><h3>Дом 146 м², Царевщина</h3><p>Кирпич · 7 месяцев</p></div>
+    <div class="obj"><img src="img/doma-hero.webp" alt=""><h3>Дом 132 м², Красный Яр</h3><p>Газобетон · 4,5 месяца</p></div>
+    <div class="obj"><img src="img/doma-4.webp" alt=""><h3>Дом 96 м², Мирный</h3><p>Брус · 5 месяцев</p></div>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="w">
+  <div class="mort">
+    <div class="t"><span class="tag">Ипотека на строительство</span><h2 style="margin-top:20px">Платёж меньше, чем аренда квартиры</h2><p style="margin-top:18px;color:var(--muted)">Аккредитованы в 9 банках. Подаём заявки сами и получаем одобрение за 1–3 дня.</p><div class="banks"><span>Сбербанк</span><span>ВТБ</span><span>Дом.РФ</span><span>Россельхозбанк</span><span>Альфа-Банк</span><span>+4 банка</span></div></div>
+    <div class="pay"><div class="row">Стоимость дома<b>4 970 000 ₽</b></div><div class="row">Первый взнос 20%<b>994 000 ₽</b></div><div class="row">Ставка<b>6% семейная</b></div><div class="row">Срок<b>25 лет</b></div><p class="sum">25 600 ₽ / мес<small>примерный платёж</small></p></div>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="w">
   <div class="head"><h2>Отзывы новосёлов</h2></div>
   <div class="revs">
     <div class="rev"><img src="img/doma-hero.webp" alt=""><div><p>«Смета не поменялась ни на рубль, хотя материалы за полгода подорожали»</p><p class="who">Дмитрий · дом 132 м², газобетон</p></div></div>
     <div class="rev"><img src="img/doma-2.webp" alt=""><div><p>«Жили в другом городе и следили за стройкой по видеоотчётам. Сдали на 2 недели раньше»</p><p class="who">Ольга · дом 146 м², кирпич</p></div></div>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="w faq">
+  <div><h2>Частые вопросы</h2><p style="margin-top:16px;color:var(--muted)">Не нашли ответ? Инженер перезвонит за 15 минут.</p></div>
+  <div>
+    <details open><summary>Может ли измениться цена после договора?</summary><p>Нет. Цена за весь дом прописана в договоре. Если материалы подорожают, разницу берём на себя.</p></details>
+    <details><summary>Нужен ли проект, если у меня есть свой?</summary><p>Можно строить по вашему проекту. Инженер проверит его и посчитает смету бесплатно.</p></details>
+    <details><summary>Как платить за стройку?</summary><p>Поэтапно: вы оплачиваете следующий этап только после приёмки предыдущего.</p></details>
+    <details><summary>Строите зимой?</summary><p>Да, кроме кладки при сильных морозах. Сроки в договоре учитывают сезон.</p></details>
+    <details><summary>Что с гарантией?</summary><p>10 лет на фундамент и стены, 3 года на кровлю и инженерные системы.</p></details>
   </div>
 </div></section>
 

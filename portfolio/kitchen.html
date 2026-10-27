@@ -90,6 +90,31 @@ body { background: var(--bg); color: var(--ink); font-weight: 300; }
 .final small { display: block; margin-top: 16px; color: rgba(255,255,255,.65); font-size: 12px; }
 footer { padding: 36px 0; font-size: 14px; color: var(--muted); }
 footer .w { display: flex; justify-content: space-between; align-items: center; }
+
+/* Портфолио-лонгрид: манифест, материалы, производство, квиз в конце */
+.manifest { max-width: 1000px; margin: 0 auto; text-align: center; }
+.manifest p { margin-top: 26px; font-family: "Lora", serif; font-size: 40px; line-height: 1.35; }
+.manifest p i { color: var(--terra); }
+.manifest .sign { margin-top: 30px; font-size: 15px; color: var(--muted); font-family: "Onest", sans-serif; }
+.mat { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 56px; }
+.mat h3 { font-size: 28px; }
+.mat .note2 { margin-top: 8px; color: var(--muted); }
+.sw { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 28px; }
+.sw div { text-align: center; font-size: 14px; }
+.sw i { display: block; height: 130px; margin-bottom: 12px; border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); }
+.sw b { display: block; font-weight: 500; font-size: 15px; }
+.sw span { color: var(--muted); }
+.made { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.made div { padding: 44px 30px; }
+.made div + div { border-left: 1px solid var(--line); }
+.made b { display: block; font-family: "Lora", serif; font-weight: 500; font-style: italic; font-size: 64px; line-height: 1; color: var(--terra); }
+.made span { display: block; margin-top: 12px; color: var(--muted); }
+.journey { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 56px; counter-reset: j; }
+.journey li { counter-increment: j; padding: 0 26px; border-left: 1px solid var(--line); }
+.journey li::before { content: counter(j, decimal-leading-zero); display: block; font-family: "Lora", serif; font-style: italic; font-size: 26px; color: var(--terra); }
+.journey h3 { margin-top: 14px; font-family: "Lora", serif; font-weight: 500; font-size: 22px; }
+.journey p { margin-top: 8px; color: var(--muted); font-size: 15px; }
+.journey .d { display: inline-block; margin-top: 14px; padding: 4px 12px; border-radius: 999px; background: var(--soft); font-size: 13px; }
 </style></head>
 <body>
 <header><div class="w hd"><nav><span>Каталог</span><span>Фасады</span><span>Работы</span></nav><span class="logo">Кухни Тепло</span><nav class="r"><b>+7 900 000-00-03</b><a class="btn ghost" style="height:44px;padding:0 22px" href="#f">Замер бесплатно</a></nav></div></header>
@@ -108,6 +133,48 @@ footer .w { display: flex; justify-content: space-between; align-items: center; 
   </div>
 </div></section>
 
+<section class="sec"><div class="manifest">
+  <span class="eyebrow">О нас</span>
+  <p>Мы не продаём «модули из каталога». Каждую кухню рисуем под&nbsp;вашу стену, ваш рост и&nbsp;то, <i>как вы готовите</i>.</p>
+  <p class="sign">Андрей и Мария Тепловы, основатели фабрики</p>
+</div></section>
+
+<section class="sec" id="c" style="padding-top:20px"><div class="w">
+  <div class="center" style="margin-bottom:50px"><span class="eyebrow">Портфолио</span><h2 class="lora" style="margin-top:16px">Наши работы</h2></div>
+  <article class="spread"><div class="pic"><img src="img/kitchen-3.webp" alt="Кухня «Изумруд»"></div><div><span class="num">№ 01</span><h3 class="lora">«Изумруд»</h3><p class="desc">Глубокий зелёный, латунь и открытые полки из дуба для квартиры в сталинке.</p><dl><div><dt>Фасады</dt><dd>Эмаль, фрезеровка</dd></div><div><dt>Столешница</dt><dd>Кварц</dd></div><div><dt>Срок</dt><dd>19 дней</dd></div></dl><p class="price">от 168 000 ₽</p></div></article>
+  <article class="spread"><div class="pic"><img src="img/kitchen-1.webp" alt="Кухня «Сканди»"></div><div><span class="num">№ 02</span><h3 class="lora">«Сканди»</h3><p class="desc">Светлая угловая кухня под потолок: вся техника встроена, ничего лишнего.</p><dl><div><dt>Фасады</dt><dd>МДФ, матовые</dd></div><div><dt>Столешница</dt><dd>Дуб</dd></div><div><dt>Срок</dt><dd>21 день</dd></div></dl><p class="price">от 142 000 ₽</p></div></article>
+  <article class="spread"><div class="pic"><img src="img/kitchen-2.webp" alt="Кухня «Мрамор»"></div><div><span class="num">№ 03</span><h3 class="lora">«Мрамор»</h3><p class="desc">Остров из керамики под мрамор и колонны с духовкой для большой кухни-гостиной.</p><dl><div><dt>Фасады</dt><dd>Эмаль, без ручек</dd></div><div><dt>Остров</dt><dd>Керамика 12 мм</dd></div><div><dt>Срок</dt><dd>24 дня</dd></div></dl><p class="price">от 236 000 ₽</p></div></article>
+</div></section>
+
+<section class="sec" style="padding-top:40px"><div class="w">
+  <div class="center"><span class="eyebrow">Материалы</span><h2 class="lora" style="margin-top:16px">Потрогайте образцы до&nbsp;заказа</h2><p class="sub">Привезём на замер 40 фасадов и 25 столешниц</p></div>
+  <div class="mat">
+    <div><h3 class="lora">Фасады</h3><p class="note2">Эмаль, шпон, МДФ в плёнке, пластик</p><div class="sw">
+      <div><i style="background:#2f4a3a"></i><b>Изумруд</b><span>эмаль</span></div>
+      <div><i style="background:#ece6dc"></i><b>Молоко</b><span>эмаль</span></div>
+      <div><i style="background:linear-gradient(90deg,#a77b52,#8c623d 40%,#a77b52 70%,#94693f)"></i><b>Дуб</b><span>шпон</span></div>
+      <div><i style="background:#3a3d42"></i><b>Графит</b><span>пластик</span></div>
+    </div></div>
+    <div><h3 class="lora">Столешницы</h3><p class="note2">Кварц, керамика, массив, компакт-плита</p><div class="sw">
+      <div><i style="background:linear-gradient(135deg,#f4f1ec,#e3ded6 40%,#f6f3ef 60%,#d9d3ca)"></i><b>Каррара</b><span>керамика</span></div>
+      <div><i style="background:#cfc8bd"></i><b>Песок</b><span>кварц</span></div>
+      <div><i style="background:linear-gradient(90deg,#b88a5c,#a77a4d)"></i><b>Бук</b><span>массив</span></div>
+      <div><i style="background:#1f1f22"></i><b>Ночь</b><span>компакт</span></div>
+    </div></div>
+  </div>
+</div></section>
+
+<section class="measure">
+  <div class="pic"><img src="img/kitchen-4.webp" alt="Замерщик на кухне"></div>
+  <div class="text"><span class="eyebrow">Перед договором</span><h2 class="lora">Замер и&nbsp;3D-проект бесплатно</h2><ol><li>Замерщик приезжает с образцами фасадов и столешниц</li><li>Учитываем трубы, розетки и неровные стены</li><li>Дизайнер присылает проект с ценой в тот же день</li><li>Цена в проекте не меняется после договора</li></ol></div>
+</section>
+
+<section class="sec"><div class="w">
+  <div class="made"><div><b>1 800</b><span>кухонь собрали с 2014 года</span></div><div><b>2 400</b><span>м² собственного цеха в Тольятти</span></div><div><b>21</b><span>день от замера до сборки</span></div><div><b>5 лет</b><span>гарантии на корпус и фурнитуру</span></div></div>
+  <div class="center" style="margin-top:100px"><span class="eyebrow">Путь кухни</span><h2 class="lora" style="margin-top:16px">От замера до первого ужина</h2></div>
+  <ol class="journey"><li><h3>Замер</h3><p>С образцами материалов</p><span class="d">день 1</span></li><li><h3>3D-проект</h3><p>С ценой до рубля</p><span class="d">день 2</span></li><li><h3>Договор</h3><p>Предоплата 30%</p><span class="d">день 3</span></li><li><h3>Производство</h3><p>Распил, кромка, покраска</p><span class="d">дни 4–18</span></li><li><h3>Сборка</h3><p>Ставим технику и мойку</p><span class="d">день 21</span></li></ol>
+</div></section>
+
 <section class="sec" id="q"><div class="w">
   <div class="center"><span class="eyebrow">Расчёт за 1 минуту</span><h2 class="lora" style="margin-top:16px">Рассчитайте стоимость кухни</h2><p class="sub">4 вопроса — и мы пришлём 3D-проект с ценой</p></div>
   <div class="quiz">
@@ -121,18 +188,6 @@ footer .w { display: flex; justify-content: space-between; align-items: center; 
     <div class="nav"><span class="gift">В подарок: 3D-проект и скидка 10%</span><a class="btn" href="#q">Далее</a></div>
   </div>
 </div></section>
-
-<section class="sec" id="c" style="padding-top:20px"><div class="w">
-  <div class="center" style="margin-bottom:50px"><span class="eyebrow">Портфолио</span><h2 class="lora" style="margin-top:16px">Наши работы</h2></div>
-  <article class="spread"><div class="pic"><img src="img/kitchen-3.webp" alt="Кухня «Изумруд»"></div><div><span class="num">№ 01</span><h3 class="lora">«Изумруд»</h3><p class="desc">Глубокий зелёный, латунь и открытые полки из дуба для квартиры в сталинке.</p><dl><div><dt>Фасады</dt><dd>Эмаль, фрезеровка</dd></div><div><dt>Столешница</dt><dd>Кварц</dd></div><div><dt>Срок</dt><dd>19 дней</dd></div></dl><p class="price">от 168 000 ₽</p></div></article>
-  <article class="spread"><div class="pic"><img src="img/kitchen-1.webp" alt="Кухня «Сканди»"></div><div><span class="num">№ 02</span><h3 class="lora">«Сканди»</h3><p class="desc">Светлая угловая кухня под потолок: вся техника встроена, ничего лишнего.</p><dl><div><dt>Фасады</dt><dd>МДФ, матовые</dd></div><div><dt>Столешница</dt><dd>Дуб</dd></div><div><dt>Срок</dt><dd>21 день</dd></div></dl><p class="price">от 142 000 ₽</p></div></article>
-  <article class="spread"><div class="pic"><img src="img/kitchen-2.webp" alt="Кухня «Мрамор»"></div><div><span class="num">№ 03</span><h3 class="lora">«Мрамор»</h3><p class="desc">Остров из керамики под мрамор и колонны с духовкой для большой кухни-гостиной.</p><dl><div><dt>Фасады</dt><dd>Эмаль, без ручек</dd></div><div><dt>Остров</dt><dd>Керамика 12 мм</dd></div><div><dt>Срок</dt><dd>24 дня</dd></div></dl><p class="price">от 236 000 ₽</p></div></article>
-</div></section>
-
-<section class="measure">
-  <div class="pic"><img src="img/kitchen-4.webp" alt="Замерщик на кухне"></div>
-  <div class="text"><span class="eyebrow">Перед договором</span><h2 class="lora">Замер и&nbsp;3D-проект бесплатно</h2><ol><li>Замерщик приезжает с образцами фасадов и столешниц</li><li>Учитываем трубы, розетки и неровные стены</li><li>Дизайнер присылает проект с ценой в тот же день</li><li>Цена в проекте не меняется после договора</li></ol></div>
-</section>
 
 <section class="sec"><div class="quote">
   <span class="eyebrow">Отзывы</span>
