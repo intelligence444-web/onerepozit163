@@ -2,23 +2,141 @@
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=1440">
 <meta name="robots" content="noindex, nofollow">
 <title>Высота — концепт Land Engine</title>
-<link rel="stylesheet" href="concept.css"><style>:root{--bg:#f6f4ef;--tint:#ece8de;--card:#fff;--ink:#141a2e;--muted:#5d6475;--line:#dcd7cb;--acc:#c9a45c;--acc-ink:#9a7631;--on-acc:#141a2e;--chip:#efe5cf;--art-bg:#c9d6f2;--side:#141a2e;--acc-2:#c9a45c;--on-acc-2:#141a2e;--r:6px}</style></head>
+<link rel="stylesheet" href="base.css">
+<style>
+:root { --bg: #0e1014; --card: #161920; --ink: #f2ede3; --muted: #a29d92; --gold: #c9a45c; --line: rgba(242, 237, 227, .12); }
+body { background: var(--bg); color: var(--ink); }
+.serif { font-family: "Cormorant", serif; font-weight: 500; letter-spacing: -0.01em; }
+.gold { color: var(--gold); }
+.btn { display: inline-flex; align-items: center; justify-content: center; height: 56px; padding: 0 30px; background: var(--gold); color: #14110b; font-weight: 600; letter-spacing: .02em; }
+.btn.line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--gold); }
+.kick { display: flex; align-items: center; gap: 14px; color: var(--gold); font-size: 13px; letter-spacing: .24em; text-transform: uppercase; }
+.kick::before { content: ""; width: 44px; height: 1px; background: var(--gold); }
+
+header { position: absolute; inset: 0 0 auto; z-index: 2; }
+.hd { display: flex; align-items: center; gap: 48px; height: 96px; border-bottom: 1px solid var(--line); }
+.logo { font-family: "Cormorant", serif; font-size: 30px; letter-spacing: .32em; }
+.nav { display: flex; gap: 34px; margin-left: auto; color: rgba(242,237,227,.8); font-size: 15px; }
+.ph { text-align: right; font-weight: 600; }
+.ph small { display: block; color: var(--muted); font-weight: 400; font-size: 13px; }
+
+.hero { position: relative; height: 900px; background: url("img/realty-hero.webp") center 40% / cover; }
+.hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,16,20,.94) 0%, rgba(14,16,20,.72) 45%, rgba(14,16,20,.25) 100%), linear-gradient(0deg, var(--bg) 0%, transparent 30%); }
+.hero .w { position: relative; display: grid; grid-template-columns: 1fr 440px; gap: 80px; align-items: center; height: 100%; padding-top: 60px; }
+.hero h1 { margin-top: 28px; font-size: 92px; line-height: .98; }
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero .lead { margin-top: 28px; max-width: 520px; color: rgba(242,237,227,.78); font-size: 19px; }
+.hero .stats { display: flex; gap: 48px; margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--line); }
+.hero .stats b { display: block; font-family: "Cormorant", serif; font-weight: 500; font-size: 44px; line-height: 1; color: var(--gold); }
+.hero .stats span { color: var(--muted); font-size: 14px; }
+
+.quiz { padding: 36px; background: rgba(22, 25, 32, .82); backdrop-filter: blur(14px); border: 1px solid var(--line); }
+.quiz .top { display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
+.quiz .bar { height: 2px; margin: 14px 0 26px; background: var(--line); }
+.quiz .bar i { display: block; width: 25%; height: 100%; background: var(--gold); }
+.quiz h3 { font-size: 34px; line-height: 1.1; }
+.quiz .q { margin-top: 24px; color: var(--muted); font-size: 14px; }
+.chips { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.chips span { padding: 14px 16px; border: 1px solid var(--line); font-size: 15px; }
+.chips .on { border-color: var(--gold); color: var(--gold); }
+.quiz .btn { width: 100%; margin-top: 26px; }
+.quiz small { display: block; margin-top: 14px; color: var(--muted); font-size: 13px; text-align: center; }
+
+.sec { padding: 120px 0; }
+.sec-head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 64px; }
+.sec-head h2 { margin-top: 18px; font-size: 64px; line-height: 1; }
+.sec-head p { max-width: 380px; color: var(--muted); }
+
+.jk { display: grid; grid-template-columns: 1.25fr 1fr; border-top: 1px solid var(--line); }
+.jk:last-child { border-bottom: 1px solid var(--line); }
+.jk:nth-child(even) .pic { order: 2; }
+.jk .pic { height: 440px; overflow: hidden; }
+.jk .pic img { width: 100%; height: 100%; object-fit: cover; }
+.jk .body { display: flex; flex-direction: column; justify-content: center; padding: 48px 64px; }
+.jk .tag { color: var(--gold); font-size: 13px; letter-spacing: .2em; text-transform: uppercase; }
+.jk h3 { margin-top: 14px; font-size: 52px; line-height: 1; }
+.jk dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.jk dt { color: var(--muted); font-size: 13px; }
+.jk dd { margin-top: 4px; font-weight: 600; }
+.jk .price { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; }
+.jk .price b { font-family: "Cormorant", serif; font-weight: 500; font-size: 38px; }
+.jk .price a { color: var(--gold); font-weight: 600; }
+
+.manager { display: grid; grid-template-columns: 460px 1fr; gap: 100px; align-items: center; }
+.manager .pic { height: 560px; border-radius: 230px 230px 0 0; overflow: hidden; }
+.manager .pic img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.manager blockquote { margin: 28px 0 0; font-family: "Cormorant", serif; font-style: italic; font-weight: 500; font-size: 46px; line-height: 1.15; }
+.manager .who { margin-top: 32px; font-weight: 600; }
+.manager .who small { display: block; color: var(--muted); font-weight: 400; }
+.manager ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; padding-top: 32px; border-top: 1px solid var(--line); color: rgba(242,237,227,.8); font-size: 15px; }
+.manager li b { display: block; margin-bottom: 6px; color: var(--gold); font-family: "Cormorant", serif; font-weight: 500; font-size: 30px; }
+
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+.steps li { padding: 40px 32px 0 0; }
+.steps li + li { padding-left: 32px; border-left: 1px solid var(--line); }
+.steps b { font-family: "Cormorant", serif; font-weight: 500; font-size: 72px; line-height: 1; color: var(--gold); }
+.steps h3 { margin-top: 18px; font-size: 20px; }
+.steps p { margin-top: 8px; color: var(--muted); font-size: 15px; }
+
+.final { position: relative; padding: 110px 0; background: url("img/realty-2.webp") center / cover; }
+.final::before { content: ""; position: absolute; inset: 0; background: rgba(14,16,20,.86); }
+.final .w { position: relative; display: grid; grid-template-columns: 1fr 460px; gap: 100px; align-items: center; }
+.final h2 { margin-top: 20px; font-size: 64px; line-height: 1; }
+.final p { margin-top: 20px; color: var(--muted); }
+.form { display: grid; gap: 14px; padding: 40px; border: 1px solid var(--gold); }
+.inp { height: 56px; padding: 0 18px; display: flex; align-items: center; border-bottom: 1px solid var(--line); color: var(--muted); }
+.form small { color: var(--muted); font-size: 12px; }
+footer { padding: 40px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .w { display: flex; justify-content: space-between; align-items: center; }
+footer .logo { color: var(--ink); font-size: 22px; }
+</style></head>
 <body>
-<header><div class="w hd"><span class="logo"><i>В</i>Высота</span><nav class="nav"><span>Новостройки</span><span>Ипотека</span><span>Trade-in</span><span>О компании</span></nav><span class="ph">+7 900 000-00-01<small>Ежедневно 9:00–21:00</small></span><a class="btn" href="#f">Заказать звонок</a></div></header>
-<section class="hero"><div class="w"><div>
-<span class="kick">Новостройки Самары от застройщиков</span><h1>Подберём квартиру в&nbsp;новостройке <em>без комиссии</em></h1><p class="lead">Покажем 3–5 вариантов под ваш бюджет и&nbsp;район за&nbsp;24 часа. Цены как у&nbsp;застройщика, ипотека от&nbsp;6%.</p>
-<ul class="ticks"><li>Более 120 ЖК в базе</li><li>Одобрение ипотеки за 1 день</li><li>Юридическая проверка сделки</li></ul>
-<div class="acts"><a class="btn" href="#q">Подобрать квартиру</a><a class="btn ghost" href="#c">Каталог ЖК</a></div></div>
-<div class="art"><img src="img/realty-hero.webp" alt="Жилой квартал на закате" loading="lazy" style="object-position:center"><div class="float f1"><b>от 4,2 млн ₽</b>1-комн. в ЖК у Волги</div><div class="float f2"><b>−5%</b>скидка при 100% оплате</div></div></div></section>
-<div class="w nums"><div><b>120+</b><span>жилых комплексов</span></div><div><b>0 ₽</b><span>комиссия для покупателя</span></div><div><b>6%</b><span>ставка по семейной ипотеке</span></div><div><b>1 день</b><span>одобрение ипотеки</span></div></div>
-<section class="sec" id="q"><div class="w"><h2>Подберите квартиру за&nbsp;1 минуту</h2><p class="sub">Ответьте на 5 вопросов — пришлём подборку с ценами и планировками</p>
-<div class="quiz"><div class="q-main"><div class="q-top"><span>Вопрос 2 из 5</span><span>40%</span></div><div class="q-bar"><i></i></div><h3>Сколько комнат нужно?</h3><div class="opts"><div class="opt"><div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="1"/><path d="M4 11h16M10 11v9"/></svg></div><p>Студия</p></div><div class="opt on"><div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="7" height="13" rx="1"/><rect x="12" y="4" width="9" height="16" rx="1"/></svg></div><p>1-комнатная</p></div><div class="opt"><div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20V9l5-4 5 4v11"/><path d="M13 20V12l4-3 4 3v8"/></svg></div><p>2-комнатная</p></div><div class="opt"><div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v18"/></svg></div><p>3+ комнат</p></div></div><div class="q-nav"><span>← Назад</span><a class="btn" href="#q">Далее</a></div></div>
-<aside class="q-side"><span class="gift"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M2 9h20M12 9v12M12 9c-2-4-7-4-6-1 .5 2 6 1 6 1zm0 0c2-4 7-4 6-1-.5 2-6 1-6 1z"/></svg></span><h4>Подборка + расчёт ипотеки</h4><p>Пришлём в мессенджер в течение часа</p><ul><li>Планировки и цены</li><li>Платёж по ипотеке</li><li>Акции застройщиков</li></ul></aside></div></div></section>
-<section class="sec tint" id="c"><div class="w"><h2>Популярные ЖК этого месяца</h2><div class="cards"><article class="card"><div class="pic"><img src="img/realty-2.webp" alt="Жилой комплекс у набережной" loading="lazy" style="object-position:center"><span class="tag">Сдача 2027</span></div><div class="body"><h3>ЖК «Речной»</h3><dl><div><dt>Район</dt><dd>Октябрьский</dd></div><div><dt>Этажей</dt><dd>25</dd></div></dl><div class="price"><b>от 4,2 млн ₽</b><span>Подробнее →</span></div></div></article><article class="card"><div class="pic"><img src="img/realty-3.webp" alt="Двор без машин с детской площадкой" loading="lazy" style="object-position:center"><span class="tag">Сдан</span></div><div class="body"><h3>ЖК «Парковый»</h3><dl><div><dt>Район</dt><dd>Промышленный</dd></div><div><dt>Этажей</dt><dd>17</dd></div></dl><div class="price"><b>от 5,6 млн ₽</b><span>Подробнее →</span></div></div></article><article class="card"><div class="pic"><img src="img/realty-1.webp" alt="Квартира с чистовой отделкой" loading="lazy" style="object-position:center"><span class="tag">Старт продаж</span></div><div class="body"><h3>ЖК «Сокол»</h3><dl><div><dt>Район</dt><dd>Ленинский</dd></div><div><dt>Этажей</dt><dd>32</dd></div></dl><div class="price"><b>от 7,9 млн ₽</b><span>Подробнее →</span></div></div></article></div></div></section>
-<section class="sec"><div class="w about"><div class="about-pic"><img src="img/realty-agent.webp" alt="Менеджер агентства" loading="lazy" style="object-position:center 30%"></div><div><h2>Один менеджер ведёт вас от&nbsp;подборки до&nbsp;ключей</h2><p class="sub">Не нужно звонить в пять отделов продаж: менеджер сам договорится о показах, бронях и скидках застройщика.</p><ul class="ticks"><li>Показы в удобное время, в том числе в выходные</li><li>Сравнение ЖК по цене, срокам и инфраструктуре</li><li>Сопровождение ипотеки и сделки</li></ul></div></div></section>
-<section class="sec tint"><div class="w"><h2>Как мы работаем</h2><ol class="steps" style="list-style:none;padding:0"><li><h3>Заявка</h3><p>Оставляете бюджет и пожелания</p></li><li><h3>Подборка</h3><p>3–5 вариантов за 24 часа</p></li><li><h3>Показ</h3><p>Едем на объекты в удобное время</p></li><li><h3>Сделка</h3><p>Ипотека, бронь и проверка документов</p></li></ol></div></section>
-<section class="sec"><div class="w"><h2>Отзывы клиентов</h2><div class="revs"><div class="rev"><span class="stars">★★★★★</span><p>«Искали двушку под семейную ипотеку. Показали 4 ЖК, взяли с отделкой и скидкой.»</p><span class="who"><i>А</i><span>Анна<small>купила 2-комн.</small></span></span></div><div class="rev"><span class="stars">★★★★★</span><p>«Всё через одного менеджера: подбор, ипотека, бронь. Без беготни.»</p><span class="who"><i>С</i><span>Сергей<small>купил студию</small></span></span></div><div class="rev"><span class="stars">★★★★★</span><p>«Помогли продать старую квартиру по trade-in и сразу въехать в новую.»</p><span class="who"><i>И</i><span>Ирина<small>trade-in</small></span></span></div></div></div></section>
-<section class="final sec" id="f" style="padding-bottom:96px"><div class="w final-box"><div><h2>Получите подборку квартир с&nbsp;ценами</h2><p>Пришлём варианты под ваш бюджет и рассчитаем платёж по ипотеке</p></div>
-<div class="form"><span class="inp">Ваше имя</span><span class="inp">+7 (___) ___-__-__</span><a class="btn" href="#f">Получить подборку</a><small>Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</small></div></div></section>
-<footer class="ft"><div class="w"><span class="logo"><i>В</i>Высота</span><span>+7 900 000-00-01 · Концепт сайта от Land Engine</span></div></footer>
+<header><div class="w hd"><span class="logo">ВЫСОТА</span><nav class="nav"><span>Новостройки</span><span>Ипотека</span><span>Trade-in</span><span>О компании</span></nav><span class="ph">+7 900 000-00-01<small>Ежедневно 9:00–21:00</small></span><a class="btn line" href="#f">Заказать звонок</a></div></header>
+
+<section class="hero"><div class="w">
+  <div>
+    <span class="kick">Новостройки Самары от застройщиков</span>
+    <h1 class="serif">Квартира в&nbsp;новостройке <em>без&nbsp;комиссии</em></h1>
+    <p class="lead">Покажем 3–5 вариантов под ваш бюджет и&nbsp;район за&nbsp;24 часа. Цены как у&nbsp;застройщика, семейная ипотека от&nbsp;6%.</p>
+    <div class="stats"><div><b>120+</b><span>жилых комплексов</span></div><div><b>0 ₽</b><span>комиссия покупателю</span></div><div><b>1 день</b><span>одобрение ипотеки</span></div></div>
+  </div>
+  <div class="quiz">
+    <div class="top"><span>Подбор квартиры</span><span>1 из 4</span></div><div class="bar"><i></i></div>
+    <h3 class="serif">Какую квартиру ищете?</h3>
+    <p class="q">Количество комнат</p>
+    <div class="chips"><span>Студия</span><span class="on">1-комнатная</span><span>2-комнатная</span><span>3 и больше</span></div>
+    <p class="q">Бюджет</p>
+    <div class="chips"><span>до 6 млн ₽</span><span class="on">6–10 млн ₽</span><span>10–15 млн ₽</span><span>от 15 млн ₽</span></div>
+    <a class="btn" href="#q">Далее</a>
+    <small>В конце — подборка с ценами и расчёт ипотеки</small>
+  </div>
+</div></section>
+
+<section class="sec" id="c"><div class="w">
+  <div class="sec-head"><div><span class="kick">Избранное</span><h2 class="serif">ЖК этого месяца</h2></div><p>Отобрали проекты с лучшим соотношением цены, сроков сдачи и инфраструктуры.</p></div>
+  <article class="jk"><div class="pic"><img src="img/realty-2.webp" alt="ЖК у набережной"></div><div class="body"><span class="tag">Сдача 2027</span><h3 class="serif">ЖК «Речной»</h3><dl><div><dt>Район</dt><dd>Октябрьский</dd></div><div><dt>Этажей</dt><dd>25</dd></div><div><dt>До Волги</dt><dd>5 минут</dd></div></dl><div class="price"><b>от 4,2 млн ₽</b><a href="#q">Планировки →</a></div></div></article>
+  <article class="jk"><div class="pic"><img src="img/realty-3.webp" alt="Двор без машин"></div><div class="body"><span class="tag">Дом сдан</span><h3 class="serif">ЖК «Парковый»</h3><dl><div><dt>Район</dt><dd>Промышленный</dd></div><div><dt>Этажей</dt><dd>17</dd></div><div><dt>Двор</dt><dd>без машин</dd></div></dl><div class="price"><b>от 5,6 млн ₽</b><a href="#q">Планировки →</a></div></div></article>
+  <article class="jk"><div class="pic"><img src="img/realty-1.webp" alt="Квартира с отделкой"></div><div class="body"><span class="tag">Старт продаж</span><h3 class="serif">ЖК «Сокол»</h3><dl><div><dt>Район</dt><dd>Ленинский</dd></div><div><dt>Этажей</dt><dd>32</dd></div><div><dt>Отделка</dt><dd>чистовая</dd></div></dl><div class="price"><b>от 7,9 млн ₽</b><a href="#q">Планировки →</a></div></div></article>
+</div></section>
+
+<section class="sec" style="padding-top:20px"><div class="w manager">
+  <div class="pic"><img src="img/realty-agent.webp" alt="Руководитель отдела подбора"></div>
+  <div>
+    <span class="kick">Ваш менеджер</span>
+    <blockquote>«Не нужно звонить в&nbsp;пять отделов продаж. Я&nbsp;сама договорюсь о&nbsp;показах, бронях и&nbsp;скидках застройщика»</blockquote>
+    <p class="who">Анна Ковалёва<small>руководитель отдела подбора, 9 лет в новостройках</small></p>
+    <ul><li><b>01</b>Показы в удобное время, в том числе в выходные</li><li><b>02</b>Сравнение ЖК по цене, срокам и району</li><li><b>03</b>Ипотека и проверка сделки</li></ul>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:20px"><div class="w">
+  <div class="sec-head"><div><span class="kick">Как мы работаем</span><h2 class="serif">От заявки до ключей</h2></div></div>
+  <ol class="steps"><li><b>I</b><h3>Заявка</h3><p>Бюджет, район и пожелания</p></li><li><b>II</b><h3>Подборка</h3><p>3–5 вариантов за 24 часа</p></li><li><b>III</b><h3>Показ</h3><p>Едем на объекты вместе</p></li><li><b>IV</b><h3>Сделка</h3><p>Ипотека, бронь и проверка</p></li></ol>
+</div></section>
+
+<section class="final" id="f"><div class="w">
+  <div><span class="kick">Персональная подборка</span><h2 class="serif">Получите варианты с&nbsp;ценами и&nbsp;планировками</h2><p>Пришлём подборку под ваш бюджет и рассчитаем платёж по ипотеке.</p></div>
+  <div class="form"><span class="inp">Ваше имя</span><span class="inp">+7 (___) ___-__-__</span><a class="btn" href="#f">Получить подборку</a><small>Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</small></div>
+</div></section>
+<footer><div class="w"><span class="logo">ВЫСОТА</span><span>+7 900 000-00-01 · Концепт сайта от Land Engine</span></div></footer>
 </body></html>

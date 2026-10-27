@@ -2,23 +2,153 @@
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=1440">
 <meta name="robots" content="noindex, nofollow">
 <title>Дом на века — концепт Land Engine</title>
-<link rel="stylesheet" href="concept.css"><style>:root{--bg:#f4f2ea;--tint:#e8e6da;--card:#fff;--ink:#1b2419;--muted:#5d6658;--line:#d8d6c8;--acc:#2f6b3a;--chip:#dfe9d8;--art-bg:#cfe3ec;--side:#1f3a24;--acc-2:#e2b04a;--on-acc-2:#1b2419;--r:10px}</style></head>
+<link rel="stylesheet" href="base.css">
+<style>
+:root { --bg: #f3f1ea; --card: #fff; --ink: #1c2a1f; --muted: #5f6b5f; --green: #2f5d3a; --soft: #dfe8d6; --wood: #b98a57; --line: #dcd9cc; }
+body { background: var(--bg); color: var(--ink); font-family: "Manrope", sans-serif; }
+.btn { display: inline-flex; align-items: center; justify-content: center; height: 58px; padding: 0 30px; border-radius: 16px; background: var(--green); color: #fff; font-weight: 600; }
+.btn.light { background: #fff; color: var(--ink); }
+.tag { display: inline-block; padding: 7px 14px; border-radius: 999px; background: var(--soft); color: var(--green); font-weight: 600; font-size: 14px; }
+
+.hd { display: flex; align-items: center; gap: 44px; height: 84px; }
+.logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 21px; }
+.logo svg { width: 40px; height: 40px; padding: 8px; border-radius: 12px; background: var(--green); color: #fff; }
+.nav { display: flex; gap: 32px; margin-left: auto; color: var(--muted); font-size: 15px; }
+.ph { font-weight: 800; }
+.ph small { display: block; color: var(--muted); font-weight: 400; font-size: 13px; }
+
+.photo { position: relative; margin: 0 24px; height: 500px; border-radius: 36px; overflow: hidden; }
+.photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 55%; }
+.photo .badge { position: absolute; left: 48px; top: 40px; display: flex; gap: 10px; }
+.photo .badge span { padding: 10px 18px; border-radius: 999px; background: rgba(255,255,255,.92); font-weight: 600; font-size: 14px; }
+
+.intro { display: grid; grid-template-columns: 1fr 520px; gap: 72px; margin-top: -220px; position: relative; }
+.intro .text { padding-top: 260px; }
+.intro h1 { font-weight: 800; font-size: 64px; line-height: 1.02; letter-spacing: -0.035em; }
+.intro h1 span { color: var(--green); }
+.intro .lead { margin-top: 22px; max-width: 540px; color: var(--muted); font-size: 19px; }
+.intro .ticks { display: flex; gap: 26px; margin-top: 30px; font-weight: 600; font-size: 15px; }
+.intro .ticks li::before { content: "✓"; margin-right: 8px; color: var(--green); }
+
+.calc { padding: 40px; border-radius: 28px; background: var(--card); box-shadow: 0 30px 70px -30px rgba(28,42,31,.35); }
+.calc h3 { font-weight: 800; font-size: 26px; letter-spacing: -0.02em; }
+.calc .sub { margin-top: 6px; color: var(--muted); font-size: 15px; }
+.field { margin-top: 28px; }
+.field .lbl { display: flex; justify-content: space-between; font-size: 15px; color: var(--muted); }
+.field .lbl b { color: var(--ink); }
+.range { position: relative; height: 6px; margin-top: 16px; border-radius: 3px; background: var(--soft); }
+.range i { position: absolute; inset: 0 auto 0 0; border-radius: 3px; background: var(--green); }
+.range i::after { content: ""; position: absolute; right: -11px; top: -8px; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 3px solid var(--green); }
+.seg { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 12px; padding: 5px; border-radius: 14px; background: var(--bg); }
+.seg span { padding: 10px 0; border-radius: 10px; text-align: center; font-size: 14px; font-weight: 600; color: var(--muted); }
+.seg .on { background: #fff; color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.total { display: flex; justify-content: space-between; align-items: end; margin-top: 30px; padding-top: 24px; border-top: 1px dashed var(--line); }
+.total span { color: var(--muted); font-size: 14px; }
+.total b { font-weight: 800; font-size: 36px; letter-spacing: -0.03em; }
+.calc .btn { width: 100%; margin-top: 22px; }
+
+.sec { padding: 120px 0; }
+.sec h2 { font-weight: 800; font-size: 50px; line-height: 1.05; letter-spacing: -0.03em; }
+.head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 44px; }
+.head p { max-width: 400px; color: var(--muted); }
+
+.mosaic { display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 300px 300px; gap: 20px; }
+.proj { position: relative; border-radius: 28px; overflow: hidden; }
+.proj:first-child { grid-row: span 2; }
+.proj img { width: 100%; height: 100%; object-fit: cover; }
+.proj .info { position: absolute; left: 20px; right: 20px; bottom: 20px; display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; border-radius: 20px; background: rgba(255,255,255,.94); }
+.proj h3 { font-weight: 800; font-size: 20px; }
+.proj p { color: var(--muted); font-size: 14px; }
+.proj b { font-weight: 800; font-size: 20px; white-space: nowrap; }
+.proj .tag { position: absolute; left: 20px; top: 20px; background: #fff; }
+
+.build { display: grid; grid-template-columns: 520px 1fr; gap: 72px; align-items: center; }
+.build .pic { height: 560px; border-radius: 28px; overflow: hidden; }
+.build .pic img { width: 100%; height: 100%; object-fit: cover; }
+.build h2 { margin-top: 18px; }
+.timeline { margin-top: 40px; }
+.timeline li { position: relative; display: grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 0 0 26px 34px; }
+.timeline li::before { content: ""; position: absolute; left: 7px; top: 8px; bottom: -8px; width: 2px; background: var(--line); }
+.timeline li:last-child::before { display: none; }
+.timeline li::after { content: ""; position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 3px solid var(--green); }
+.timeline li.done::after { background: var(--green); }
+.timeline .wk { color: var(--wood); font-weight: 800; }
+.timeline h3 { font-weight: 800; font-size: 18px; }
+.timeline p { color: var(--muted); font-size: 15px; }
+
+.revs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.rev { display: grid; grid-template-columns: 180px 1fr; gap: 28px; padding: 24px; border-radius: 28px; background: var(--card); }
+.rev img { width: 180px; height: 180px; border-radius: 20px; object-fit: cover; }
+.rev p { font-size: 18px; font-weight: 600; line-height: 1.45; }
+.rev .who { margin-top: 18px; color: var(--muted); font-size: 14px; }
+
+.final { margin: 0 24px 24px; padding: 90px 0; border-radius: 36px; background: var(--green); color: #fff; }
+.final .w { display: grid; grid-template-columns: 1fr 440px; gap: 80px; align-items: center; }
+.final h2 { color: #fff; }
+.final p { margin-top: 18px; color: rgba(255,255,255,.75); }
+.form { display: grid; gap: 12px; }
+.inp { height: 58px; padding: 0 20px; display: flex; align-items: center; border-radius: 16px; background: rgba(255,255,255,.12); color: rgba(255,255,255,.7); }
+.form .btn { background: var(--wood); }
+.form small { color: rgba(255,255,255,.6); font-size: 12px; }
+footer { padding: 32px 0 44px; color: var(--muted); font-size: 14px; }
+footer .w { display: flex; justify-content: space-between; align-items: center; }
+</style></head>
 <body>
-<header><div class="w hd"><span class="logo"><i>Д</i>Дом на века</span><nav class="nav"><span>Проекты</span><span>Технологии</span><span>Ипотека</span><span>Объекты</span></nav><span class="ph">+7 900 000-00-02<small>Пн–Сб 9:00–19:00</small></span><a class="btn" href="#f">Заказать звонок</a></div></header>
-<section class="hero"><div class="w"><div>
-<span class="kick">Строим дома в Самарской области</span><h1>Дома под&nbsp;ключ <em>с&nbsp;фиксированной сметой</em></h1><p class="lead">Цена в договоре не меняется до сдачи дома. Строим из газобетона, кирпича и бруса за 4–6 месяцев.</p>
-<ul class="ticks"><li>Смета за 1 день с точностью до рубля</li><li>Гарантия на конструктив 10 лет</li><li>Фото- и видеоотчёты каждую неделю</li></ul>
-<div class="acts"><a class="btn" href="#q">Рассчитать стоимость</a><a class="btn ghost" href="#c">Смотреть проекты</a></div></div>
-<div class="art"><img src="img/doma-hero.webp" alt="Дом из газобетона с террасой" loading="lazy" style="object-position:center"><div class="float f1"><b>4,5 мес.</b>средний срок стройки</div><div class="float f2"><b>10 лет</b>гарантия</div></div></div></section>
-<div class="w nums"><div><b>230+</b><span>построенных домов</span></div><div><b>12 лет</b><span>на рынке</span></div><div><b>0 ₽</b><span>доплат после договора</span></div><div><b>4,5 мес</b><span>средний срок</span></div></div>
-<section class="sec" id="q"><div class="w"><h2>Рассчитайте стоимость дома</h2><p class="sub">5 вопросов — и вы получите смету с разбивкой по этапам</p>
-<div class="quiz"><div class="q-main"><div class="q-top"><span>Вопрос 2 из 5</span><span>40%</span></div><div class="q-bar"><i></i></div><h3>Из какого материала строим?</h3><div class="opts"><div class="opt"><div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 10h18M3 15h18M9 5v5M15 10v5M9 15v4"/></svg></div><p>Газобетон</p></div><div class="opt on"><div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 10h18M3 15h18M9 5v5M15 10v5M9 15v4"/></svg></div><p>Кирпич</p></div><div class="opt"><div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/></svg></div><p>Брус</p></div><div class="opt"><div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg></div><p>Каркас</p></div></div><div class="q-nav"><span>← Назад</span><a class="btn" href="#q">Далее</a></div></div>
-<aside class="q-side"><span class="gift"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M2 9h20M12 9v12M12 9c-2-4-7-4-6-1 .5 2 6 1 6 1zm0 0c2-4 7-4 6-1-.5 2-6 1-6 1z"/></svg></span><h4>Смета + 3 проекта в подарок</h4><p>Подберём проекты под ваш участок</p><ul><li>Смета по этапам</li><li>Планировки</li><li>Сроки стройки</li></ul></aside></div></div></section>
-<section class="sec tint" id="c"><div class="w"><h2>Популярные проекты</h2><div class="cards"><article class="card"><div class="pic"><img src="img/doma-1.webp" alt="Одноэтажный дом с панорамными окнами" loading="lazy" style="object-position:center"><span class="tag">Хит</span></div><div class="body"><h3>Проект «Лесной»</h3><dl><div><dt>Площадь</dt><dd>118 м²</dd></div><div><dt>Спальни</dt><dd>3</dd></div></dl><div class="price"><b>от 4,9 млн ₽</b><span>Подробнее →</span></div></div></article><article class="card"><div class="pic"><img src="img/doma-2.webp" alt="Двухэтажный дом из камня и штукатурки" loading="lazy" style="object-position:center"><span class="tag">Новинка</span></div><div class="body"><h3>Проект «Семейный»</h3><dl><div><dt>Площадь</dt><dd>146 м²</dd></div><div><dt>Спальни</dt><dd>4</dd></div></dl><div class="price"><b>от 6,3 млн ₽</b><span>Подробнее →</span></div></div></article><article class="card"><div class="pic"><img src="img/doma-4.webp" alt="Гостиная с камином" loading="lazy" style="object-position:center"><span class="tag">Под ипотеку</span></div><div class="body"><h3>Проект «Компакт»</h3><dl><div><dt>Площадь</dt><dd>84 м²</dd></div><div><dt>Спальни</dt><dd>2</dd></div></dl><div class="price"><b>от 3,6 млн ₽</b><span>Подробнее →</span></div></div></article></div></div></section>
-<section class="sec"><div class="w about"><div class="about-pic"><img src="img/doma-3.webp" alt="Бригада кладёт стены из газобетона" loading="lazy" style="object-position:center 30%"></div><div><h2>Строим своими бригадами, без субподрядчиков</h2><p class="sub">Каждый этап принимает технадзор, а вы получаете фото- и видеоотчёт по пятницам.</p><ul class="ticks"><li>Свои бригады каменщиков и кровельщиков</li><li>Материалы со своего склада по закупочной цене</li><li>Технадзор на каждом этапе</li></ul></div></div></section>
-<section class="sec tint"><div class="w"><h2>Как мы работаем</h2><ol class="steps" style="list-style:none;padding:0"><li><h3>Смета</h3><p>Выезд на участок и расчёт за 1 день</p></li><li><h3>Договор</h3><p>Фиксируем цену и сроки</p></li><li><h3>Стройка</h3><p>Еженедельные фотоотчёты</p></li><li><h3>Сдача</h3><p>Принимаете дом с гарантией</p></li></ol></div></section>
-<section class="sec"><div class="w"><h2>Отзывы клиентов</h2><div class="revs"><div class="rev"><span class="stars">★★★★★</span><p>«Смета не поменялась ни на рубль, хотя цены на материалы за полгода выросли.»</p><span class="who"><i>Д</i><span>Дмитрий<small>дом 132 м²</small></span></span></div><div class="rev"><span class="stars">★★★★★</span><p>«Жили в другом городе — следили за стройкой по видеоотчётам.»</p><span class="who"><i>О</i><span>Ольга<small>дом 96 м²</small></span></span></div><div class="rev"><span class="stars">★★★★★</span><p>«Помогли с ипотекой на строительство, сдали на 2 недели раньше.»</p><span class="who"><i>П</i><span>Павел<small>дом 150 м²</small></span></span></div></div></div></section>
-<section class="final sec" id="f" style="padding-bottom:96px"><div class="w final-box"><div><h2>Получите смету на&nbsp;ваш дом</h2><p>Рассчитаем стоимость по вашему проекту или подберём готовый</p></div>
-<div class="form"><span class="inp">Ваше имя</span><span class="inp">+7 (___) ___-__-__</span><a class="btn" href="#f">Получить смету</a><small>Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</small></div></div></section>
-<footer class="ft"><div class="w"><span class="logo"><i>Д</i>Дом на века</span><span>+7 900 000-00-02 · Концепт сайта от Land Engine</span></div></footer>
+<header><div class="w hd"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg>Дом на века</span><nav class="nav"><span>Проекты</span><span>Технологии</span><span>Ипотека</span><span>Объекты</span></nav><span class="ph">+7 900 000-00-02<small>Пн–Сб 9:00–19:00</small></span><a class="btn" href="#f">Заказать звонок</a></div></header>
+
+<div class="photo"><img src="img/doma-hero.webp" alt="Дом из газобетона с террасой"><div class="badge"><span>230+ домов построено</span><span>Гарантия 10 лет</span></div></div>
+
+<section class="w intro">
+  <div class="text">
+    <span class="tag">Строим в Самарской области</span>
+    <h1 style="margin-top:20px">Дома под ключ <span>с&nbsp;фиксированной сметой</span></h1>
+    <p class="lead">Цена в договоре не меняется до сдачи дома. Газобетон, кирпич или брус — за 4–6 месяцев.</p>
+    <ul class="ticks"><li>Смета за 1 день</li><li>Видеоотчёт каждую неделю</li><li>Ипотека на стройку</li></ul>
+  </div>
+  <div class="calc">
+    <h3>Калькулятор стоимости дома</h3><p class="sub">Предварительная цена под ключ</p>
+    <div class="field"><div class="lbl">Площадь дома<b>140 м²</b></div><div class="range"><i style="width:52%"></i></div></div>
+    <div class="field"><div class="lbl">Материал стен</div><div class="seg"><span class="on">Газобетон</span><span>Кирпич</span><span>Брус</span><span>Каркас</span></div></div>
+    <div class="field"><div class="lbl">Этажей</div><div class="seg" style="grid-template-columns:repeat(3,1fr)"><span>1</span><span class="on">2</span><span>Мансарда</span></div></div>
+    <div class="total"><span>Стоимость под ключ<br>от 35 500 ₽ за м²</span><b>≈ 4 970 000 ₽</b></div>
+    <a class="btn" href="#f">Получить точную смету</a>
+  </div>
+</section>
+
+<section class="sec" id="c"><div class="w">
+  <div class="head"><h2>Популярные проекты</h2><p>Каждый проект можно изменить под ваш участок и бюджет — бесплатно.</p></div>
+  <div class="mosaic">
+    <article class="proj"><img src="img/doma-1.webp" alt="Одноэтажный дом с панорамными окнами"><span class="tag">Хит сезона</span><div class="info"><div><h3>Проект «Лесной»</h3><p>118 м² · 3 спальни · 1 этаж</p></div><b>от 4,9 млн ₽</b></div></article>
+    <article class="proj"><img src="img/doma-2.webp" alt="Двухэтажный дом с гаражом"><div class="info"><div><h3>«Семейный»</h3><p>146 м² · 4 спальни</p></div><b>от 6,3 млн ₽</b></div></article>
+    <article class="proj"><img src="img/doma-4.webp" alt="Гостиная с камином"><div class="info"><div><h3>«Компакт»</h3><p>84 м² · 2 спальни</p></div><b>от 3,6 млн ₽</b></div></article>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="w build">
+  <div class="pic"><img src="img/doma-3.webp" alt="Бригада кладёт стены"></div>
+  <div>
+    <span class="tag">Свои бригады, без субподряда</span>
+    <h2>Стройка по&nbsp;этапам с&nbsp;отчётом каждую пятницу</h2>
+    <ol class="timeline">
+      <li class="done"><span class="wk">1–2 нед.</span><div><h3>Фундамент</h3><p>Монолитная плита, технадзор принимает арматуру</p></div></li>
+      <li class="done"><span class="wk">3–8 нед.</span><div><h3>Стены и перекрытия</h3><p>Газобетон D500, армопояс</p></div></li>
+      <li><span class="wk">9–11 нед.</span><div><h3>Кровля и окна</h3><p>Дом закрыт от погоды</p></div></li>
+      <li><span class="wk">12–18 нед.</span><div><h3>Инженерия и отделка</h3><p>Сдаём дом с гарантией 10 лет</p></div></li>
+    </ol>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="w">
+  <div class="head"><h2>Отзывы новосёлов</h2></div>
+  <div class="revs">
+    <div class="rev"><img src="img/doma-hero.webp" alt=""><div><p>«Смета не поменялась ни на рубль, хотя материалы за полгода подорожали»</p><p class="who">Дмитрий · дом 132 м², газобетон</p></div></div>
+    <div class="rev"><img src="img/doma-2.webp" alt=""><div><p>«Жили в другом городе и следили за стройкой по видеоотчётам. Сдали на 2 недели раньше»</p><p class="who">Ольга · дом 146 м², кирпич</p></div></div>
+  </div>
+</div></section>
+
+<section class="final" id="f"><div class="w">
+  <div><h2>Получите смету на&nbsp;ваш дом за&nbsp;1&nbsp;день</h2><p>Инженер приедет на участок, а смета придёт с разбивкой по этапам.</p></div>
+  <div class="form"><span class="inp">Ваше имя</span><span class="inp">+7 (___) ___-__-__</span><a class="btn" href="#f">Получить смету</a><small>Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</small></div>
+</div></section>
+<footer><div class="w"><span class="logo" style="font-size:17px">Дом на века</span><span>+7 900 000-00-02 · Концепт сайта от Land Engine</span></div></footer>
 </body></html>

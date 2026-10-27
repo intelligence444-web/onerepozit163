@@ -8,6 +8,7 @@ const slugs = ["realty", "doma", "kitchen", "remont"];
   const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
   for (const s of slugs) {
     await p.goto("file://" + path.resolve(__dirname, "../portfolio", `${s}.html`), { waitUntil: "load" });
+    await p.evaluate(() => document.fonts.ready);
     // Фото с loading="lazy" должны загрузиться до снимка всей страницы
     await p.evaluate(() => Promise.all([...document.images].map((i) => { i.loading = "eager"; return i.complete ? 0 : new Promise((r) => (i.onload = i.onerror = r)); })));
     await p.screenshot({ path: `${process.argv[2]}/${s}-top.png` });
