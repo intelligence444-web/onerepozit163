@@ -1,10 +1,8 @@
 // Настройки сайта
 const CONFIG = {
   // Адрес, куда отправлять заявки (POST JSON): вебхук Telegram-бота, amoCRM, Bitrix24, Make и т.п.
-  // Временно заявки идут на почту через FormSubmit. Когда функция из server/lead-mail будет развёрнута
-  // в Yandex Cloud, сюда вписывается её ссылка вида https://functions.yandexcloud.net/... — тогда
-  // заявки пойдут на Яндекс Почту и не будут покидать Россию.
-  formEndpoint: "https://formsubmit.co/ajax/intelligence444@gmail.com",
+  // Заявки принимает функция в Yandex Cloud (server/lead-mail) и отправляет их на Яндекс Почту.
+  formEndpoint: "https://functions.yandexcloud.net/d4er6d31bf29uc92fked",
   // Номер счётчика Яндекс Метрики, для цели "lead" при отправке формы.
   metrikaId: null,
 };
@@ -403,27 +401,6 @@ function phoneMask(input) {
 
 // Общая логика формы заявки: проверка полей, согласие, отправка. Используется калькулятором и попапом.
 // getLead возвращает, что именно человек заказывает: текст для страницы благодарности и поля для заявки.
-// Заявка для письма: поля по-русски, тема с сутью заявки, письмо в виде таблицы
-const MAIL_LABELS = {
-  name: "Имя", contact: "Телефон или Telegram", request: "Что нужно", source: "Откуда заявка",
-  plan: "Тариф", project: "Проект", extras: "Дополнительно", urgent: "Срочно", estimate: "Расчёт",
-  page: "Страница", utm: "Метки UTM", consent: "Согласие на обработку данных",
-};
-function mailLead(payload, lead) {
-  const mail = {
-    _subject: `Заявка с сайта: ${payload.name}, ${lead.summary}`,
-    _template: "table",
-    _captcha: "false",
-  };
-  Object.entries(payload).forEach(([key, value]) => {
-    if (value === null || value === "" || (Array.isArray(value) && !value.length)) return;
-    if (typeof value === "boolean") value = value ? "да" : "нет";
-    if (Array.isArray(value)) value = value.join(", ");
-    mail[MAIL_LABELS[key] || key] = value;
-  });
-  return mail;
-}
-
 function leadForm(el, getLead, onSent) {
   const status = el.querySelector(".form-status");
   const button = el.querySelector('button[type="submit"]');
@@ -497,15 +474,12 @@ function leadForm(el, getLead, onSent) {
     button.disabled = true;
     button.textContent = "Отправляю…";
     try {
-      const toMail = CONFIG.formEndpoint.includes("formsubmit.co");
       const response = await fetch(CONFIG.formEndpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(toMail ? mailLead(payload, lead) : payload),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
       if (!response.ok) throw new Error(response.status);
-      // FormSubmit отвечает 200 и тогда, когда письмо не ушло (например, почта ещё не подтверждена)
-      if (toMail && String((await response.json()).success) !== "true") throw new Error("formsubmit");
       done();
     } catch {
       if (tab) tab.close();
