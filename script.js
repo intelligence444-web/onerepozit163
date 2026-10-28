@@ -519,7 +519,10 @@ function openModal(mode, link) {
     const list = document.getElementById("modal-list");
     list.replaceChildren(...[...link.closest(".plan").querySelectorAll("li")].map((li) => li.cloneNode(true)));
   } else {
-    modalTitle.textContent = "Обсудим ваш проект";
+    modalTitle.textContent = link.dataset.title || "Обсудим ваш проект";
+    // Кнопка может сразу отметить формат, например «Лендинг и реклама» из блока про трафик
+    const need = [...modalForm.elements.need].find((r) => r.value === (link.dataset.need || ""));
+    if (need) need.checked = true;
   }
   modalForm.querySelector(".form-status").textContent = "";
   modal.showModal();
