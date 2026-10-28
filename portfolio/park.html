@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=1440">
+<meta name="robots" content="noindex, nofollow">
+<title>ЖК «Северный парк» — концепт Land Engine</title>
+<link rel="stylesheet" href="base.css">
+<style>
+:root { --bg: #f7f5ef; --ink: #1f2e25; --muted: #66746b; --acc: #2f8f5b; --soft: #e3eee6; --sun: #f4b63f; --line: #e3e0d6; }
+body { background: var(--bg); color: var(--ink); font-family: "Manrope", sans-serif; }
+.btn { display: inline-flex; align-items: center; justify-content: center; height: 58px; padding: 0 30px; border-radius: 999px; background: var(--acc); color: #fff; font-weight: 700; }
+.btn.light { background: #fff; color: var(--ink); }
+.btn.sm { height: 48px; width: 100%; margin-top: 18px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: var(--soft); color: var(--acc); font-weight: 700; font-size: 14px; }
+.hd { display: flex; align-items: center; gap: 40px; height: 88px; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; }
+.logo i { width: 36px; height: 36px; border-radius: 50% 50% 50% 4px; background: var(--acc); }
+.nav { display: flex; gap: 28px; margin-left: auto; color: var(--muted); font-size: 15px; font-weight: 600; }
+.ph { font-weight: 800; }
+.hero { display: grid; grid-template-columns: 560px 1fr; gap: 40px; align-items: stretch; height: 760px; }
+.hero .t { display: flex; flex-direction: column; justify-content: center; }
+.hero h1 { margin-top: 22px; font-weight: 800; font-size: 76px; line-height: .98; letter-spacing: -0.045em; }
+.hero h1 span { color: var(--acc); }
+.hero .lead { margin-top: 22px; color: var(--muted); font-size: 19px; }
+.hero .acts { display: flex; gap: 12px; margin-top: 34px; }
+.promo { display: flex; align-items: center; gap: 16px; margin-top: 34px; padding: 16px 20px; border-radius: 20px; background: #fff; }
+.promo b { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: var(--sun); font-size: 20px; }
+.promo span { font-size: 15px; color: var(--muted); }
+.promo strong { display: block; color: var(--ink); font-size: 17px; }
+.hero .pic { position: relative; border-radius: 40px; overflow: hidden; }
+.hero .pic img { width: 100%; height: 100%; object-fit: cover; }
+.hero .badge { position: absolute; right: 24px; bottom: 24px; padding: 18px 22px; border-radius: 22px; background: #fff; }
+.hero .badge b { display: block; font-size: 26px; letter-spacing: -0.03em; }
+.hero .badge span { color: var(--muted); font-size: 14px; }
+.sec { padding: 110px 0; }
+.sec h2 { margin-top: 16px; font-weight: 800; font-size: 50px; line-height: 1.04; letter-spacing: -0.035em; }
+.head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 44px; }
+.head p { max-width: 400px; color: var(--muted); }
+.life { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.life div { padding: 30px 26px; border-radius: 28px; background: #fff; }
+.life i { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 16px; background: var(--soft); font-style: normal; font-size: 24px; }
+.life h3 { margin-top: 20px; font-weight: 800; font-size: 20px; }
+.life p { margin-top: 6px; color: var(--muted); font-size: 15px; }
+.yard { position: relative; height: 560px; border-radius: 40px; overflow: hidden; }
+.yard img { width: 100%; height: 100%; object-fit: cover; }
+.yard .card { position: absolute; left: 40px; top: 40px; width: 420px; padding: 36px; border-radius: 28px; background: #fff; }
+.yard .card h2 { font-size: 38px; }
+.yard .card ul { display: grid; gap: 10px; margin-top: 20px; font-weight: 600; }
+.yard .card li::before { content: "✓"; margin-right: 10px; color: var(--acc); }
+.loc { display: grid; grid-template-columns: 1fr 640px; gap: 64px; align-items: center; }
+.loc svg { display: block; width: 100%; border-radius: 32px; }
+.times { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 30px; }
+.times div { padding: 20px; border-radius: 20px; background: #fff; }
+.times b { display: block; font-size: 30px; color: var(--acc); }
+.times span { color: var(--muted); font-size: 15px; }
+.picker { display: flex; gap: 40px; align-items: center; margin-bottom: 30px; padding: 26px 32px; border-radius: 28px; background: #fff; }
+.picker .f { flex: 1; }
+.picker .l { display: flex; justify-content: space-between; color: var(--muted); font-size: 15px; }
+.picker .l b { color: var(--ink); }
+.rng { position: relative; height: 6px; margin-top: 16px; border-radius: 3px; background: var(--soft); }
+.rng i { position: absolute; left: 0; width: 46%; height: 100%; border-radius: 3px; background: var(--acc); }
+.rng i::after { content: ""; position: absolute; right: -11px; top: -8px; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 3px solid var(--acc); }
+.seg { display: flex; gap: 6px; padding: 5px; border-radius: 999px; background: var(--bg); }
+.seg span { padding: 10px 18px; border-radius: 999px; font-weight: 700; font-size: 14px; color: var(--muted); }
+.seg .on { background: var(--acc); color: #fff; }
+.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.pl { padding: 26px; border-radius: 28px; background: #fff; }
+.pl .pic { padding: 16px; border-radius: 20px; background: var(--bg); }
+.pl svg { display: block; width: 100%; }
+.pl h3 { margin-top: 20px; font-weight: 800; font-size: 22px; }
+.pl .ar { color: var(--muted); }
+.pl .pr { margin-top: 14px; }
+.pl .pr b { display: block; font-size: 24px; letter-spacing: -0.02em; }
+.pl .pr span { color: var(--acc); font-weight: 700; font-size: 14px; }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.steps div { padding: 26px; border-radius: 24px; background: #fff; }
+.steps b { font-size: 15px; color: var(--muted); }
+.steps h3 { margin-top: 8px; font-weight: 800; font-size: 19px; }
+.steps .st { display: inline-block; margin-top: 14px; padding: 5px 12px; border-radius: 999px; background: var(--soft); color: var(--acc); font-weight: 700; font-size: 13px; }
+.steps .now { background: var(--sun); color: var(--ink); }
+.final { display: grid; grid-template-columns: 1fr 440px; gap: 80px; align-items: center; padding: 70px 80px; border-radius: 40px; background: var(--acc); color: #fff; }
+.final h2 { color: #fff; }
+.final p { margin-top: 16px; color: rgba(255,255,255,.8); }
+.form { display: grid; gap: 12px; }
+.inp { height: 58px; display: flex; align-items: center; padding: 0 22px; border-radius: 999px; background: rgba(255,255,255,.16); color: rgba(255,255,255,.75); }
+.form .btn { background: var(--sun); color: var(--ink); }
+.form small { color: rgba(255,255,255,.65); font-size: 12px; }
+footer { padding: 36px 0 44px; color: var(--muted); font-size: 14px; }
+footer .w { display: flex; justify-content: space-between; }
+</style></head>
+<body>
+<header><div class="w hd"><span class="logo"><i></i>Северный парк</span><nav class="nav"><span>О ЖК</span><span>Двор</span><span>Квартиры</span><span>Ипотека</span><span>Стройка</span></nav><span class="ph">+7 900 000-00-10</span><a class="btn" style="height:48px;padding:0 22px" href="#f">Записаться на показ</a></div></header>
+
+<section class="w hero">
+  <div class="t">
+    <span class="chip">● Старт продаж 3-го корпуса</span>
+    <h1>Квартиры для&nbsp;семей <span>у&nbsp;парка</span></h1>
+    <p class="lead">Жилой комплекс комфорт-класса на севере Ростова-на-Дону: свой детский сад, школа рядом и выход в парк прямо из двора.</p>
+    <div class="acts"><a class="btn" href="#plans">Подобрать квартиру</a><a class="btn light" href="#f">Ипотека 6%</a></div>
+    <div class="promo"><b>%</b><span><strong>Скидка 300 000 ₽ до 30 ноября</strong>на 2- и 3-комнатные квартиры в корпусе 3</span></div>
+  </div>
+  <div class="pic"><img src="img/realty-2.webp" alt="Дома жилого комплекса"><div class="badge"><b>от 5,29 млн ₽</b><span>1-комнатные квартиры</span></div></div>
+</section>
+
+<section class="sec"><div class="w">
+  <div class="head"><div><span class="chip">Инфраструктура</span><h2>Всё нужное — в&nbsp;пешей доступности</h2></div></div>
+  <div class="life"><div><i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2f8f5b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M12 15v6"/></svg></i><h3>Парк 40 га</h3><p>Выход прямо из двора</p></div><div><i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2f8f5b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M10 9h.01M14 9h.01M10 11.5c1 1 3 1 4 0M6 21c1-4 3-6 6-6s5 2 6 6"/></svg></i><h3>Детский сад</h3><p>На 180 мест на территории</p></div><div><i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2f8f5b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V8l8-4 8 4v11z"/><path d="M9 19v-6h6v6"/></svg></i><h3>Школа</h3><p>В 5 минутах пешком</p></div><div><i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2f8f5b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.5 11h11L21 8H7"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg></i><h3>Магазины</h3><p>На первых этажах домов</p></div></div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="w"><div class="yard"><img src="img/realty-3.webp" alt="Двор" style="object-position:center 70%"><div class="card"><span class="chip">Двор без машин</span><h2>Двор, где&nbsp;дети гуляют сами</h2><ul><li>Площадки для разных возрастов</li><li>Видеонаблюдение и охрана</li><li>Зона барбекю и воркаут</li><li>Колясочные на каждом этаже</li></ul></div></div></div></section>
+
+<section class="sec" style="padding-top:0"><div class="w loc">
+  <div><span class="chip">Расположение</span><h2>Тихий район рядом с&nbsp;центром</h2><div class="times"><div><b>1 мин</b><span>до Северного парка</span></div><div><b>2 мин</b><span>до детского сада</span></div><div><b>5 мин</b><span>до школы № 112</span></div><div><b>15 мин</b><span>до центра на машине</span></div></div></div>
+  <svg viewBox="0 0 640 460" aria-hidden="true"><rect width="640" height="460" fill="#eef3ec"/><path d="M0 360 C140 330 220 400 360 380 S560 330 640 350 V460 H0Z" fill="#cfe3ee"/><rect x="420" y="60" width="170" height="120" rx="22" fill="#cfe6c8"/><path d="M0 120 H640" stroke="#ffffff" stroke-width="14" fill="none"/><path d="M0 250 H640" stroke="#ffffff" stroke-width="14" fill="none"/><path d="M140 0 V340" stroke="#ffffff" stroke-width="14" fill="none"/><path d="M330 0 V360" stroke="#ffffff" stroke-width="14" fill="none"/><path d="M520 0 V330" stroke="#ffffff" stroke-width="14" fill="none"/><path d="M0 40 L260 300" stroke="#ffffff" stroke-width="14" fill="none"/><circle cx="110" cy="80" r="9" fill="#fff" stroke="#2f4a3a" stroke-width="3"/><rect x="124" y="66" width="170" height="28" rx="8" fill="#ffffff"/><text x="133" y="85" font-size="14" font-family="Onest, sans-serif" fill="#2f4a3a">Детский сад · 2 мин</text><circle cx="420" cy="215" r="9" fill="#fff" stroke="#2f4a3a" stroke-width="3"/><rect x="434" y="201" width="186" height="28" rx="8" fill="#ffffff"/><text x="443" y="220" font-size="14" font-family="Onest, sans-serif" fill="#2f4a3a">Северный парк · 1 мин</text><circle cx="460" cy="300" r="9" fill="#fff" stroke="#2f4a3a" stroke-width="3"/><rect x="474" y="286" width="122" height="28" rx="8" fill="#ffffff"/><text x="483" y="305" font-size="14" font-family="Onest, sans-serif" fill="#2f4a3a">Школа · 5 мин</text><circle cx="40" cy="210" r="9" fill="#fff" stroke="#2f4a3a" stroke-width="3"/><rect x="54" y="196" width="154" height="28" rx="8" fill="#ffffff"/><text x="63" y="215" font-size="14" font-family="Onest, sans-serif" fill="#2f4a3a">ТЦ «Мега» · 8 мин</text><circle cx="250" cy="190" r="38" fill="#2f8f5b" opacity=".22"/><circle cx="250" cy="190" r="20" fill="#2f8f5b"/><text x="250" y="196" text-anchor="middle" font-size="15" font-weight="700" font-family="Onest, sans-serif" fill="#fff">ЖК</text></svg>
+</div></section>
+
+<section class="sec" id="plans" style="padding-top:0"><div class="w">
+  <div class="head"><div><span class="chip">Квартиры</span><h2>Подберите квартиру по&nbsp;бюджету</h2></div><p>В продаже 96 квартир в корпусе 3. Покажем любую на показе.</p></div>
+  <div class="picker"><div class="f"><div class="l">Бюджет<b>до 8 000 000 ₽</b></div><div class="rng"><i></i></div></div><div class="seg"><span>Все</span><span class="on">1-комн.</span><span>2-комн.</span><span>3-комн.</span></div></div>
+  <div class="plans"><article class="pl"><div class="pic"><svg viewBox="0 0 260 180" aria-hidden="true"><rect x="12" y="12" width="236" height="156" fill="#fff"/><rect x="12" y="12" width="64" height="58" fill="#e3eee6"/><path d="M76 12v58H12M140 12v110M140 140v28" stroke="#2f4a3a" stroke-width="2.5" fill="none"/><line x1="170" y1="168" x2="225" y2="168" stroke="#fff" stroke-width="5"/><line x1="40" y1="168" x2="100" y2="168" stroke="#fff" stroke-width="5"/><rect x="12" y="12" width="236" height="156" stroke="#2f4a3a" stroke-width="5" fill="none" stroke-linecap="square"/></svg></div><h3>1-комнатная</h3><p class="ar">38,6 м²</p><div class="pr"><b>от 5 290 000 ₽</b><span>от 19 800 ₽/мес в ипотеку 6%</span></div><a class="btn sm" href="#f">Узнать о наличии</a></article><article class="pl"><div class="pic"><svg viewBox="0 0 260 180" aria-hidden="true"><rect x="12" y="12" width="236" height="156" fill="#fff"/><rect x="96" y="12" width="56" height="50" fill="#e3eee6"/><path d="M96 12v50h56V12M96 62v36M12 98h60M90 98h62v70M152 98h20M190 98h58" stroke="#2f4a3a" stroke-width="2.5" fill="none"/><line x1="30" y1="168" x2="80" y2="168" stroke="#fff" stroke-width="5"/><line x1="180" y1="168" x2="230" y2="168" stroke="#fff" stroke-width="5"/><line x1="12" y1="30" x2="12" y2="80" stroke="#fff" stroke-width="5"/><rect x="12" y="12" width="236" height="156" stroke="#2f4a3a" stroke-width="5" fill="none" stroke-linecap="square"/></svg></div><h3>2-комнатная</h3><p class="ar">56,4 м²</p><div class="pr"><b>от 7 140 000 ₽</b><span>от 26 700 ₽/мес в ипотеку 6%</span></div><a class="btn sm" href="#f">Узнать о наличии</a></article><article class="pl"><div class="pic"><svg viewBox="0 0 260 180" aria-hidden="true"><rect x="12" y="12" width="236" height="156" fill="#fff"/><rect x="100" y="12" width="60" height="46" fill="#e3eee6"/><path d="M100 12v46h60V12M12 92h70M100 58v34h60V58M160 92h88M86 92v76M172 92v76" stroke="#2f4a3a" stroke-width="2.5" fill="none"/><line x1="25" y1="168" x2="70" y2="168" stroke="#fff" stroke-width="5"/><line x1="105" y1="168" x2="150" y2="168" stroke="#fff" stroke-width="5"/><line x1="190" y1="168" x2="235" y2="168" stroke="#fff" stroke-width="5"/><line x1="248" y1="25" x2="248" y2="70" stroke="#fff" stroke-width="5"/><rect x="12" y="12" width="236" height="156" stroke="#2f4a3a" stroke-width="5" fill="none" stroke-linecap="square"/></svg></div><h3>3-комнатная</h3><p class="ar">78,1 м²</p><div class="pr"><b>от 9 380 000 ₽</b><span>от 35 100 ₽/мес в ипотеку 6%</span></div><a class="btn sm" href="#f">Узнать о наличии</a></article></div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="w">
+  <div class="head"><div><span class="chip">Ход строительства</span><h2>Сдача по&nbsp;плану</h2></div></div>
+  <div class="steps"><div><b>Корпус 1</b><h3>Дом сдан</h3><span class="st">Заселение</span></div><div><b>Корпус 2</b><h3>Отделка фасада</h3><span class="st">Сдача II кв. 2027</span></div><div><b>Корпус 3</b><h3>Монолит, 9 этаж</h3><span class="st now">Старт продаж</span></div><div><b>Детский сад</b><h3>Коробка готова</h3><span class="st">Открытие 2027</span></div></div>
+</div></section>
+
+<section class="sec" id="f" style="padding-top:0"><div class="w final">
+  <div><h2>Приходите на&nbsp;показ в&nbsp;выходные</h2><p>Покажем двор, детский сад и квартиры в сданном корпусе. Рассчитаем ипотеку на месте.</p></div>
+  <div class="form"><span class="inp">Ваше имя</span><span class="inp">+7 (___) ___-__-__</span><a class="btn" href="#f">Записаться на показ</a><small>Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</small></div>
+</div></section>
+<footer><div class="w"><span>ЖК «Северный парк» · Ростов-на-Дону</span><span>Концепт сайта от Land Engine</span></div></footer>
+</body></html>
