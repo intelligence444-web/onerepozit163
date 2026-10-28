@@ -1,8 +1,9 @@
 // Настройки сайта
 const CONFIG = {
   // Адрес, куда отправлять заявки (POST JSON): вебхук Telegram-бота, amoCRM, Bitrix24, Make и т.п.
-  // Пока пусто — форма предложит написать в Telegram.
-  formEndpoint: "",
+  // Сейчас заявки приходят на почту через FormSubmit: после подтверждения почты адрес в конце
+  // можно заменить на код из письма сервиса, чтобы он не был виден в коде сайта.
+  formEndpoint: "https://formsubmit.co/ajax/intelligence444@gmail.com",
   // Номер счётчика Яндекс Метрики, для цели "lead" при отправке формы.
   metrikaId: null,
 };
@@ -343,6 +344,7 @@ function calcLead() {
       extras: c.extras.map((e) => EXTRAS[e].label),
       urgent: c.fast,
       estimate: `${priceText(c)}, ${c.dMin}–${c.dMax} ${daysWord(c.dMax)}`,
+      source: document.getElementById("lead-modal").open ? "Попап тарифа" : "Калькулятор",
     },
   };
 }
@@ -400,6 +402,27 @@ function phoneMask(input) {
 
 // Общая логика формы заявки: проверка полей, согласие, отправка. Используется калькулятором и попапом.
 // getLead возвращает, что именно человек заказывает: текст для страницы благодарности и поля для заявки.
+// Заявка для письма: поля по-русски, тема с сутью заявки, письмо в виде таблицы
+const MAIL_LABELS = {
+  name: "Имя", contact: "Телефон или Telegram", request: "Что нужно", source: "Откуда заявка",
+  plan: "Тариф", project: "Проект", extras: "Дополнительно", urgent: "Срочно", estimate: "Расчёт",
+  page: "Страница", utm: "Метки UTM", consent: "Согласие на обработку данных",
+};
+function mailLead(payload, lead) {
+  const mail = {
+    _subject: `Заявка с сайта: ${payload.name}, ${lead.summary}`,
+    _template: "table",
+    _captcha: "false",
+  };
+  Object.entries(payload).forEach(([key, value]) => {
+    if (value === null || value === "" || (Array.isArray(value) && !value.length)) return;
+    if (typeof value === "boolean") value = value ? "да" : "нет";
+    if (Array.isArray(value)) value = value.join(", ");
+    mail[MAIL_LABELS[key] || key] = value;
+  });
+  return mail;
+}
+
 function leadForm(el, getLead, onSent) {
   const status = el.querySelector(".form-status");
   const button = el.querySelector('button[type="submit"]');
@@ -473,12 +496,15 @@ function leadForm(el, getLead, onSent) {
     button.disabled = true;
     button.textContent = "Отправляю…";
     try {
+      const toMail = CONFIG.formEndpoint.includes("formsubmit.co");
       const response = await fetch(CONFIG.formEndpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(toMail ? mailLead(payload, lead) : payload),
       });
       if (!response.ok) throw new Error(response.status);
+      // FormSubmit отвечает 200 и тогда, когда письмо не ушло (например, почта ещё не подтверждена)
+      if (toMail && String((await response.json()).success) !== "true") throw new Error("formsubmit");
       done();
     } catch {
       if (tab) tab.close();
@@ -502,13 +528,14 @@ function generalLead() {
   const need = modalForm.elements.need.value;
   return {
     summary: need ? need.toLowerCase() : "обсудить проект",
-    fields: { request: need || "Пока не знаю", source: "Попап «Обсудить проект»" },
+    fields: { request: need || "Пока не знаю", source: `Попап «${modal.dataset.source || "Обсудить проект"}»` },
   };
 }
 leadForm(modalForm, () => (modal.dataset.mode === "plan" ? calcLead() : generalLead()), () => modal.close());
 
 function openModal(mode, link) {
   modal.dataset.mode = mode;
+  modal.dataset.source = link.textContent.replace(/\s+/g, " ").trim(); // какая кнопка открыла попап — уходит в заявку
   modal.querySelectorAll("[data-mode]").forEach((el) => { el.hidden = el.dataset.mode !== mode; });
   if (mode === "plan") {
     const c = readCalc();
