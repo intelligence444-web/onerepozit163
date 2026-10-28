@@ -2,7 +2,7 @@
 // node tools/shoot_concepts.js <папка_для_png>
 const path = require("path");
 const { chromium } = require("playwright");
-const slugs = ["realty", "doma", "kitchen", "remont"];
+const slugs = ["realty", "doma", "kitchen", "remont", "azov", "bereg"];
 (async () => {
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
