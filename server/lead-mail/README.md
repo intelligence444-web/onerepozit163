@@ -24,7 +24,7 @@
    | `SMTP_USER` | `mr.iducczeli@yandex.ru` |
    | `SMTP_PASS` | пароль приложения из шага 1 |
    | `MAIL_TO` | `mr.iducczeli@yandex.ru` |
-   | `ALLOWED_ORIGINS` | `https://intelligence444-web.github.io` (после подключения домена добавьте его через запятую, например `https://intelligence444-web.github.io,https://вашдомен.ru`) |
+   | `ALLOWED_ORIGINS` | `https://ad-engine.ru,https://www.ad-engine.ru,https://intelligence444-web.github.io` |
 
    Пароль надёжнее хранить в **Lockbox**: создайте секрет и подключите его к функции как переменную `SMTP_PASS`.
 7. **Сохранить изменения**.
@@ -32,6 +32,6 @@
 
 ## 3. Подключение к сайту
 
-Ссылку из шага 2.8 впишите в `formEndpoint` в начале `script.js`. Отправьте тестовую заявку с сайта: письмо придёт на почту за несколько секунд.
+Ссылку из шага 2.8 впишите в `formEndpoint` в начале `landengine/script.js`. Отправьте тестовую заявку с сайта: письмо придёт на почту за несколько секунд.
 
 Если письма нет: **Cloud Functions** → `lead-mail` → **Логи**. Строка `smtp ...` означает, что почта не приняла пароль (проверьте шаг 1), ответ `403` — что адреса сайта нет в `ALLOWED_ORIGINS`.

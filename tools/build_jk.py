@@ -1,7 +1,7 @@
-"""Собирает два сайта ЖК (portfolio/grafit.html и portfolio/park.html): планировки и карта рисуются SVG."""
+"""Собирает два сайта ЖК (landengine/portfolio/grafit.html и park.html): планировки и карта рисуются SVG."""
 from pathlib import Path
 
-OUT = Path("/home/user/onerepozit163/portfolio")
+OUT = Path(__file__).resolve().parent.parent / "landengine" / "portfolio"
 
 
 def plan(kind, wall="#222", fill="#fff", zone="#eee"):
