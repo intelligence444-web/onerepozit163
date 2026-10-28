@@ -1,0 +1,12 @@
+{
+  "name": "lead-mail",
+  "private": true,
+  "description": "Приём заявок с сайта в Yandex Cloud Functions и отправка на Яндекс Почту",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "nodemailer": "6.9.16"
+  }
+}
