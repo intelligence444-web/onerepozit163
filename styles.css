@@ -811,14 +811,9 @@ body:has(.modal[open]) { overflow: hidden; }
 }
 
 /* Примеры работ */
-.case-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-.case-filter button { min-height: 44px; padding: 0 18px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); font: inherit; font-size: 15px; cursor: pointer; transition: border-color .15s, background-color .15s, color .15s; }
-.case-filter button:hover { border-color: var(--ink); }
-.case-filter button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
 .works { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .work { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--r-card); background: var(--paper); overflow: hidden; transition: border-color .2s; }
 .work:hover { border-color: #b9bfc9; }
-.work[hidden] { display: none; }
 .work-shot { display: block; margin: 14px 14px 0; padding: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--mist); cursor: zoom-in; text-align: left; }
 .ws-bar { display: flex; gap: 5px; padding: 9px 12px; background: var(--paper); border-bottom: 1px solid var(--line); }
 .ws-bar i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
@@ -847,10 +842,7 @@ body:has(.modal[open]) { overflow: hidden; }
   .works { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .case-filter { flex-wrap: nowrap; overflow-x: auto; margin: 0 calc(-1 * var(--gutter)) 20px; padding: 0 var(--gutter); scrollbar-width: none; }
-  .case-filter::-webkit-scrollbar { display: none; }
-  .case-filter button { flex: none; }
-  .work-body { padding: 18px 20px 20px; }
+        .work-body { padding: 18px 20px 20px; }
   .cases-cta { flex-direction: column; align-items: stretch; padding: 22px 20px; }
   .work-modal { width: 100vw; height: 100dvh; max-width: none; border-radius: 0; }
 }

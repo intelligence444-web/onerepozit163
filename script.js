@@ -589,19 +589,6 @@ if (marquees && "IntersectionObserver" in window) {
   new IntersectionObserver(([entry]) => marquees.classList.toggle("is-off", !entry.isIntersecting)).observe(marquees);
 }
 
-// Примеры работ: фильтр по нише
-const caseFilter = document.querySelector(".case-filter");
-if (caseFilter) {
-  caseFilter.addEventListener("click", (e) => {
-    const btn = e.target.closest("[data-filter]");
-    if (!btn) return;
-    caseFilter.querySelectorAll("[data-filter]").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
-    document.querySelectorAll("#cases-list .work").forEach((c) => {
-      c.hidden = btn.dataset.filter !== "all" && c.dataset.niche !== btn.dataset.filter;
-    });
-  });
-}
-
 // Сайт целиком: полный скриншот в окне с прокруткой
 const workModal = document.getElementById("work-modal");
 const workImg = document.getElementById("work-full");
