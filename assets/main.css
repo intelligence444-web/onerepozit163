@@ -112,6 +112,12 @@ a { color: inherit; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .btn-tg { gap: 10px; padding: 0 20px; }
 .btn-tg svg { color: #229ed9; flex: none; }
+.msg-btns { display: flex; gap: 12px; }
+.btn-max-chat { gap: 10px; padding: 0 20px; }
+.btn-max-chat svg { color: #6b4cf5; flex: none; }
+.mobile-cta .btn-max-chat { padding: 0; }
+.mobile-cta .btn:first-child { padding: 0 14px; white-space: nowrap; }
+.mobile-cta .btn-icon:not(.btn-max-chat) svg { color: #229ed9; }
 
 /* Путь заявки: объявление → квиз → CRM */
 .flow { position: relative; isolation: isolate; display: grid; gap: 14px; }
@@ -391,6 +397,8 @@ body:has(.modal[open]) { overflow: hidden; }
   .header-inner { gap: 10px; }
   .hero-facts { grid-template-columns: 1fr 1fr; gap: 16px 24px; }
   .hero-actions .btn { width: 100%; }
+  .msg-btns { width: 100%; }
+  .msg-btns .btn { flex: 1; width: auto; }
   .flow::before { left: 23px; }
   .flow-serp, .flow-quiz, .flow-crm { margin: 0; }
   .flow-card { padding: 14px 16px 16px; }
