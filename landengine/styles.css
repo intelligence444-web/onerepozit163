@@ -886,12 +886,9 @@ body:has(.modal[open]) { overflow: hidden; }
 @keyframes btn-shine { 0%, 55% { transform: translateX(-120%) skewX(-12deg); } 85%, 100% { transform: translateX(260%) skewX(-12deg); } }
 @media (prefers-reduced-motion: reduce) { .btn-shine::after { animation: none; display: none; } }
 
-/* Первый экран: плашка с подарком, ведёт к бонусу в тарифах */
-.hero-gift { display: flex; align-items: center; gap: 14px; margin-top: 28px; padding: 14px 18px; border: 1px solid transparent; border-radius: 14px; background: var(--accent-soft); color: var(--graphite); font-size: 14px; line-height: 1.4; text-decoration: none; transition: border-color .2s, transform .2s; }
-.hero-gift:hover { border-color: var(--accent); transform: translateY(-1px); }
+/* Первый экран: плашка с подарком */
+.hero-gift { display: flex; align-items: center; gap: 14px; margin-top: 28px; padding: 14px 18px; border-radius: 14px; background: var(--accent-soft); color: var(--graphite); font-size: 14px; line-height: 1.4; }
 .hero-gift strong { display: block; margin-bottom: 2px; color: var(--ink); font-size: 15px; font-weight: 600; }
 .hero-gift-icon { display: grid; place-items: center; flex: none; width: 48px; height: 48px; border-radius: 12px; background: var(--paper); color: var(--accent); }
 .hero-gift-icon svg { width: 28px; height: 28px; }
-.hero-gift-arrow { margin-left: auto; padding-left: 8px; color: var(--accent); font-size: 20px; font-weight: 600; transition: transform .2s; }
-.hero-gift:hover .hero-gift-arrow { transform: translateX(3px); }
-@media (max-width: 640px) { .hero-gift { padding: 12px 14px; } .hero-gift-arrow { display: none; } }
+@media (max-width: 640px) { .hero-gift { padding: 12px 14px; } }
