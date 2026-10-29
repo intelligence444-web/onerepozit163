@@ -87,6 +87,7 @@ a { color: inherit; }
 .section-ink { background: var(--ink); color: #fff; }
 .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 64px; align-items: end; margin-bottom: 48px; }
 .section-head p { color: var(--graphite); max-width: 32em; }
+.section-head .ink { color: var(--ink); font-weight: 600; }
 .aurora { position: relative; isolation: isolate; overflow: hidden; overflow: clip; }
 .aurora::before {
   content: ""; position: absolute; inset: -15%; z-index: -1; pointer-events: none;
