@@ -270,6 +270,27 @@ if ("IntersectionObserver" in window) {
   io.observe(audit);
 }
 
+/* ---------- Этапы «Как работаем»: заполняются при прокрутке (как в Land Engine) ---------- */
+
+const processSteps = [...document.getElementById("steps").children];
+
+function updateSteps() {
+  // Шаг заполняется, когда его кружок проходит линию на экране; линия для каждого следующего шага чуть выше,
+  // поэтому в один ряд на компьютере шаги загораются по очереди, а не все сразу
+  const vh = window.innerHeight;
+  const n = processSteps.length;
+  const tops = processSteps.map((li) => li.getBoundingClientRect().top); // сначала читаем, потом меняем классы
+  processSteps.forEach((li, i) => li.classList.toggle("is-done", tops[i] < vh * (0.8 - 0.4 * i / n)));
+}
+
+let ticking = false;
+window.addEventListener("scroll", () => {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => { updateSteps(); ticking = false; });
+}, { passive: true });
+updateSteps();
+
 /* ---------- Появление блоков ---------- */
 
 if (!reduceMotion && "IntersectionObserver" in window) {
