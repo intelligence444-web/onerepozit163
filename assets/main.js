@@ -254,11 +254,11 @@ document.querySelectorAll("[data-modal]").forEach((link) => {
 modal.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", () => modal.close()));
 modal.addEventListener("click", (e) => { if (e.target === modal) modal.close(); }); // клик по затемнению
 
-/* ---------- Мобильная кнопка: после первого экрана и не поверх формы ---------- */
+/* ---------- Мобильная кнопка: как только главная кнопка первого экрана не видна, и не поверх формы ---------- */
 
 const mobileCta = document.getElementById("mobile-cta");
 if ("IntersectionObserver" in window) {
-  const hero = document.querySelector(".hero");
+  const hero = document.querySelector(".hero-actions");
   const audit = document.getElementById("audit");
   const seen = new Map();
   const update = () => mobileCta.classList.toggle("show", !seen.get(hero) && !seen.get(audit));
