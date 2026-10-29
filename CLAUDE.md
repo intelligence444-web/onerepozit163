@@ -1,6 +1,6 @@
 # Инструкция для Claude: проект Land Engine
 
-Сайт Александра Почивалова (маркетолог, трафик для недвижимости) про лендинги, квизы и сайты под ключ. Живой адрес: https://ad-engine.ru/landengine/. Подробности по файлам — в `README.md`.
+Сайт Александра Почивалова (маркетолог, трафик для недвижимости) про лендинги, квизы и сайты под ключ. Живой адрес: https://ad-engine.ru/landengine/. Главная https://ad-engine.ru/ — отдельная страница про настройку рекламы для недвижимости (`index.html`, `assets/ad.css`, `assets/ad.js`). Подробности по файлам — в `README.md`.
 
 ## Как работать с Александром
 
@@ -17,6 +17,7 @@
 
 - GitHub Pages собирает сайт из ветки `main` (корень), домен в `CNAME`. Рабочая ветка — `claude/intelligent-bardeen-3bsfar`; после проверки пушить в неё и в `main` (`git push origin HEAD:main`).
 - Старую ветку Pages `claude/youthful-wright-6awi3e` не трогать.
+- После правки `assets/ad.css` или `assets/ad.js` поднимать `?v=` в корневом `index.html`.
 - После правки `styles.css` или `script.js` поднимать `?v=` во всех страницах: `landengine/index.html`, `thanks.html`, `privacy.html`, `consent.html` и корневой `404.html`.
 - Сборки нет, сервер для проверки не нужен: Playwright открывает `file:///…/landengine/index.html`.
 
