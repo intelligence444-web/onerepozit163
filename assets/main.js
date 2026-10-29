@@ -66,6 +66,7 @@ function phoneMask(input) {
 
 function problem(input) {
   if (input.name === "contact") return contactError(input.value);
+  if (input.type === "radio") return input.form.querySelector(`[name="${input.name}"]:checked`) ? null : ""; // группа: выбран любой вариант
   return (input.type === "checkbox" ? input.checked : input.value.trim() !== "") ? null : "";
 }
 
@@ -93,7 +94,11 @@ function leadForm(form, getLead, onSent) {
     status.className = `form-status ${kind}`;
   };
 
-  required.forEach((i) => i.addEventListener(i.type === "checkbox" ? "change" : "input", () => { if (problem(i) === null) mark(i); }));
+  required.forEach((i) => {
+    // у группы кнопок-вариантов required стоит на первой, а выбрать можно любую
+    const targets = i.type === "radio" ? [...form.querySelectorAll(`[name="${i.name}"]`)] : [i];
+    targets.forEach((t) => t.addEventListener(i.type === "checkbox" || i.type === "radio" ? "change" : "input", () => { if (problem(i) === null) mark(i); }));
+  });
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();

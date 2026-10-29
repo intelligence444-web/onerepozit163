@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="landengine/assets/apple-touch-icon.png">
   <link rel="preload" href="landengine/assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="landengine/assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/main.css?v=9">
+  <link rel="stylesheet" href="assets/main.css?v=10">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -409,12 +409,15 @@
       <input id="m-city" name="city" type="text" autocomplete="address-level2" required aria-describedby="m-err-city">
       <p class="field-err" id="m-err-city" hidden>Напишите город, для&nbsp;которого считаем</p>
     </div>
-    <fieldset class="chips" data-for="calc">
-      <legend>Кто вы <span class="optional">(необязательно)</span></legend>
-      <label class="chip"><input type="radio" name="role" value="Застройщик"><span>Застройщик</span></label>
-      <label class="chip"><input type="radio" name="role" value="Агентство недвижимости"><span>Агентство</span></label>
-      <label class="chip"><input type="radio" name="role" value="Риелтор"><span>Риелтор</span></label>
-    </fieldset>
+    <div class="field" data-for="calc">
+      <fieldset class="chips">
+        <legend>Кто вы</legend>
+        <label class="chip"><input type="radio" name="role" value="Застройщик" required aria-describedby="m-err-role"><span>Застройщик</span></label>
+        <label class="chip"><input type="radio" name="role" value="Агентство недвижимости"><span>Агентство</span></label>
+        <label class="chip"><input type="radio" name="role" value="Риелтор"><span>Риелтор</span></label>
+      </fieldset>
+      <p class="field-err" id="m-err-role" hidden>Выберите, кто вы</p>
+    </div>
     <div class="field">
       <label for="m-name">Имя</label>
       <input id="m-name" name="name" type="text" autocomplete="name" required aria-describedby="m-err-name">
@@ -470,6 +473,6 @@
   </div>
 </footer>
 
-<script src="assets/main.js?v=5"></script>
+<script src="assets/main.js?v=6"></script>
 </body>
 </html>

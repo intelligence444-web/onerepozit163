@@ -255,6 +255,7 @@ a { color: inherit; }
 .chip:hover span { border-color: var(--graphite); }
 .chip input:checked + span { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 500; }
 .chip input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.field.has-error .chip span { border-color: #c62828; }
 
 /* Попап */
 .modal { width: min(460px, calc(100% - 32px)); max-height: calc(100dvh - 32px); padding: 0; border: 0; border-radius: var(--r-card); background: var(--paper); color: var(--ink); box-shadow: 0 40px 80px -30px rgba(21, 23, 26, .45); overscroll-behavior: contain; }
