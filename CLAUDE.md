@@ -19,6 +19,7 @@
 - GitHub Pages собирает сайт из ветки `main` (корень), домен в `CNAME`. Рабочая ветка — `claude/intelligent-bardeen-3bsfar`; после проверки пушить в неё и в `main` (`git push origin HEAD:main`).
 - Старую ветку Pages `claude/youthful-wright-6awi3e` не трогать.
 - После правки `assets/main.css` или `assets/main.js` поднимать `?v=` в корневом `index.html`.
+- Подвал общий для обоих сайтов: правим только `partials/footer.html` (разметка) и `assets/footer.css` (стили), потом `python3 tools/sync_footer.py` — он вставит подвал во все страницы и обновит `?v=` у стилей. Руками подвал в страницах не трогать.
 - Не называть файлы, папки и классы со словом «ad» (`ad.css`, `ad-title`, `banner`): блокировщики рекламы их режут, и страница теряет стили.
 - После правки `styles.css` или `script.js` поднимать `?v=` во всех страницах: `landengine/index.html`, `thanks.html`, `privacy.html`, `consent.html` и корневой `404.html`.
 - Сборки нет, сервер для проверки не нужен: Playwright открывает `file:///…/landengine/index.html`.

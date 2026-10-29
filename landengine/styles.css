@@ -81,10 +81,6 @@ a { color: inherit; }
 .logo img { display: block; width: 34px; height: auto; }
 .wordmark { font-size: 17px; font-weight: 300; letter-spacing: .08em; white-space: nowrap; color: var(--ink); }
 .wordmark b { font-weight: 700; }
-.footer-brand { display: grid; gap: 6px; }
-.byline { margin-left: 44px; font-size: 11px; letter-spacing: .24em; color: var(--graphite); }
-.footer-brand .muted { margin-top: 10px; }
-.footer-req { font-size: 13px; color: var(--graphite); }
 .nav { display: flex; gap: 28px; margin-left: auto; font-size: 15px; }
 .nav a { text-decoration: none; color: var(--graphite); }
 .nav a:hover { color: var(--ink); }
@@ -634,16 +630,6 @@ body:has(.modal[open]) { overflow: hidden; }
 .modal-alt { font-size: 14px; color: var(--graphite); text-align: center; }
 .modal-alt a { color: var(--accent); text-underline-offset: 3px; }
 
-/* Подвал */
-.site-footer { padding: 48px 0; border-top: 1px solid var(--line); font-size: 15px; }
-.footer-inner { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; align-items: flex-start; }
-.footer-links { display: flex; flex-wrap: wrap; gap: 0 28px; margin-top: -12px; }
-.footer-links a { display: inline-block; padding: 12px 0; color: var(--graphite); text-decoration: none; }
-.footer-links a:hover { color: var(--ink); }
-.footer-legal { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 0 24px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; }
-.footer-legal a { display: inline-block; padding: 10px 0; color: var(--graphite); text-underline-offset: 3px; }
-.footer-legal a:hover { color: var(--ink); }
-
 /* Юридические страницы */
 .legal-back { margin-left: auto; }
 .legal { padding: clamp(40px, 6vw, 72px) 0 var(--section); }
@@ -808,7 +794,7 @@ body:has(.modal[open]) { overflow: hidden; }
   }
   .mobile-cta.is-visible { transform: none; }
   .mobile-cta .btn:first-child { flex: 1; }
-  .site-footer { padding-bottom: 96px; }
+  .site-footer { --footer-pb: 96px; } /* место под нижнюю панель с кнопкой */
 }
 @media (max-width: 640px) {
   .bento { grid-template-columns: 1fr; }

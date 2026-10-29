@@ -1,0 +1,24 @@
+/* Общий подвал ad-engine.ru и Land Engine. Разметка — partials/footer.html, вставляет tools/sync_footer.py */
+.site-footer { padding: 56px 0 var(--footer-pb, 40px); border-top: 1px solid var(--line); font-size: 15px; }
+.footer-grid { display: grid; grid-template-columns: minmax(260px, 1.5fr) repeat(3, minmax(0, 1fr)); gap: 32px 40px; align-items: start; }
+.footer-brand { display: grid; gap: 6px; }
+.footer-brand .logo { margin: 0; }
+.byline { margin-left: 44px; font-size: 11px; letter-spacing: .24em; color: var(--graphite); }
+.footer-about { margin-top: 10px; color: var(--graphite); max-width: 30em; }
+.footer-req { font-size: 13px; color: var(--graphite); }
+.footer-title { margin-bottom: 6px; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); }
+.footer-col ul { margin: 0; padding: 0; list-style: none; }
+.footer-col a { display: inline-block; padding: 7px 0; color: var(--graphite); text-decoration: none; }
+.footer-col a:hover { color: var(--accent); }
+.footer-legal { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0 24px; margin: 0; padding: 16px 0 0; list-style: none; border-top: 1px solid var(--line); font-size: 13px; }
+.footer-legal a { display: inline-block; padding: 10px 0; color: var(--graphite); text-underline-offset: 3px; }
+.footer-legal a:hover, .footer-legal a[aria-current] { color: var(--ink); }
+@media (max-width: 960px) {
+  .footer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px 24px; }
+  .footer-col:last-of-type { grid-column: 1 / -1; }
+  .footer-channels { columns: 2; column-gap: 24px; }
+}

@@ -293,20 +293,6 @@ body:has(.modal[open]) { overflow: hidden; }
 .faq details p { padding: 0 48px 24px 0; color: var(--graphite); max-width: 40em; }
 .faq details a { color: var(--accent); text-underline-offset: 3px; }
 
-/* Подвал */
-.site-footer { padding: 48px 0; border-top: 1px solid var(--line); font-size: 15px; }
-.footer-inner { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; align-items: flex-start; }
-.footer-brand { display: grid; gap: 6px; }
-.byline { margin-left: 44px; font-size: 11px; letter-spacing: .24em; color: var(--graphite); }
-.footer-brand .muted { margin-top: 10px; }
-.footer-req { font-size: 13px; color: var(--graphite); }
-.footer-links { display: flex; flex-wrap: wrap; gap: 0 28px; margin-top: -12px; }
-.footer-links a { display: inline-block; padding: 12px 0; color: var(--graphite); text-decoration: none; }
-.footer-links a:hover { color: var(--ink); }
-.footer-legal { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 0 24px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; }
-.footer-legal a { display: inline-block; padding: 10px 0; color: var(--graphite); text-underline-offset: 3px; }
-.footer-legal a:hover { color: var(--ink); }
-
 /* Мобильная панель с кнопкой */
 .mobile-cta { display: none; }
 
@@ -393,7 +379,7 @@ body:has(.modal[open]) { overflow: hidden; }
   }
   .mobile-cta.show { transform: none; }
   .mobile-cta .btn:first-child { flex: 1; }
-  .site-footer { padding-bottom: 96px; }
+  .site-footer { --footer-pb: 96px; } /* место под нижнюю панель с кнопкой */
 }
 @media (max-width: 640px) {
   body { font-size: 16px; }
