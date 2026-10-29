@@ -895,3 +895,4 @@ body:has(.modal[open]) { overflow: hidden; }
   .hero-steps { grid-template-columns: 1fr; }
   .hero-steps li:not(:last-child)::after { content: none; }
 }
+.hero-steps .nowrap { white-space: nowrap; }
