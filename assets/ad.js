@@ -110,13 +110,47 @@ function leadForm(form, getLead, onSent) {
   });
 }
 
-// Форма аудита внизу страницы
+// Форма аудита внизу страницы: квиз из 5 вопросов, потом контакты
 const auditForm = document.getElementById("audit-form");
+const steps = [...auditForm.querySelectorAll(".quiz-step")];
+const quizCount = auditForm.querySelector(".quiz-count");
+const quizBar = document.getElementById("quiz-bar");
+const quizBack = auditForm.querySelector(".quiz-back");
+const QUESTIONS = steps.length - 1; // последний шаг — контакты
+let step = 0;
+
+function showStep(i, focus) {
+  step = i;
+  steps.forEach((el, n) => el.classList.toggle("is-active", n === i));
+  const last = i === QUESTIONS;
+  quizCount.innerHTML = last ? "Последний шаг" : `Вопрос <b>${i + 1}</b> из&nbsp;${QUESTIONS}`;
+  quizBar.style.width = `${((i + 1) / (QUESTIONS + 1)) * 100}%`;
+  quizBack.hidden = i === 0;
+  if (focus) (steps[i].querySelector("input:checked, input:not(.hp)") || steps[i]).focus({ preventScroll: true });
+}
+showStep(0);
+
+// Ответ на вопрос с одним вариантом сразу ведёт к следующему. Слушаем click, а не change:
+// после «Назад» человек может снова нажать уже выбранный ответ
+auditForm.querySelectorAll(".quiz-step input[type=radio]").forEach((input) => {
+  input.addEventListener("click", () => setTimeout(() => showStep(Math.min(step + 1, QUESTIONS), true), reduceMotion ? 0 : 250));
+});
+auditForm.querySelector(".quiz-next").addEventListener("click", () => showStep(step + 1, true));
+quizBack.addEventListener("click", () => showStep(Math.max(step - 1, 0), true));
+
+const answer = (name) => (auditForm.querySelector(`[name=${name}]:checked`) || {}).value;
 leadForm(auditForm, () => {
   const channels = [...auditForm.querySelectorAll("[name=channels]:checked")].map((i) => i.value);
+  const quiz = [
+    answer("role"),
+    answer("leads") && `заявок в месяц: ${answer("leads")}`,
+    answer("manager") && `менеджер по продажам: ${answer("manager")}`,
+    answer("crm") && `CRM: ${answer("crm")}`,
+    channels.length && `реклама сейчас: ${channels.join(", ")}`,
+  ].filter(Boolean);
   return {
     summary: "бесплатный аудит рекламы",
-    fields: { request: channels.length ? `Аудит рекламы: ${channels.join(", ")}` : "Аудит рекламы", source: auditForm.dataset.source },
+    fields: { request: "Аудит рекламы", project: quiz.join("; ") || "без ответов на квиз", source: auditForm.dataset.source },
   };
 });
 

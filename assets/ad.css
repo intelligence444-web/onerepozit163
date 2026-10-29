@@ -77,7 +77,7 @@ a { color: inherit; }
 .logo img { display: block; width: 34px; height: auto; }
 .wordmark { font-size: 17px; font-weight: 300; letter-spacing: .08em; white-space: nowrap; color: var(--ink); }
 .wordmark b { font-weight: 700; }
-.nav { display: flex; gap: 26px; margin-left: auto; font-size: 15px; }
+.nav { display: flex; gap: 24px; margin-left: auto; font-size: 15px; }
 .nav a { text-decoration: none; color: var(--graphite); white-space: nowrap; }
 .nav a:hover { color: var(--ink); }
 
@@ -102,7 +102,7 @@ a { color: inherit; }
 .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
 .hero-copy .kicker { margin-bottom: 18px; }
 .hero-copy .lead { margin-top: 22px; }
-.hero-facts { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 12px 40px; margin-top: 32px; }
+.hero-facts { display: grid; grid-template-columns: repeat(2, auto); justify-content: start; gap: 18px 56px; margin-top: 32px; }
 .hero-facts strong { display: block; font-size: 1.5rem; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }
 .hero-facts span { display: block; margin-top: 4px; color: var(--graphite); font-size: 14px; line-height: 1.35; max-width: 12em; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
@@ -314,9 +314,42 @@ body:has(.modal[open]) { overflow: hidden; }
   .btn-max { width: 100%; }
 }
 
+/* Телефон в шапке */
+.header-phone { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; white-space: nowrap; }
+.header-phone svg { flex: none; color: var(--accent); }
+.header-phone span { display: grid; line-height: 1.2; }
+.header-phone b { font-size: 15px; font-weight: 600; }
+.header-phone small { color: var(--graphite); font-size: 12px; }
+.header-phone small::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--ok); vertical-align: 1px; }
+.header-phone:hover b { color: var(--accent); }
+
+/* Квиз в форме аудита */
+.quiz-head { display: none; }
+.js .quiz-head { display: grid; gap: 10px; }
+.quiz-count { color: var(--graphite); font-size: 14px; }
+.quiz-count b { color: var(--ink); }
+.quiz-bar { height: 6px; border-radius: 999px; background: var(--mist); overflow: hidden; }
+.quiz-bar i { display: block; width: 20%; height: 100%; border-radius: inherit; background: var(--accent); transition: width .3s ease; }
+.quiz-step legend { font-size: 1.15rem; font-weight: 600; margin-bottom: 14px; }
+.quiz-step .chip span { min-height: 48px; padding: 0 18px; font-size: 15px; }
+.quiz-next { margin-top: 12px; }
+.js .quiz-next { margin-top: 20px; }
+.quiz-final { display: grid; gap: 16px; }
+.quiz-title { font-size: 1.15rem; font-weight: 600; }
+.quiz-text { font-size: 14.5px; margin-top: -8px; }
+.js .quiz-step:not(.is-active) { display: none; }
+.js .quiz-step.is-active { animation: quiz-in .25s ease-out; }
+@keyframes quiz-in { from { opacity: 0; transform: translateX(10px); } }
+.quiz-next { display: none; }
+.js .quiz-next { display: inline-flex; }
+.quiz-back { justify-self: start; padding: 6px 0; border: 0; background: none; color: var(--graphite); font: 500 14px/1 var(--font); cursor: pointer; }
+.quiz-back:hover { color: var(--ink); }
+
 @media (max-width: 1080px) {
   .nav { display: none; }
   .header-inner { justify-content: space-between; }
+  .header-phone { margin-left: auto; }
+  .hero-facts { grid-template-columns: repeat(2, auto); gap: 16px 40px; }
   .steps { grid-template-columns: repeat(2, 1fr); gap: 40px 32px; }
   .steps li::after { display: none; }
   .included { grid-template-columns: repeat(2, 1fr); }
@@ -342,8 +375,10 @@ body:has(.modal[open]) { overflow: hidden; }
 @media (max-width: 640px) {
   body { font-size: 16px; }
   .header-inner .btn-small { padding: 0 14px; }
+  .header-phone { display: grid; place-items: center; flex: none; width: 42px; height: 42px; margin-left: auto; border: 1px solid var(--line); border-radius: var(--r-control); }
+  .header-phone span { display: none; }
+  .header-inner { gap: 10px; }
   .hero-facts { grid-template-columns: 1fr 1fr; gap: 16px 24px; }
-  .hero-facts li:last-child { grid-column: span 2; }
   .hero-actions .btn { width: 100%; }
   .flow::before { left: 23px; }
   .flow-ad, .flow-quiz, .flow-crm { margin: 0; }
@@ -357,11 +392,14 @@ body:has(.modal[open]) { overflow: hidden; }
   .founder-stats { grid-template-columns: 1fr; gap: 14px; }
   .faq details p { padding-right: 0; }
 }
-@media (max-width: 380px) {
+@media (max-width: 420px) {
+  .logo { gap: 8px; }
+  .logo img { width: 30px; }
   .wordmark { font-size: 15px; }
-  .header-inner .btn-small { font-size: 14px; }
+  .header-inner .btn-small { padding: 0 12px; font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .js .quiz-step.is-active { animation: none; }
   html { scroll-behavior: auto; }
   .btn-shine::after { animation: none; display: none; }
   .js .reveal { opacity: 1; transform: none; transition: none; }

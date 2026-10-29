@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="landengine/assets/apple-touch-icon.png">
   <link rel="preload" href="landengine/assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="landengine/assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/ad.css?v=2">
+  <link rel="stylesheet" href="assets/ad.css?v=3">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -32,11 +32,14 @@
     <nav class="nav" aria-label="Разделы">
       <a href="#channels">Площадки</a>
       <a href="#included">Что&nbsp;входит</a>
-      <a href="#quality">Качество заявок</a>
       <a href="#process">Как&nbsp;работаем</a>
       <a href="#faq">Вопросы</a>
       <a href="landengine/">Сайты и&nbsp;квизы</a>
     </nav>
+    <a class="header-phone" href="tel:+79270111160" aria-label="Позвонить: 8 (927) 011-11-60">
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z" fill="currentColor"/></svg>
+      <span><b>8&nbsp;(927)&nbsp;011-11-60</b><small>Отвечаю за&nbsp;3&nbsp;минуты</small></span>
+    </a>
     <a class="btn btn-small" href="#audit" data-modal data-need="Аудит рекламы" data-title="Бесплатный аудит рекламы">Бесплатный аудит</a>
   </div>
 </header>
@@ -54,6 +57,7 @@
           <li><strong>от&nbsp;30 заявок</strong><span>в&nbsp;месяц на&nbsp;проект</span></li>
           <li><strong>от&nbsp;700&nbsp;₽</strong><span>цена заявки</span></li>
           <li><strong>5–45 млн&nbsp;₽</strong><span>чек квартир, с&nbsp;которыми работаем</span></li>
+          <li><strong>13 лет</strong><span>в&nbsp;интернет-маркетинге</span></li>
         </ul>
         <div class="hero-actions">
           <a class="btn btn-shine" href="#audit" data-modal data-need="Аудит рекламы" data-title="Бесплатный аудит рекламы">Получить бесплатный аудит</a>
@@ -243,13 +247,13 @@
           <p class="kicker">Кто отвечает за&nbsp;результат</p>
           <h2 id="founder-title">Александр Почивалов</h2>
           <p class="founder-role">Маркетолог, специалист по&nbsp;трафику для&nbsp;недвижимости</p>
-          <p class="founder-text">Больше 5&nbsp;лет привлекаю покупателей квартир в&nbsp;новостройках для&nbsp;риэлторов, застройщиков и&nbsp;агентств. Работаю на&nbsp;окупаемость рекламы, а&nbsp;не&nbsp;на&nbsp;количество обращений: мне важно долгое сотрудничество, поэтому я&nbsp;лично заинтересован в&nbsp;вашей прибыли.</p>
+          <p class="founder-text">13&nbsp;лет в&nbsp;интернет-маркетинге, из&nbsp;них больше 5&nbsp;лет привлекаю покупателей квартир в&nbsp;новостройках для&nbsp;риэлторов, застройщиков и&nbsp;агентств. Работаю на&nbsp;окупаемость рекламы, а&nbsp;не&nbsp;на&nbsp;количество обращений: мне важно долгое сотрудничество, поэтому я&nbsp;лично заинтересован в&nbsp;вашей прибыли.</p>
           <ul class="founder-stats">
             <li><b>13 лет</b><span>в&nbsp;интернет-маркетинге</span></li>
             <li><b>5+ лет</b><span>в&nbsp;недвижимости</span></li>
             <li><b>ИП</b><span>договор, сроки и&nbsp;цена на&nbsp;бумаге</span></li>
           </ul>
-          <p class="founder-links">Пишу о&nbsp;Директе и&nbsp;трафике: <a href="https://t.me/labtrafik" target="_blank" rel="noopener">Telegram-канал</a>, <a href="https://rutube.ru/channel/10772125/" target="_blank" rel="noopener">Rutube</a>, <a href="https://vk.com/apochivalov" target="_blank" rel="noopener">ВКонтакте</a>, <a href="https://tenchat.ru/alex_poch" target="_blank" rel="noopener">TenChat</a>.</p>
+          <p class="founder-links">Пишу о&nbsp;Директе и&nbsp;трафике: <a href="https://t.me/labtrafik" target="_blank" rel="noopener">Telegram-канал</a>, <a href="https://www.youtube.com/@a_pochivalov" target="_blank" rel="noopener">YouTube</a>, <a href="https://rutube.ru/channel/10772125/" target="_blank" rel="noopener">Rutube</a>, <a href="https://vkvideo.ru/@apochivalov" target="_blank" rel="noopener">VK Видео</a>, <a href="https://vk.com/apochivalov" target="_blank" rel="noopener">ВКонтакте</a>, <a href="https://tenchat.ru/alex_poch" target="_blank" rel="noopener">TenChat</a>. Позвонить: <a href="tel:+79270111160">8&nbsp;(927)&nbsp;011-11-60</a>.</p>
         </div>
       </div>
     </div>
@@ -287,31 +291,64 @@
       </div>
 
       <form class="lead-form card" id="audit-form" novalidate data-source="Форма «Бесплатный аудит»">
-        <fieldset class="chips">
-          <legend>Где сейчас реклама <span class="optional">(необязательно)</span></legend>
+        <div class="quiz-head" aria-live="polite">
+          <p class="quiz-count">Вопрос <b>1</b> из&nbsp;5</p>
+          <div class="quiz-bar"><i id="quiz-bar"></i></div>
+        </div>
+        <fieldset class="quiz-step chips" data-step="1">
+          <legend>Кто вы?</legend>
+          <label class="chip"><input type="radio" name="role" value="Застройщик"><span>Застройщик</span></label>
+          <label class="chip"><input type="radio" name="role" value="Агентство недвижимости"><span>Агентство недвижимости</span></label>
+          <label class="chip"><input type="radio" name="role" value="Риэлтор"><span>Риэлтор</span></label>
+        </fieldset>
+        <fieldset class="quiz-step chips" data-step="2">
+          <legend>Сколько заявок нужно в&nbsp;месяц?</legend>
+          <label class="chip"><input type="radio" name="leads" value="до 20"><span>до&nbsp;20</span></label>
+          <label class="chip"><input type="radio" name="leads" value="21–50"><span>21–50</span></label>
+          <label class="chip"><input type="radio" name="leads" value="больше 50"><span>больше 50</span></label>
+        </fieldset>
+        <fieldset class="quiz-step chips" data-step="3">
+          <legend>Есть менеджер по&nbsp;продажам?</legend>
+          <label class="chip"><input type="radio" name="manager" value="да"><span>Да</span></label>
+          <label class="chip"><input type="radio" name="manager" value="нет"><span>Нет</span></label>
+          <label class="chip"><input type="radio" name="manager" value="обрабатываю заявки сам"><span>Обрабатываю заявки сам</span></label>
+        </fieldset>
+        <fieldset class="quiz-step chips" data-step="4">
+          <legend>Работали с&nbsp;CRM?</legend>
+          <label class="chip"><input type="radio" name="crm" value="да"><span>Да</span></label>
+          <label class="chip"><input type="radio" name="crm" value="нет"><span>Нет</span></label>
+        </fieldset>
+        <fieldset class="quiz-step chips" data-step="5">
+          <legend>Где сейчас идёт реклама? <span class="optional">(можно несколько)</span></legend>
           <label class="chip"><input type="checkbox" name="channels" value="Яндекс Директ"><span>Яндекс Директ</span></label>
           <label class="chip"><input type="checkbox" name="channels" value="Авито Реклама"><span>Авито Реклама</span></label>
           <label class="chip"><input type="checkbox" name="channels" value="VK Реклама"><span>VK Реклама</span></label>
           <label class="chip"><input type="checkbox" name="channels" value="Ещё не запускали"><span>Ещё не&nbsp;запускали</span></label>
+          <button class="btn btn-wide quiz-next" type="button">Дальше</button>
         </fieldset>
-        <div class="field">
-          <label for="a-name">Имя</label>
-          <input id="a-name" name="name" type="text" autocomplete="name" required aria-describedby="a-err-name">
-          <p class="field-err" id="a-err-name" hidden>Напишите, как&nbsp;к&nbsp;вам обращаться</p>
+        <div class="quiz-step quiz-final" data-step="6">
+          <p class="quiz-title">Куда прислать результаты аудита?</p>
+          <p class="muted quiz-text">Договоримся об&nbsp;онлайн-встрече на&nbsp;30&nbsp;минут: покажу, что в&nbsp;рекламе работает, а&nbsp;что сливает бюджет, и&nbsp;обсудим стратегию.</p>
+          <div class="field">
+            <label for="a-name">Имя</label>
+            <input id="a-name" name="name" type="text" autocomplete="name" required aria-describedby="a-err-name">
+            <p class="field-err" id="a-err-name" hidden>Напишите, как&nbsp;к&nbsp;вам обращаться</p>
+          </div>
+          <div class="field">
+            <label for="a-contact">Телефон или&nbsp;Telegram</label>
+            <input id="a-contact" name="contact" type="text" autocomplete="tel" required aria-describedby="a-hint-contact a-err-contact">
+            <p class="field-hint" id="a-hint-contact">Например, +7 (900) 123-45-67 или @username</p>
+            <p class="field-err" id="a-err-contact" hidden>Оставьте телефон или&nbsp;ник в&nbsp;Telegram, чтобы мы&nbsp;связались</p>
+          </div>
+          <div class="field">
+            <label class="check"><input name="consent" type="checkbox" required aria-describedby="a-err-consent"><span>Даю <a href="landengine/consent.html" target="_blank">согласие на&nbsp;обработку персональных данных</a> и&nbsp;принимаю <a href="landengine/privacy.html" target="_blank">политику конфиденциальности</a></span></label>
+            <p class="field-err" id="a-err-consent" hidden>Без согласия мы&nbsp;не&nbsp;сможем принять заявку</p>
+          </div>
+          <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn-wide btn-shine" type="submit">Получить аудит</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
         </div>
-        <div class="field">
-          <label for="a-contact">Телефон или&nbsp;Telegram</label>
-          <input id="a-contact" name="contact" type="text" autocomplete="tel" required aria-describedby="a-hint-contact a-err-contact">
-          <p class="field-hint" id="a-hint-contact">Например, +7 (900) 123-45-67 или @username</p>
-          <p class="field-err" id="a-err-contact" hidden>Оставьте телефон или&nbsp;ник в&nbsp;Telegram, чтобы мы&nbsp;связались</p>
-        </div>
-        <div class="field">
-          <label class="check"><input name="consent" type="checkbox" required aria-describedby="a-err-consent"><span>Даю <a href="landengine/consent.html" target="_blank">согласие на&nbsp;обработку персональных данных</a> и&nbsp;принимаю <a href="landengine/privacy.html" target="_blank">политику конфиденциальности</a></span></label>
-          <p class="field-err" id="a-err-consent" hidden>Без согласия мы&nbsp;не&nbsp;сможем принять заявку</p>
-        </div>
-        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button class="btn btn-wide btn-shine" type="submit">Получить аудит</button>
-        <p class="form-status" role="status" aria-live="polite"></p>
+        <button class="quiz-back" type="button" hidden>← Назад</button>
       </form>
     </div>
   </section>
@@ -399,11 +436,15 @@
       <p class="footer-req">ИП Почивалов Александр Валериевич, ИНН&nbsp;633067457803, ОГРНИП&nbsp;311633004900036</p>
     </div>
     <ul class="footer-links">
+      <li><a href="tel:+79270111160">8&nbsp;(927)&nbsp;011-11-60</a></li>
       <li><a href="https://t.me/a_pochivalov" target="_blank" rel="noopener">Telegram</a></li>
       <li><a href="https://max.ru/u/f9LHodD0cOIEXmDghMJe8XzrIIAUtrgSVoxWeF1K5f7LX4LCp95hYXRwVlU" target="_blank" rel="noopener">MAX</a></li>
       <li><a href="https://t.me/labtrafik" target="_blank" rel="noopener">Telegram-канал</a></li>
+      <li><a href="https://www.youtube.com/@a_pochivalov" target="_blank" rel="noopener">YouTube</a></li>
       <li><a href="https://rutube.ru/channel/10772125/" target="_blank" rel="noopener">Rutube</a></li>
+      <li><a href="https://vkvideo.ru/@apochivalov" target="_blank" rel="noopener">VK Видео</a></li>
       <li><a href="https://vk.com/apochivalov" target="_blank" rel="noopener">ВКонтакте</a></li>
+      <li><a href="https://vk.ru/pochivalov_agence" target="_blank" rel="noopener">Сообщество ВК</a></li>
       <li><a href="https://tenchat.ru/alex_poch" target="_blank" rel="noopener">TenChat</a></li>
     </ul>
     <ul class="footer-legal">
@@ -414,6 +455,6 @@
   </div>
 </footer>
 
-<script src="assets/ad.js?v=1"></script>
+<script src="assets/ad.js?v=2"></script>
 </body>
 </html>
