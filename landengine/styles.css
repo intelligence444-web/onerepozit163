@@ -870,3 +870,15 @@ body:has(.modal[open]) { overflow: hidden; }
   .lead-card { width: 200px; }
   .leads-track { animation-duration: 45s; }
 }
+
+/* Блик на главных кнопках: пробегает раз в несколько секунд */
+.btn-shine { position: relative; overflow: hidden; isolation: isolate; }
+.btn-shine::after {
+  content: ""; position: absolute; inset: -2px auto -2px 0; width: 60%; z-index: -1;
+  background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, .55) 50%, transparent 80%);
+  transform: translateX(-120%) skewX(-12deg);
+  animation: btn-shine 4s ease-in-out infinite; pointer-events: none;
+}
+.btn-light.btn-shine::after { background: linear-gradient(105deg, transparent 20%, rgba(39, 71, 245, .18) 50%, transparent 80%); }
+@keyframes btn-shine { 0%, 55% { transform: translateX(-120%) skewX(-12deg); } 85%, 100% { transform: translateX(260%) skewX(-12deg); } }
+@media (prefers-reduced-motion: reduce) { .btn-shine::after { animation: none; display: none; } }
