@@ -373,9 +373,12 @@ a { color: inherit; }
 
 /* Цены */
 .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
-.plan { display: flex; flex-direction: column; padding: 36px 32px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); transition: border-color .2s; }
+.plan { position: relative; display: flex; flex-direction: column; padding: 36px 32px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); transition: border-color .2s; }
 .plan:hover { border-color: #b9bfc9; }
 .plan-main, .plan-main:hover { border: 2px solid var(--accent); }
+/* Плашка над тарифом: «Чаще выбирают», «Выгодно» */
+.plan-badge { position: absolute; top: 0; left: 32px; transform: translateY(-50%); padding: 6px 14px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 13px; font-weight: 600; line-height: 1.2; white-space: nowrap; }
+.plan-badge-soft { background: var(--accent-soft); color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
 .plan h3 { font-size: 1.25rem; }
 .price { margin: 18px 0 8px; font-size: 2.1rem; font-weight: 700; letter-spacing: -0.03em; }
 .plan-desc { color: var(--graphite); font-size: 15px; }
@@ -645,7 +648,7 @@ body:has(.modal[open]) { overflow: hidden; }
   .showcase { max-width: 640px; }
   .toast { left: 10px; }
   .section-head { grid-template-columns: 1fr; margin-bottom: 32px; }
-  .plans { grid-template-columns: 1fr; }
+  .plans { grid-template-columns: 1fr; gap: 28px; }
 }
 
 @media (max-width: 640px) {
