@@ -70,10 +70,10 @@ function problem(input) {
 }
 
 function leadForm(form, getLead, onSent) {
-  const fields = [...form.querySelectorAll("[required]")];
+  const required = [...form.querySelectorAll("[required]")];
+  const fields = () => required.filter((i) => !i.disabled); // поля скрытого режима попапа выключены
   const status = form.querySelector(".form-status");
-  const button = form.querySelector("[type=submit]");
-  const buttonText = button.textContent;
+  const submitButton = () => [...form.querySelectorAll("[type=submit]")].find((b) => !b.hidden);
   phoneMask(form.elements.contact);
 
   const mark = (input) => {
@@ -93,14 +93,14 @@ function leadForm(form, getLead, onSent) {
     status.className = `form-status ${kind}`;
   };
 
-  fields.forEach((i) => i.addEventListener(i.type === "checkbox" ? "change" : "input", () => { if (problem(i) === null) mark(i); }));
+  required.forEach((i) => i.addEventListener(i.type === "checkbox" ? "change" : "input", () => { if (problem(i) === null) mark(i); }));
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     status.textContent = "";
     if (form.elements.website.value) return; // скрытое поле заполнил бот
 
-    const firstInvalid = fields.filter((i) => !mark(i))[0];
+    const firstInvalid = fields().filter((i) => !mark(i))[0];
     if (firstInvalid) {
       firstInvalid.focus();
       return;
@@ -134,6 +134,8 @@ function leadForm(form, getLead, onSent) {
       return;
     }
 
+    const button = submitButton();
+    const buttonText = button.textContent;
     button.disabled = true;
     button.textContent = "Отправляю…";
     try {
@@ -204,18 +206,42 @@ const modal = document.getElementById("lead-modal");
 const modalForm = document.getElementById("modal-form");
 const modalTitle = document.getElementById("modal-title");
 
-leadForm(modalForm, () => ({
-  summary: (modal.dataset.need || "консультация по рекламе").toLowerCase(),
-  fields: { request: modal.dataset.need || "Консультация по рекламе", source: `Попап «${modal.dataset.source}»` },
-}), () => modal.close());
+// Режимы попапа: calc — встреча с расчётом стоимости лида, audit — бесплатный аудит рекламы
+const MODES = {
+  calc: { title: "Рассчитаем стоимость лида в\u00a0вашем городе", need: "Расчёт стоимости лида" },
+  audit: { title: "Бесплатный аудит рекламы", need: "Аудит рекламы" },
+};
+
+leadForm(modalForm, () => {
+  const mode = modal.dataset.mode;
+  const need = MODES[mode].need;
+  const city = modalForm.elements.city.value.trim();
+  const role = (modalForm.querySelector("[name=role]:checked") || {}).value;
+  return {
+    summary: mode === "calc" ? `расчёт стоимости лида: ${city}` : need.toLowerCase(),
+    fields: {
+      request: need,
+      project: mode === "calc" ? [`город: ${city}`, role].filter(Boolean).join("; ") : "",
+      source: `Попап «${modal.dataset.source}»`,
+    },
+  };
+}, () => modal.close());
+
+function setMode(mode) {
+  modal.dataset.mode = mode;
+  modal.querySelectorAll("[data-for]").forEach((el) => {
+    el.hidden = el.dataset.for !== mode;
+    el.querySelectorAll("input").forEach((i) => { i.disabled = el.hidden; });
+  });
+  modalTitle.textContent = MODES[mode].title;
+}
 
 document.querySelectorAll("[data-modal]").forEach((link) => {
   link.addEventListener("click", (e) => {
     if (!modal.showModal) return; // старый браузер: ссылка просто ведёт к форме аудита
     e.preventDefault();
-    modal.dataset.need = link.dataset.need || "";
-    modal.dataset.source = link.textContent.replace(/\s+/g, " ").trim(); // какая кнопка открыла попап — уходит в заявку
-    modalTitle.textContent = link.dataset.title || "Обсудим рекламу";
+    setMode(link.dataset.mode || "audit");
+    modal.dataset.source = (link.querySelector(".lbl-full") || link).textContent.replace(/\s+/g, " ").trim(); // какая кнопка открыла попап — уходит в заявку
     modalForm.querySelector(".form-status").textContent = "";
     modal.showModal();
   });

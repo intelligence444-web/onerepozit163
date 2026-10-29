@@ -260,6 +260,8 @@ body:has(.modal[open]) { overflow: hidden; }
 .modal-close:hover { background: var(--mist); color: var(--ink); }
 .modal h3 { margin-top: -8px; padding-right: 36px; font-size: 1.5rem; line-height: 1.2; }
 .modal-text { color: var(--graphite); font-size: 15px; }
+.modal [data-for][hidden] { display: none; }
+.lbl-short { display: none; }
 
 /* Вопросы */
 .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; }
@@ -347,10 +349,12 @@ body:has(.modal[open]) { overflow: hidden; }
 .quiz-back { justify-self: start; padding: 6px 0; border: 0; background: none; color: var(--graphite); font: 500 14px/1 var(--font); cursor: pointer; }
 .quiz-back:hover { color: var(--ink); }
 
-@media (max-width: 1080px) {
+@media (max-width: 1180px) {
   .nav { display: none; }
   .header-inner { justify-content: space-between; }
   .header-phone { margin-left: auto; }
+}
+@media (max-width: 1080px) {
   .hero-facts { grid-template-columns: repeat(2, auto); gap: 16px 40px; }
   .steps { grid-template-columns: repeat(2, 1fr); gap: 40px 32px; }
   .steps li::after { display: none; }
@@ -396,6 +400,8 @@ body:has(.modal[open]) { overflow: hidden; }
   .faq details p { padding-right: 0; }
 }
 @media (max-width: 420px) {
+  .lbl-full { display: none; }
+  .lbl-short { display: inline; }
   .logo { gap: 8px; }
   .logo img { width: 30px; }
   .wordmark { font-size: 15px; }
