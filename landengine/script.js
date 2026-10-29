@@ -229,7 +229,7 @@ const EXTRAS = {
   analytics: { label: "Сквозная аналитика", price: 15000, days: 2 },
   direct: { label: "Яндекс Директ", price: 45000, days: 0, monthly: true },
   vk: { label: "Реклама ВКонтакте", price: 35000, days: 0, monthly: true },
-  avito: { label: "Авито", price: 35000, days: 0, monthly: true },
+  avito: { label: "Авито Реклама", price: 35000, days: 0, monthly: true },
 };
 // Тарифы: фиксированная цена, состав отмечается в калькуляторе
 const PRESETS = {
