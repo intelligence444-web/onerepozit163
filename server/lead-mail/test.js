@@ -73,5 +73,16 @@ const call = (body, origin = "https://site.ru", method = "POST") =>
   fn._setFetch(async () => { throw new Error("net"); });
   r = await fn.handler({ httpMethod: "POST", headers: { Origin: "https://site.ru" }, body: JSON.stringify(lead) });
   assert.strictEqual(r.statusCode, 502, "оба канала упали");
+  // Без MAX_CHAT_ID функция сама находит группу бота
+  delete process.env.MAX_CHAT_ID;
+  fn._setTransport({ sendMail: async () => {} });
+  const urls = [];
+  fn._setFetch(async (url) => {
+    urls.push(url);
+    return { ok: true, text: async () => "", json: async () => ({ chats: [{ chat_id: 555, type: "dialog", title: "Личка" }, { chat_id: -777, type: "chat", title: "Ad engine leads" }] }) };
+  });
+  await fn.handler({ httpMethod: "POST", headers: { Origin: "https://site.ru" }, body: JSON.stringify(lead) });
+  await fn.handler({ httpMethod: "POST", headers: { Origin: "https://site.ru" }, body: JSON.stringify(lead) });
+  assert.deepStrictEqual(urls, ["https://platform-api.max.ru/chats?count=100", "https://platform-api.max.ru/messages?chat_id=-777", "https://platform-api.max.ru/messages?chat_id=-777"], "группа найдена один раз");
   console.log("Проверки MAX пройдены. Пример сообщения:\n" + text);
 })().catch((e) => { console.error(e); process.exit(1); });
