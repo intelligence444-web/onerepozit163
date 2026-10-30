@@ -3,8 +3,8 @@ const CONFIG = {
   // Адрес, куда отправлять заявки (POST JSON): вебхук Telegram-бота, amoCRM, Bitrix24, Make и т.п.
   // Заявки принимает функция в Yandex Cloud (server/lead-mail) и отправляет их на Яндекс Почту.
   formEndpoint: "https://functions.yandexcloud.net/d4er6d31bf29uc92fked",
-  // Номер счётчика Яндекс Метрики, для цели "lead" при отправке формы.
-  metrikaId: null,
+  // Номер счётчика Яндекс Метрики, для цели "lead_lend" при отправке формы.
+  metrikaId: 99790839,
 };
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -458,7 +458,7 @@ function leadForm(el, getLead, onSent) {
     const done = () => {
       // Имя и суть заявки страница благодарности берёт из localStorage — он общий для вкладок сайта
       try { localStorage.setItem("lead", JSON.stringify({ name: payload.name, summary: lead.summary })); } catch {}
-      if (CONFIG.metrikaId && window.ym) window.ym(CONFIG.metrikaId, "reachGoal", "lead");
+      if (CONFIG.metrikaId && window.ym) window.ym(CONFIG.metrikaId, "reachGoal", "lead_lend");
       fields.forEach((i) => { if (i.type === "checkbox") i.checked = false; else i.value = ""; });
       setStatus("Заявка отправлена, спасибо! Свяжемся в течение часа в рабочее время.", "ok");
       if (onSent) onSent();
