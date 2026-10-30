@@ -1,7 +1,5 @@
 User-agent: *
 Disallow: /server/
 Disallow: /tools/
-Disallow: /landengine/portfolio/
-Disallow: /landengine/thanks.html
 
 Sitemap: https://ad-engine.ru/sitemap.xml

@@ -2,10 +2,10 @@
 const CONFIG = {
   // Та же функция Yandex Cloud, что и у Land Engine (server/lead-mail): письмо уходит на Яндекс Почту.
   formEndpoint: "https://functions.yandexcloud.net/d4er6d31bf29uc92fked",
-  // Номер счётчика Яндекс Метрики, для цели "lead" при отправке формы.
-  metrikaId: null,
-  // Общая страница благодарности сайта
-  thanksUrl: "landengine/thanks.html?v=3",
+  // Номер счётчика Яндекс Метрики, для цели "lead_estate" при отправке формы.
+  metrikaId: 99790839,
+  // Своя страница благодарности, отдельно от Land Engine
+  thanksUrl: "thanks-estate.html",
 };
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -126,7 +126,7 @@ function leadForm(form, getLead, onSent) {
     const thanks = new URL(CONFIG.thanksUrl, location.href).href;
     const done = () => {
       try { localStorage.setItem("lead", JSON.stringify({ name: payload.name, summary: lead.summary })); } catch {}
-      if (CONFIG.metrikaId && window.ym) window.ym(CONFIG.metrikaId, "reachGoal", "lead");
+      if (CONFIG.metrikaId && window.ym) window.ym(CONFIG.metrikaId, "reachGoal", "lead_estate");
       form.reset();
       setStatus("Заявка отправлена, спасибо! Свяжемся в течение часа в рабочее время.", "ok");
       if (onSent) onSent();
