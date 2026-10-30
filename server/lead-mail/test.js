@@ -66,6 +66,7 @@ const call = (body, origin = "https://site.ru", method = "POST") =>
   fn._setFetch(async () => ({ ok: false, status: 401, text: async () => "bad token" }));
   r = await fn.handler({ httpMethod: "POST", headers: { Origin: "https://site.ru" }, body: JSON.stringify(lead) });
   assert.strictEqual(r.statusCode, 200, "MAX упал, письмо ушло");
+  assert.deepStrictEqual(JSON.parse(r.body), { ok: true, mail: "ok", max: "ошибка: max 401 bad token" }, "ошибка MAX видна в ответе");
   fn._setTransport({ sendMail: async () => { throw new Error("auth"); } });
   fn._setFetch(async () => ({ ok: true, text: async () => "" }));
   r = await fn.handler({ httpMethod: "POST", headers: { Origin: "https://site.ru" }, body: JSON.stringify(lead) });

@@ -155,8 +155,11 @@ module.exports.handler = async (event) => {
   // Заявка принята, если дошла хотя бы в один канал; сбой второго видно в логах функции
   const results = await Promise.allSettled(channels);
   results.forEach((r, i) => r.status === "rejected" && console.error(i ? "max" : "smtp", r.reason && r.reason.message));
-  if (!results.some((r) => r.status === "fulfilled")) return reply(502, { ok: false, error: "send" }, origin);
-  return reply(200, { ok: true }, origin);
+  // Состояние каналов в ответе: видно во вкладке «Тестирование», даже если логи недоступны
+  const state = (r) => (r.status === "fulfilled" ? "ok" : `ошибка: ${String(r.reason && r.reason.message).slice(0, 200)}`);
+  const status = { mail: state(results[0]), max: results[1] ? state(results[1]) : "выключено: нет MAX_TOKEN" };
+  if (!results.some((r) => r.status === "fulfilled")) return reply(502, { ok: false, error: "send", ...status }, origin);
+  return reply(200, { ok: true, ...status }, origin);
 };
 
 module.exports._setTransport = (t) => { transport = t; };
