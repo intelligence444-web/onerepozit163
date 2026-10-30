@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=1440">
+<meta name="robots" content="noindex, nofollow">
+<title>Азов Дом — концепт Land Engine</title>
+<link rel="stylesheet" href="base.css">
+<style>
+:root { --ink: #fff; --sea: #0b2a3f; --acc: #36c2b4; --muted: rgba(255,255,255,.72); --line: rgba(255,255,255,.18); }
+body { color: var(--ink); background: var(--sea); }
+.screen { position: relative; height: 900px; overflow: hidden; background: url("img/realty-hero.webp") center 45% / cover; }
+.screen::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,30,46,.95) 0%, rgba(8,30,46,.8) 48%, rgba(8,30,46,.35) 100%); }
+.w { position: relative; height: 100%; display: flex; flex-direction: column; }
+.hd { display: flex; align-items: center; gap: 28px; height: 96px; border-bottom: 1px solid var(--line); }
+.logo { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 22px; }
+.logo i { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--acc); color: var(--sea); font-style: normal; font-weight: 800; }
+.logo small { display: block; color: var(--muted); font-weight: 400; font-size: 13px; }
+.hd .sp { margin-left: auto; text-align: right; font-weight: 700; font-size: 19px; }
+.hd .sp small { display: block; color: var(--muted); font-weight: 400; font-size: 13px; }
+.msg { display: flex; gap: 8px; }
+.msg span { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; font-weight: 700; font-size: 13px; }
+.tg { background: #2aa1da; } .wa { background: #25d366; } .mx { background: #7b5cff; }
+
+.main { flex: 1; display: grid; grid-template-columns: 1fr 450px; gap: 90px; align-items: center; }
+.badge { display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px 9px 10px; border-radius: 999px; background: rgba(54,194,180,.16); color: #9be8df; font-weight: 600; font-size: 15px; }
+.badge b { padding: 3px 10px; border-radius: 999px; background: var(--acc); color: var(--sea); }
+h1 { margin-top: 26px; font-size: 64px; line-height: 1.04; letter-spacing: -0.03em; font-weight: 700; }
+h1 span { color: var(--acc); }
+.lead { margin-top: 22px; max-width: 600px; color: var(--muted); font-size: 19px; }
+.facts { display: grid; grid-template-columns: repeat(4, auto); gap: 36px; margin-top: 44px; padding-top: 30px; border-top: 1px solid var(--line); }
+.facts b { display: block; font-size: 30px; letter-spacing: -0.02em; white-space: nowrap; }
+.facts span { color: var(--muted); font-size: 14px; }
+
+.form { padding: 36px; border-radius: 24px; background: #fff; color: #10202c; box-shadow: 0 40px 80px -30px rgba(0,0,0,.6); }
+.form h2 { font-size: 26px; line-height: 1.2; letter-spacing: -0.02em; }
+.form .sub { margin-top: 8px; color: #5b6b76; font-size: 15px; }
+.inp { display: flex; align-items: center; height: 56px; margin-top: 12px; padding: 0 18px; border-radius: 14px; background: #f1f5f7; color: #7d8b94; }
+.form h2 + .sub + .inp { margin-top: 22px; }
+.lbl { margin-top: 18px; font-size: 14px; color: #5b6b76; }
+.ch { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+.ch span { padding: 11px 0; border-radius: 12px; border: 1.5px solid #dfe6ea; text-align: center; font-weight: 600; font-size: 14px; }
+.ch .on { border-color: var(--acc); background: #e8f8f6; color: #0d7f74; }
+.btn { display: flex; align-items: center; justify-content: center; height: 60px; margin-top: 20px; border-radius: 14px; background: var(--acc); color: var(--sea); font-weight: 700; font-size: 17px; }
+.form small { display: block; margin-top: 12px; color: #8a979f; font-size: 12px; text-align: center; }
+
+.banks { display: flex; align-items: center; gap: 12px; height: 84px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+.banks span { padding: 7px 14px; border-radius: 10px; background: rgba(255,255,255,.1); color: #fff; font-weight: 600; }
+.banks em { margin-left: auto; font-style: normal; }
+</style></head>
+<body>
+<div class="screen"><div class="w">
+  <header class="hd"><span class="logo"><i>А</i><span>Азов Дом<small>Недвижимость Мариуполя</small></span></span><span class="sp">+7 900 000-00-07<small>Ежедневно 9:00–21:00</small></span><span class="msg"><span class="tg">TG</span><span class="wa">WA</span><span class="mx">MAX</span></span></header>
+  <div class="main">
+    <div>
+      <span class="badge"><b>2%</b>Льготная ипотека для новых регионов</span>
+      <h1>Квартиры в&nbsp;новостройках Мариуполя <span>у&nbsp;моря</span></h1>
+      <p class="lead">Подберём квартиру от застройщика за 1 день, поможем с ипотекой 2% и проведём сделку дистанционно — из любого города России.</p>
+      <div class="facts"><div><b>от 3,9 млн ₽</b><span>студия у моря</span></div><div><b>2%</b><span>ставка по ипотеке</span></div><div><b>28 ЖК</b><span>в продаже сейчас</span></div><div><b>0 ₽</b><span>комиссия покупателю</span></div></div>
+    </div>
+    <div class="form">
+      <h2>Получите подборку квартир с&nbsp;ценами и&nbsp;планировками</h2>
+      <p class="sub">Пришлём в течение 15 минут</p>
+      <span class="inp">Ваше имя</span>
+      <span class="inp">+7 (___) ___-__-__</span>
+      <p class="lbl">Куда прислать подборку?</p>
+      <div class="ch"><span class="on">Telegram</span><span>WhatsApp</span><span>MAX</span></div>
+      <a class="btn" href="#">Получить подборку</a>
+      <small>Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</small>
+    </div>
+  </div>
+  <div class="banks">Ипотека 2% в банках:<span>Сбербанк</span><span>ВТБ</span><span>Дом.РФ</span><span>Промсвязьбанк</span><em>Концепт сайта от Land Engine</em></div>
+</div></div>
+</body></html>

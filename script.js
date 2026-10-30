@@ -1,8 +1,8 @@
 // Настройки сайта
 const CONFIG = {
   // Адрес, куда отправлять заявки (POST JSON): вебхук Telegram-бота, amoCRM, Bitrix24, Make и т.п.
-  // Пока пусто — форма предложит написать в Telegram.
-  formEndpoint: "",
+  // Заявки принимает функция в Yandex Cloud (server/lead-mail) и отправляет их на Яндекс Почту.
+  formEndpoint: "https://functions.yandexcloud.net/d4er6d31bf29uc92fked",
   // Номер счётчика Яндекс Метрики, для цели "lead" при отправке формы.
   metrikaId: null,
 };
@@ -343,6 +343,7 @@ function calcLead() {
       extras: c.extras.map((e) => EXTRAS[e].label),
       urgent: c.fast,
       estimate: `${priceText(c)}, ${c.dMin}–${c.dMax} ${daysWord(c.dMax)}`,
+      source: document.getElementById("lead-modal").open ? "Попап тарифа" : "Калькулятор",
     },
   };
 }
@@ -502,13 +503,14 @@ function generalLead() {
   const need = modalForm.elements.need.value;
   return {
     summary: need ? need.toLowerCase() : "обсудить проект",
-    fields: { request: need || "Пока не знаю", source: "Попап «Обсудить проект»" },
+    fields: { request: need || "Пока не знаю", source: `Попап «${modal.dataset.source || "Обсудить проект"}»` },
   };
 }
 leadForm(modalForm, () => (modal.dataset.mode === "plan" ? calcLead() : generalLead()), () => modal.close());
 
 function openModal(mode, link) {
   modal.dataset.mode = mode;
+  modal.dataset.source = link.textContent.replace(/\s+/g, " ").trim(); // какая кнопка открыла попап — уходит в заявку
   modal.querySelectorAll("[data-mode]").forEach((el) => { el.hidden = el.dataset.mode !== mode; });
   if (mode === "plan") {
     const c = readCalc();
@@ -519,7 +521,10 @@ function openModal(mode, link) {
     const list = document.getElementById("modal-list");
     list.replaceChildren(...[...link.closest(".plan").querySelectorAll("li")].map((li) => li.cloneNode(true)));
   } else {
-    modalTitle.textContent = "Обсудим ваш проект";
+    modalTitle.textContent = link.dataset.title || "Обсудим ваш проект";
+    // Кнопка может сразу отметить формат, например «Лендинг и реклама» из блока про трафик
+    const need = [...modalForm.elements.need].find((r) => r.value === (link.dataset.need || ""));
+    if (need) need.checked = true;
   }
   modalForm.querySelector(".form-status").textContent = "";
   modal.showModal();
@@ -587,4 +592,22 @@ const marquees = document.querySelector(".marquees");
 if (marquees && "IntersectionObserver" in window) {
   marquees.classList.add("is-off");
   new IntersectionObserver(([entry]) => marquees.classList.toggle("is-off", !entry.isIntersecting)).observe(marquees);
+}
+
+// Сайт целиком: полный скриншот в окне с прокруткой
+const workModal = document.getElementById("work-modal");
+const workImg = document.getElementById("work-full");
+if (workModal) {
+  document.querySelectorAll("[data-full]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const work = btn.closest(".work");
+      workImg.src = btn.dataset.full;
+      workImg.alt = `Сайт «${work.querySelector("h3").textContent.split("»")[0].slice(1)}» целиком`;
+      workModal.querySelector(".work-scroll").scrollTop = 0;
+      if (workModal.showModal) workModal.showModal(); else window.open(btn.dataset.full, "_blank");
+    });
+  });
+  workModal.addEventListener("click", (e) => {
+    if (e.target === workModal || e.target.closest("[data-close]")) workModal.close();
+  });
 }

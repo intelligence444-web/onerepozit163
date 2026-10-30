@@ -17,7 +17,7 @@
   <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-ruble.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=42">
+  <link rel="stylesheet" href="styles.css?v=44">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -32,6 +32,7 @@
       <a href="#services">Услуги</a>
       <a href="#included">Что&nbsp;входит</a>
       <a href="#support">Сопровождение</a>
+      <a href="#cases">Работы</a>
       <a href="#process">Как&nbsp;работаем</a>
       <a href="#prices">Тарифы</a>
       <a href="#faq">Вопросы</a>
@@ -238,7 +239,7 @@
         <div class="addon-head">
           <h2>Администрирование и&nbsp;сопровождение</h2>
           <p class="muted">Отдельная услуга после запуска. Следим за&nbsp;сайтом и&nbsp;вносим изменения, когда они нужны. Стоимость от&nbsp;10&nbsp;000&nbsp;₽ в&nbsp;месяц.</p>
-          <a class="btn btn-ghost" href="#calc">Обсудить сопровождение</a>
+          <a class="btn btn-ghost" href="#calc" data-modal data-need="Сопровождение" data-title="Обсудим сопровождение сайта">Обсудить сопровождение</a>
         </div>
         <ul class="addon-list">
           <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></svg></span><div><h3>Тексты, цены и&nbsp;фото</h3><p>Меняем то, что устарело: цены, акции, фотографии и&nbsp;описания услуг.</p></div></li>
@@ -255,7 +256,7 @@
       <div>
         <h2>Сайт без&nbsp;трафика — это просто визитка</h2>
         <p>13 лет настраиваем рекламу, поэтому сайт сразу строим под&nbsp;источник трафика: что&nbsp;ищет человек, с&nbsp;какого объявления придёт и&nbsp;что&nbsp;должен увидеть первым. Рекламу после запуска можем взять на&nbsp;себя. Это отдельная услуга, её&nbsp;можно заказать вместе с&nbsp;сайтом или&nbsp;позже.</p>
-        <a class="btn btn-light" href="#calc">Обсудить сайт и&nbsp;рекламу</a>
+        <a class="btn btn-light" href="#calc" data-modal data-need="Лендинг и реклама" data-title="Обсудим сайт и рекламу">Обсудить сайт и&nbsp;рекламу</a>
       </div>
       <ul class="channels">
         <li><strong>Яндекс Директ</strong><span>Поиск, РСЯ, Мастер кампаний</span></li>
@@ -267,6 +268,119 @@
   </section>
 
   <!-- Как работаем -->
+  <section class="section" id="cases">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Примеры работ</h2>
+        <p>Концепты сайтов для&nbsp;ниш, с&nbsp;которыми работаем чаще всего. Разные задачи — разные форматы: одноэкранники и&nbsp;квиз-лендинг под&nbsp;рекламу, сайты ЖК, сайт-каталог, портфолио-лонгрид и&nbsp;лендинг с&nbsp;прайсом.</p>
+      </div>
+
+      <ul class="works" id="cases-list">
+        <li class="work" data-niche="realty">
+          <button type="button" class="work-shot" data-full="assets/works/realty-full.webp?v=3" aria-label="Смотреть сайт «Высота» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/realty.webp?v=3" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Высота»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Недвижимость</span><span>Квиз-лендинг</span><span>5 экранов</span><span class="work-concept">Концепт</span></p>
+            <h3>«Высота» — агентство новостроек</h3>
+            <ul class="work-done"><li>Короткий: квиз прямо на первом экране</li><li>Каталог ЖК и личный менеджер</li><li>Для рекламы с быстрым сбором заявок</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/realty-full.webp?v=3">Смотреть сайт целиком</button>
+          </div>
+        </li>
+        <li class="work" data-niche="azov">
+          <button type="button" class="work-shot" data-full="assets/works/azov-full.webp?v=3" aria-label="Смотреть сайт «Азов Дом» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/azov.webp?v=3" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Азов Дом»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Недвижимость</span><span>Одноэкранник с формой</span><span>1 экран</span><span class="work-concept">Концепт</span></p>
+            <h3>«Азов Дом» — новостройки Мариуполя</h3>
+            <ul class="work-done"><li>Оффер про ипотеку 2% на фото квартала</li><li>Форма с выбором мессенджера для подборки</li><li>Банки-партнёры внизу экрана</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/azov-full.webp?v=3">Смотреть сайт целиком</button>
+          </div>
+        </li>
+        <li class="work" data-niche="bereg">
+          <button type="button" class="work-shot" data-full="assets/works/bereg-full.webp?v=3" aria-label="Смотреть сайт «Береговая» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/bereg.webp?v=3" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Береговая»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Недвижимость</span><span>Одноэкранник-каталог</span><span>1 экран</span><span class="work-concept">Концепт</span></p>
+            <h3>«Береговая» — каталог новостроек</h3>
+            <ul class="work-done"><li>Мини-каталог: три квартиры с ценами</li><li>Платёж по ипотеке 2% прямо на экране</li><li>Каталог в Telegram, WhatsApp или MAX</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/bereg-full.webp?v=3">Смотреть сайт целиком</button>
+          </div>
+        </li>
+        <li class="work" data-niche="grafit">
+          <button type="button" class="work-shot" data-full="assets/works/grafit-full.webp?v=3" aria-label="Смотреть сайт «ЖК Графит» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/grafit.webp?v=3" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «ЖК Графит»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Недвижимость</span><span>Сайт ЖК</span><span>6 экранов</span><span class="work-concept">Концепт</span></p>
+            <h3>ЖК «Графит» — бизнес-класс в Ростове</h3>
+            <ul class="work-done"><li>Название ЖК крупно на фото квартала</li><li>Карта района и планировки с ценами</li><li>Отделка, способы покупки, ход стройки</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/grafit-full.webp?v=3">Смотреть сайт целиком</button>
+          </div>
+        </li>
+        <li class="work" data-niche="park">
+          <button type="button" class="work-shot" data-full="assets/works/park-full.webp?v=3" aria-label="Смотреть сайт «ЖК Северный парк» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/park.webp?v=3" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «ЖК Северный парк»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Недвижимость</span><span>Сайт ЖК</span><span>5 экранов</span><span class="work-concept">Концепт</span></p>
+            <h3>ЖК «Северный парк» — квартиры для семей</h3>
+            <ul class="work-done"><li>Акция и старт продаж на первом экране</li><li>Двор, инфраструктура и время до объектов</li><li>Подбор по бюджету с платежом по ипотеке</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/park-full.webp?v=3">Смотреть сайт целиком</button>
+          </div>
+        </li>
+        <li class="work" data-niche="doma">
+          <button type="button" class="work-shot" data-full="assets/works/doma-full.webp?v=3" aria-label="Смотреть сайт «Дом на века» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/doma.webp?v=3" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Дом на века»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Строительство домов</span><span>Сайт-каталог</span><span>8 экранов</span><span class="work-concept">Концепт</span></p>
+            <h3>«Дом на века» — строительная компания</h3>
+            <ul class="work-done"><li>Калькулятор сметы и мозаика проектов</li><li>Сравнение технологий и комплектации</li><li>Построенные дома, ипотека, вопросы</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/doma-full.webp?v=3">Смотреть сайт целиком</button>
+          </div>
+        </li>
+        <li class="work" data-niche="kitchen">
+          <button type="button" class="work-shot" data-full="assets/works/kitchen-full.webp?v=3" aria-label="Смотреть сайт «Кухни Тепло» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/kitchen.webp?v=3" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Кухни Тепло»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Кухни и мебель</span><span>Портфолио-лонгрид</span><span>9 экранов</span><span class="work-concept">Концепт</span></p>
+            <h3>«Кухни Тепло» — кухни на заказ</h3>
+            <ul class="work-done"><li>Манифест и работы журнальными разворотами</li><li>Образцы фасадов и столешниц</li><li>Путь кухни по дням, квиз в конце</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/kitchen-full.webp?v=3">Смотреть сайт целиком</button>
+          </div>
+        </li>
+        <li class="work" data-niche="remont">
+          <button type="button" class="work-shot" data-full="assets/works/remont-full.webp?v=3" aria-label="Смотреть сайт «Ремонт Про» целиком">
+            <span class="ws-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="assets/works/remont.webp?v=3" width="960" height="600" loading="lazy" decoding="async" alt="Первый экран сайта «Ремонт Про»">
+          </button>
+          <div class="work-body">
+            <p class="work-tags"><span>Ремонт</span><span>Лендинг с прайсом</span><span>9 экранов</span><span class="work-concept">Концепт</span></p>
+            <h3>«Ремонт Про» — ремонт квартир</h3>
+            <ul class="work-done"><li>Калькулятор ремонта и тарифы</li><li>Прайс по видам работ</li><li>Кейсы до/после и условия договора</li></ul>
+            <button type="button" class="work-open" data-full="assets/works/remont-full.webp?v=3">Смотреть сайт целиком</button>
+          </div>
+        </li>
+      </ul>
+
+      <div class="cases-cta">
+        <p>Нет вашей ниши? Расскажите о&nbsp;задаче — покажем похожие проекты на&nbsp;созвоне.</p>
+        <a class="btn" href="#calc" data-modal>Обсудить свой сайт</a>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="process">
     <div class="wrap">
       <div class="section-head">
@@ -499,6 +613,11 @@
 
 </main>
 
+<dialog class="work-modal" id="work-modal" aria-label="Сайт целиком">
+  <button type="button" class="work-close" data-close aria-label="Закрыть">&times;</button>
+  <div class="work-scroll"><img id="work-full" alt="" width="1100" height="4000"></div>
+</dialog>
+
 <dialog class="modal" id="lead-modal" aria-labelledby="modal-title">
   <form class="modal-box" id="lead-form" novalidate>
     <button class="modal-close" type="button" data-close aria-label="Закрыть"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
@@ -521,6 +640,7 @@
         <label class="chip"><input type="radio" name="need" value="Квиз"><span>Квиз</span></label>
         <label class="chip"><input type="radio" name="need" value="Многостраничный сайт"><span>Сайт</span></label>
         <label class="chip"><input type="radio" name="need" value="Лендинг и реклама"><span>Лендинг + реклама</span></label>
+        <label class="chip"><input type="radio" name="need" value="Сопровождение"><span>Сопровождение</span></label>
         <label class="chip"><input type="radio" name="need" value="" checked><span>Пока не&nbsp;знаю</span></label>
       </fieldset>
     </div>
@@ -574,6 +694,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=40"></script>
+<script src="script.js?v=45"></script>
 </body>
 </html>

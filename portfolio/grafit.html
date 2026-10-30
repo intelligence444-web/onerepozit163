@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=1440">
+<meta name="robots" content="noindex, nofollow">
+<title>ЖК «Графит» — концепт Land Engine</title>
+<link rel="stylesheet" href="base.css">
+<style>
+:root { --bg: #141518; --card: #1c1d20; --ink: #e8e6e1; --muted: #8f8e8a; --acc: #ff6a2b; --line: #2c2e33; }
+body { background: var(--bg); color: var(--ink); }
+.up { text-transform: uppercase; letter-spacing: .02em; }
+.btn { display: inline-flex; align-items: center; justify-content: center; height: 58px; padding: 0 26px; background: var(--acc); color: #141518; font-weight: 700; white-space: nowrap; }
+.btn.line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.lbl { color: var(--acc); font-size: 13px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+header { position: absolute; inset: 0 0 auto; z-index: 2; }
+.hd { display: flex; align-items: center; gap: 40px; height: 92px; }
+.logo { font-weight: 700; font-size: 24px; letter-spacing: .3em; }
+.nav { display: flex; gap: 30px; margin-left: auto; font-size: 15px; color: rgba(232,230,225,.8); }
+.ph { font-weight: 700; }
+.hero { position: relative; height: 900px; background: url("img/realty-hero.webp") center 35% / cover; }
+.hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--bg) 2%, rgba(20,21,24,.15) 45%, rgba(20,21,24,.55) 100%); }
+.hero .w { position: relative; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 70px; }
+.hero h1 { font-size: 190px; line-height: .82; font-weight: 700; letter-spacing: -0.05em; }
+.hero .row { display: flex; justify-content: space-between; align-items: end; margin-top: 36px; padding-top: 30px; border-top: 1px solid rgba(232,230,225,.25); }
+.hero .sub { max-width: 340px; font-size: 18px; }
+.facts { display: flex; gap: 36px; }
+.facts b { display: block; font-size: 26px; white-space: nowrap; }
+.facts span { color: var(--muted); font-size: 14px; }
+.acts { display: flex; gap: 12px; }
+.sec { padding: 120px 0; }
+.sec h2 { margin-top: 18px; font-size: 56px; line-height: 1; letter-spacing: -0.035em; font-weight: 700; }
+.head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 52px; }
+.head p { max-width: 400px; color: var(--muted); }
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+.about .txt { font-size: 24px; line-height: 1.45; }
+.about .txt span { color: var(--muted); }
+.grid4 { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.grid4 div { padding: 30px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.grid4 b { display: block; font-size: 52px; letter-spacing: -0.04em; line-height: 1; }
+.grid4 span { display: block; margin-top: 10px; color: var(--muted); }
+.loc { display: grid; grid-template-columns: 640px 1fr; gap: 64px; align-items: center; }
+.loc svg { display: block; width: 100%; }
+.loc li { display: flex; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 18px; }
+.loc li b { color: var(--acc); }
+.tabs { display: flex; gap: 8px; margin-bottom: 30px; }
+.tabs span { padding: 12px 22px; border: 1px solid var(--line); font-weight: 600; font-size: 15px; }
+.tabs .on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.pl { background: var(--card); }
+.pl .pic { padding: 26px 22px; border-bottom: 1px solid var(--line); }
+.pl svg { display: block; width: 100%; }
+.pl .pb { padding: 22px; }
+.pl h3 { font-size: 20px; }
+.pl p { margin-top: 4px; color: var(--muted); font-size: 15px; }
+.pl .pr { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; }
+.pl .pr b { font-size: 19px; }
+.pl .pr a { color: var(--acc); font-weight: 600; font-size: 14px; }
+.finish { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 16px; }
+.finish figure { position: relative; height: 440px; overflow: hidden; }
+.finish img { width: 100%; height: 100%; object-fit: cover; }
+.finish figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 60px 24px 22px; background: linear-gradient(0deg, rgba(20,21,24,.9), transparent); font-weight: 600; }
+.finish figcaption span { display: block; color: var(--muted); font-weight: 400; font-size: 14px; }
+.buy { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.buy div { padding: 32px 26px; background: var(--card); }
+.buy b { display: block; font-size: 44px; letter-spacing: -0.03em; color: var(--acc); }
+.buy h3 { margin-top: 12px; font-size: 19px; }
+.buy p { margin-top: 8px; color: var(--muted); font-size: 15px; }
+.build { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.bar { height: 8px; margin-top: 30px; background: var(--line); }
+.bar i { display: block; width: 64%; height: 100%; background: var(--acc); }
+.pct { display: flex; justify-content: space-between; margin-top: 12px; color: var(--muted); }
+.pct b { color: var(--ink); font-size: 22px; }
+.months li { display: grid; grid-template-columns: 160px 1fr; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.months span { color: var(--muted); }
+.final { display: grid; grid-template-columns: 1fr 480px; gap: 80px; padding: 72px; background: var(--card); }
+.final h2 { margin-top: 18px; font-size: 52px; line-height: 1; letter-spacing: -0.035em; font-weight: 700; }
+.office { margin-top: 30px; color: var(--muted); line-height: 1.8; }
+.office b { color: var(--ink); }
+.form { display: grid; gap: 12px; }
+.inp { height: 58px; display: flex; align-items: center; padding: 0 20px; border: 1px solid var(--line); color: var(--muted); }
+.form small { color: var(--muted); font-size: 12px; }
+footer { padding: 40px 0; color: var(--muted); font-size: 14px; }
+footer .w { display: flex; justify-content: space-between; }
+</style></head>
+<body>
+<header><div class="w hd"><span class="logo">ГРАФИТ</span><nav class="nav"><span>О проекте</span><span>Расположение</span><span>Квартиры</span><span>Ипотека</span><span>Ход строительства</span></nav><span class="ph">+7 900 000-00-09</span></div></header>
+<section class="hero"><div class="w">
+  <span class="lbl">Жилой комплекс бизнес-класса · Ростов-на-Дону</span>
+  <h1 class="up">Графит</h1>
+  <div class="row"><p class="sub">Три башни у&nbsp;парка Горького: тихий двор без машин, панорамные окна и&nbsp;подземный паркинг.</p><div class="facts"><div><b>IV кв. 2027</b><span>сдача</span></div><div><b>24 этажа</b><span>3 корпуса</span></div><div><b>от 6,8 млн ₽</b><span>студии</span></div></div><div class="acts"><a class="btn" href="#plans">Выбрать квартиру</a><a class="btn line" href="#f">Презентация</a></div></div>
+</div></section>
+
+<section class="sec"><div class="w about">
+  <div><span class="lbl">О проекте</span><h2>Город за&nbsp;окном, тишина во&nbsp;дворе</h2><p class="txt" style="margin-top:28px">Фасады из&nbsp;графитового клинкера, лобби с&nbsp;консьержем и&nbsp;двор на&nbsp;уровне второго этажа. <span>Машины остаются в&nbsp;подземном паркинге, а&nbsp;дети гуляют без&nbsp;присмотра.</span></p></div>
+  <div class="grid4"><div><b>612</b><span>квартир</span></div><div><b>3,1 м</b><span>высота потолков</span></div><div><b>480</b><span>мест в паркинге</span></div><div><b>1,2 га</b><span>двор без машин</span></div></div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="w loc">
+  <svg viewBox="0 0 640 460" aria-hidden="true"><rect width="640" height="460" fill="#1f2024"/><path d="M0 360 C140 330 220 400 360 380 S560 330 640 350 V460 H0Z" fill="#22303a"/><rect x="420" y="60" width="170" height="120" rx="22" fill="#253226"/><path d="M0 120 H640" stroke="#2c2e33" stroke-width="14" fill="none"/><path d="M0 250 H640" stroke="#2c2e33" stroke-width="14" fill="none"/><path d="M140 0 V340" stroke="#2c2e33" stroke-width="14" fill="none"/><path d="M330 0 V360" stroke="#2c2e33" stroke-width="14" fill="none"/><path d="M520 0 V330" stroke="#2c2e33" stroke-width="14" fill="none"/><path d="M0 40 L260 300" stroke="#2c2e33" stroke-width="14" fill="none"/><circle cx="120" cy="90" r="9" fill="#fff" stroke="#e8e6e1" stroke-width="3"/><rect x="134" y="76" width="162" height="28" rx="8" fill="#2c2e33"/><text x="143" y="95" font-size="14" font-family="Onest, sans-serif" fill="#e8e6e1">Набережная · 7 мин</text><circle cx="400" cy="210" r="9" fill="#fff" stroke="#e8e6e1" stroke-width="3"/><rect x="414" y="196" width="186" height="28" rx="8" fill="#2c2e33"/><text x="423" y="215" font-size="14" font-family="Onest, sans-serif" fill="#e8e6e1">Парк Горького · 5 мин</text><circle cx="470" cy="300" r="9" fill="#fff" stroke="#e8e6e1" stroke-width="3"/><rect x="484" y="286" width="154" height="28" rx="8" fill="#2c2e33"/><text x="493" y="305" font-size="14" font-family="Onest, sans-serif" fill="#e8e6e1">Школа № 5 · 3 мин</text><circle cx="60" cy="220" r="9" fill="#fff" stroke="#e8e6e1" stroke-width="3"/><rect x="74" y="206" width="186" height="28" rx="8" fill="#2c2e33"/><text x="83" y="225" font-size="14" font-family="Onest, sans-serif" fill="#e8e6e1">Ростов-Арена · 12 мин</text><circle cx="250" cy="190" r="38" fill="#ff6a2b" opacity=".22"/><circle cx="250" cy="190" r="20" fill="#ff6a2b"/><text x="250" y="196" text-anchor="middle" font-size="15" font-weight="700" font-family="Onest, sans-serif" fill="#fff">ЖК</text></svg>
+  <div><span class="lbl">Расположение</span><h2>Центр в&nbsp;10 минутах пешком</h2><ul style="margin-top:32px"><li>Парк Горького<b>5 мин</b></li><li>Набережная Дона<b>7 мин</b></li><li>Школа и детский сад<b>3 мин</b></li><li>ТЦ «Горизонт»<b>9 мин</b></li></ul></div>
+</div></section>
+
+<section class="sec" id="plans" style="padding-top:0"><div class="w">
+  <div class="head"><div><span class="lbl">Квартиры</span><h2>Планировки и&nbsp;цены</h2></div><p>В продаже 214 квартир. Цены обновлены 28 октября.</p></div>
+  <div class="tabs"><span class="on">Все</span><span>Студии</span><span>1-комнатные</span><span>2-комнатные</span><span>3-комнатные</span><span>С террасой</span></div>
+  <div class="plans"><article class="pl"><div class="pic"><svg viewBox="0 0 260 180" aria-hidden="true"><rect x="12" y="12" width="236" height="156" fill="#1c1d20"/><rect x="12" y="12" width="64" height="58" fill="#2a2c31"/><path d="M76 12v58H12" stroke="#e8e6e1" stroke-width="2.5" fill="none"/><path d="M76 120h70" stroke="#e8e6e1" stroke-width="1.5" stroke-dasharray="4 4"/><line x1="150" y1="168" x2="210" y2="168" stroke="#1c1d20" stroke-width="5"/><line x1="248" y1="40" x2="248" y2="100" stroke="#1c1d20" stroke-width="5"/><rect x="12" y="12" width="236" height="156" stroke="#e8e6e1" stroke-width="5" fill="none" stroke-linecap="square"/></svg></div><div class="pb"><h3>Студия</h3><p>26,4 м² · 8 этаж</p><div class="pr"><b>6 840 000 ₽</b><a href="#f">Забронировать</a></div></div></article><article class="pl"><div class="pic"><svg viewBox="0 0 260 180" aria-hidden="true"><rect x="12" y="12" width="236" height="156" fill="#1c1d20"/><rect x="12" y="12" width="64" height="58" fill="#2a2c31"/><path d="M76 12v58H12M140 12v110M140 140v28" stroke="#e8e6e1" stroke-width="2.5" fill="none"/><line x1="170" y1="168" x2="225" y2="168" stroke="#1c1d20" stroke-width="5"/><line x1="40" y1="168" x2="100" y2="168" stroke="#1c1d20" stroke-width="5"/><rect x="12" y="12" width="236" height="156" stroke="#e8e6e1" stroke-width="5" fill="none" stroke-linecap="square"/></svg></div><div class="pb"><h3>1-комнатная</h3><p>41,8 м² · 12 этаж</p><div class="pr"><b>9 120 000 ₽</b><a href="#f">Забронировать</a></div></div></article><article class="pl"><div class="pic"><svg viewBox="0 0 260 180" aria-hidden="true"><rect x="12" y="12" width="236" height="156" fill="#1c1d20"/><rect x="96" y="12" width="56" height="50" fill="#2a2c31"/><path d="M96 12v50h56V12M96 62v36M12 98h60M90 98h62v70M152 98h20M190 98h58" stroke="#e8e6e1" stroke-width="2.5" fill="none"/><line x1="30" y1="168" x2="80" y2="168" stroke="#1c1d20" stroke-width="5"/><line x1="180" y1="168" x2="230" y2="168" stroke="#1c1d20" stroke-width="5"/><line x1="12" y1="30" x2="12" y2="80" stroke="#1c1d20" stroke-width="5"/><rect x="12" y="12" width="236" height="156" stroke="#e8e6e1" stroke-width="5" fill="none" stroke-linecap="square"/></svg></div><div class="pb"><h3>2-комнатная</h3><p>63,2 м² · 17 этаж</p><div class="pr"><b>12 960 000 ₽</b><a href="#f">Забронировать</a></div></div></article><article class="pl"><div class="pic"><svg viewBox="0 0 260 180" aria-hidden="true"><rect x="12" y="12" width="236" height="156" fill="#1c1d20"/><rect x="100" y="12" width="60" height="46" fill="#2a2c31"/><path d="M100 12v46h60V12M12 92h70M100 58v34h60V58M160 92h88M86 92v76M172 92v76" stroke="#e8e6e1" stroke-width="2.5" fill="none"/><line x1="25" y1="168" x2="70" y2="168" stroke="#1c1d20" stroke-width="5"/><line x1="105" y1="168" x2="150" y2="168" stroke="#1c1d20" stroke-width="5"/><line x1="190" y1="168" x2="235" y2="168" stroke="#1c1d20" stroke-width="5"/><line x1="248" y1="25" x2="248" y2="70" stroke="#1c1d20" stroke-width="5"/><rect x="12" y="12" width="236" height="156" stroke="#e8e6e1" stroke-width="5" fill="none" stroke-linecap="square"/></svg></div><div class="pb"><h3>3-комнатная</h3><p>86,5 м² · 21 этаж</p><div class="pr"><b>16 750 000 ₽</b><a href="#f">Забронировать</a></div></div></article></div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="w">
+  <div class="head"><div><span class="lbl">Отделка</span><h2>Въезжайте сразу</h2></div><p>Квартиры сдаются с чистовой отделкой или в white box — на выбор.</p></div>
+  <div class="finish"><figure><img src="img/remont-hero.webp" alt="Гостиная с отделкой"><figcaption>Чистовая отделка<span>Инженерная доска, итальянская плитка</span></figcaption></figure><figure><img src="img/kitchen-2.webp" alt="Кухня"><figcaption>Кухня-гостиная<span>Окна от пола до потолка</span></figcaption></figure><figure><img src="img/remont-bath.webp" alt="Санузел"><figcaption>Санузел<span>Инсталляция и тропический душ</span></figcaption></figure></div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="w">
+  <div class="head"><div><span class="lbl">Способы покупки</span><h2>Как купить</h2></div></div>
+  <div class="buy"><div><b>6%</b><h3>Семейная ипотека</h3><p>Для семей с ребёнком до 6 лет</p></div><div><b>0%</b><h3>Рассрочка</h3><p>До окончания строительства</p></div><div><b>−7%</b><h3>Полная оплата</h3><p>Скидка при 100% оплате</p></div><div><b>Trade-in</b><h3>Обмен квартиры</h3><p>Зачтём вашу квартиру в цену</p></div></div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="w build">
+  <div><span class="lbl">Ход строительства</span><h2>Строим по&nbsp;графику</h2><div class="bar"><i></i></div><div class="pct"><span>Корпус 1 · монолит 18 из 24 этажей</span><b>64%</b></div></div>
+  <ul class="months"><li><b>Октябрь 2026</b><span>Монолит корпуса 1 — 18 этаж</span></li><li><b>Сентябрь 2026</b><span>Начат фасад корпуса 1</span></li><li><b>Август 2026</b><span>Корпус 2 — 12 этаж</span></li><li><b>Июль 2026</b><span>Завершён подземный паркинг</span></li></ul>
+</div></section>
+
+<section class="sec" id="f" style="padding-top:0"><div class="w final">
+  <div><span class="lbl">Офис продаж</span><h2>Запишитесь на&nbsp;показ</h2><p class="office"><b>ул. Пушкинская, 120</b><br>Ежедневно 9:00–21:00<br>Покажем макет, шоурум и строительную площадку</p></div>
+  <div class="form"><span class="inp">Ваше имя</span><span class="inp">+7 (___) ___-__-__</span><a class="btn" href="#f">Записаться на показ</a><small>Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</small></div>
+</div></section>
+<footer><div class="w"><span>ЖК «Графит» · Ростов-на-Дону</span><span>Концепт сайта от Land Engine</span></div></footer>
+</body></html>
