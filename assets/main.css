@@ -176,6 +176,7 @@ a { color: inherit; }
 .included p { color: var(--graphite); font-size: 15px; }
 .included a { color: var(--accent); text-underline-offset: 3px; white-space: nowrap; }
 .ico { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 6px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); }
+.art-3d { display: block; width: auto; height: 132px; margin: 0 0 20px -6px; }
 .ico-3d { display: block; width: 112px; height: 104px; margin: -6px 0 2px -4px; object-fit: contain; object-position: left bottom; }
 .ico svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
@@ -310,8 +311,8 @@ body:has(.modal[open]) { overflow: hidden; }
 /* Бот в MAX */
 .section-flush { padding-top: 0; }
 .bot { display: grid; grid-template-columns: auto 1fr auto; gap: 20px 32px; align-items: center; padding: clamp(24px, 4vw, 40px); border-radius: var(--r-card); background: var(--ink); color: #fff; }
-.bot-icon { position: relative; display: grid; place-items: center; width: 88px; height: 88px; border-radius: 22px; background: linear-gradient(135deg, #2747f5, #8a4cf5); }
-.bot-icon svg { width: 34px; height: 34px; fill: #fff; margin-left: 4px; }
+.bot-icon { position: relative; display: block; width: 96px; }
+.bot-icon img { display: block; width: 96px; height: auto; margin: -24px 0; }
 .bot-icon b { position: absolute; right: -8px; bottom: -8px; padding: 3px 8px; border-radius: 999px; background: #fff; color: var(--ink); font-size: 12px; font-weight: 700; white-space: nowrap; }
 .bot h2 { font-size: clamp(1.5rem, 2.4vw, 2rem); }
 .bot p { margin-top: 10px; color: #c4c9d2; max-width: 40em; font-size: 15.5px; }
@@ -323,8 +324,9 @@ body:has(.modal[open]) { overflow: hidden; }
 }
 @media (max-width: 640px) {
   .bot { grid-template-columns: 1fr; }
-  .bot-icon { width: 64px; height: 64px; border-radius: 18px; }
-  .bot-icon svg { width: 26px; height: 26px; }
+  .bot-icon, .bot-icon img { width: 72px; }
+  .bot-icon img { margin: 0; }
+  .art-3d { height: 104px; }
   .btn-max { width: 100%; }
 }
 
