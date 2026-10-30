@@ -428,7 +428,7 @@ a { color: inherit; }
 .plan .btn { margin-top: auto; }
 
 .bonus { display: flex; gap: 24px; align-items: flex-start; margin-top: 20px; padding: 28px 32px; background: var(--accent-soft); border-radius: var(--r-card); color: var(--accent); }
-.bonus svg { flex: none; }
+.bonus-3d { flex: none; display: block; width: auto; height: 76px; margin: -10px 0; }
 .bonus h3 { color: var(--ink); margin-bottom: 6px; }
 .bonus p { color: #2b3140; max-width: 60em; }
 
@@ -918,8 +918,8 @@ body:has(.modal[open]) { overflow: hidden; }
 /* Первый экран: плашка с подарком */
 .hero-gift { display: flex; align-items: center; gap: 14px; margin-top: 28px; padding: 14px 18px; border-radius: 14px; background: var(--accent-soft); color: var(--graphite); font-size: 14px; line-height: 1.4; }
 .hero-gift strong { display: block; margin-bottom: 2px; color: var(--ink); font-size: 15px; font-weight: 600; }
-.hero-gift-icon { display: grid; place-items: center; flex: none; width: 48px; height: 48px; border-radius: 12px; background: var(--paper); color: var(--accent); }
-.hero-gift-icon svg { width: 28px; height: 28px; }
+.hero-gift-icon { display: grid; place-items: center; flex: none; width: 52px; height: 56px; }
+.hero-gift-icon img { display: block; width: auto; height: 56px; }
 @media (max-width: 640px) { .hero-gift { padding: 12px 14px; } }
 
 /* Пальцем по чипам ниш попадать проще */
@@ -931,3 +931,9 @@ body:has(.modal[open]) { overflow: hidden; }
   .fmt-land .pg-hero { grid-template-columns: 1fr 70px; }
   .fmt-land .fmt-form { left: calc(50% + 22px); width: 100px; }
 }
+
+/* 3D-иллюстрации из общей серии (assets/3d/, генерация в Kie, вырезка tools/cut_3d.py) */
+.art-3d { display: block; width: auto; height: 120px; margin: 0 0 20px -6px; }
+.art-below { height: 140px; margin: 28px 0 0 -6px; }
+@media (max-width: 900px) { .art-below { display: none; } }
+@media (max-width: 640px) { .art-3d { height: 96px; } }
