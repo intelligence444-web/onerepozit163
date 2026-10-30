@@ -70,6 +70,24 @@ function problem(input) {
   return (input.type === "checkbox" ? input.checked : input.value.trim() !== "") ? null : "";
 }
 
+/* ---------- Источник визита для заявки: UTM-метки, _ym_uid, откуда пришёл ---------- */
+
+// Метки первого рекламного перехода храним в сессии, чтобы они не терялись при переходах по сайту
+const firstVisit = (() => {
+  const fresh = { utm: location.search, referrer: document.referrer };
+  try {
+    const saved = JSON.parse(sessionStorage.getItem("visit") || "null");
+    if (saved && (saved.utm || !fresh.utm)) return saved;
+    sessionStorage.setItem("visit", JSON.stringify(fresh));
+  } catch {}
+  return fresh;
+})();
+
+function visitSource() {
+  const uid = document.cookie.match(/(?:^|;\s*)_ym_uid=([^;]+)/);
+  return { utm: firstVisit.utm || location.search, ym_uid: uid ? uid[1] : "", referrer: firstVisit.referrer };
+}
+
 function leadForm(form, getLead, onSent) {
   const required = [...form.querySelectorAll("[required]")];
   const fields = () => required.filter((i) => !i.disabled); // поля скрытого режима попапа выключены
@@ -117,7 +135,7 @@ function leadForm(form, getLead, onSent) {
       contact: form.elements.contact.value.trim(),
       ...lead.fields,
       page: location.href,
-      utm: location.search,
+      ...visitSource(),
       consent: new Date().toISOString(), // когда человек отметил согласие на обработку данных
     };
 

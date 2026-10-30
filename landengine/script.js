@@ -401,6 +401,24 @@ function phoneMask(input) {
 
 // Общая логика формы заявки: проверка полей, согласие, отправка. Используется калькулятором и попапом.
 // getLead возвращает, что именно человек заказывает: текст для страницы благодарности и поля для заявки.
+/* ---------- Источник визита для заявки: UTM-метки, _ym_uid, откуда пришёл ---------- */
+
+// Метки первого рекламного перехода храним в сессии, чтобы они не терялись при переходах по сайту
+const firstVisit = (() => {
+  const fresh = { utm: location.search, referrer: document.referrer };
+  try {
+    const saved = JSON.parse(sessionStorage.getItem("visit") || "null");
+    if (saved && (saved.utm || !fresh.utm)) return saved;
+    sessionStorage.setItem("visit", JSON.stringify(fresh));
+  } catch {}
+  return fresh;
+})();
+
+function visitSource() {
+  const uid = document.cookie.match(/(?:^|;\s*)_ym_uid=([^;]+)/);
+  return { utm: firstVisit.utm || location.search, ym_uid: uid ? uid[1] : "", referrer: firstVisit.referrer };
+}
+
 function leadForm(el, getLead, onSent) {
   const status = el.querySelector(".form-status");
   const button = el.querySelector('button[type="submit"]');
@@ -447,7 +465,7 @@ function leadForm(el, getLead, onSent) {
       contact: contact.value.trim(),
       ...lead.fields,
       page: location.href,
-      utm: location.search,
+      ...visitSource(),
       consent: new Date().toISOString(), // когда человек отметил согласие на обработку данных
     };
 
