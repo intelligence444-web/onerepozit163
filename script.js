@@ -4,7 +4,7 @@ const CONFIG = {
   // Заявки принимает функция в Yandex Cloud (server/lead-mail) и отправляет их на Яндекс Почту.
   formEndpoint: "https://functions.yandexcloud.net/d4er6d31bf29uc92fked",
   // Номер счётчика Яндекс Метрики, для цели "lead" при отправке формы.
-  metrikaId: null,
+  metrikaId: 99790839,
 };
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
