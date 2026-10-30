@@ -686,6 +686,8 @@ body:has(.modal[open]) { overflow: hidden; }
   .services { grid-template-columns: minmax(0, 1fr); }
   .steps { grid-template-columns: 1fr; }
   .hero-actions .btn { flex: 1 1 100%; }
+  .msg-btns { flex: 1 1 100%; }
+  .msg-btns .btn { flex: 1; }
   .header-inner { gap: 12px; }
   .site-header .logo img { width: 28px; }
   .site-header .wordmark { font-size: 14px; letter-spacing: .06em; }
@@ -779,6 +781,13 @@ body:has(.modal[open]) { overflow: hidden; }
 /* Мобильная панель с кнопкой */
 .mobile-cta { display: none; }
 .btn-icon { width: 52px; padding: 0; flex: none; }
+/* Кнопки мессенджеров рядом с главной кнопкой (как на главной ad-engine.ru) */
+.msg-btns { display: flex; gap: 12px; }
+.btn-tg, .btn-max-chat { gap: 10px; padding: 0 20px; }
+.btn-tg svg { color: #229ed9; flex: none; }
+.btn-max-chat svg { color: #6b4cf5; flex: none; }
+.mobile-cta .btn-max-chat { padding: 0; }
+.mobile-cta .btn-icon:not(.btn-max-chat) svg { color: #229ed9; }
 
 @media (max-width: 1080px) {
   .bento { grid-template-columns: repeat(2, 1fr); }
