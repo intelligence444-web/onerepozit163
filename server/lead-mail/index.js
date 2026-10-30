@@ -3,7 +3,7 @@
 // Если заданы MAX_TOKEN и MAX_CHAT_ID, заявка с метками дублируется ботом в группу MAX (тоже Россия).
 // Переменные окружения: SMTP_USER (ящик-отправитель), SMTP_PASS (пароль приложения),
 // MAIL_TO (куда слать заявки, по умолчанию SMTP_USER), ALLOWED_ORIGINS (адреса сайта через запятую),
-// MAX_TOKEN (токен бота MAX), MAX_CHAT_ID (id группы; если не задан, берётся первая группа, куда добавлен бот).
+// MAX_TOKEN (токен бота MAX), MAX_CHAT_ID (id группы, отрицательное число; если не задан, ищем в событиях бота).
 const nodemailer = require("nodemailer");
 
 const LABELS = {
@@ -87,16 +87,17 @@ const MAX_API = "https://platform-api.max.ru";
 let maxFetch = (...a) => fetch(...a);
 let maxChat = null;
 
-// Номер группы: из MAX_CHAT_ID или первая группа, куда добавлен бот (ищем один раз и запоминаем)
+// Номер группы: из MAX_CHAT_ID, иначе ищем группу в последних событиях бота (сообщения в группе, добавление бота)
 async function maxChatId() {
   if (process.env.MAX_CHAT_ID) return process.env.MAX_CHAT_ID;
   if (maxChat) return maxChat;
-  const res = await maxFetch(`${MAX_API}/chats?count=100`, { headers: { Authorization: process.env.MAX_TOKEN } });
-  if (!res.ok) throw new Error(`max chats ${res.status} ${(await res.text()).slice(0, 200)}`);
-  const group = ((await res.json()).chats || []).find((c) => c.type === "chat");
-  if (!group) throw new Error("max: бот не добавлен ни в одну группу");
-  console.log(`max: заявки идут в группу «${group.title}», MAX_CHAT_ID=${group.chat_id}`);
-  return (maxChat = String(group.chat_id));
+  const res = await maxFetch(`${MAX_API}/updates?limit=100&timeout=0`, { headers: { Authorization: process.env.MAX_TOKEN } });
+  if (!res.ok) throw new Error(`max updates ${res.status} ${(await res.text()).slice(0, 200)}`);
+  const found = ((await res.json()).updates || [])
+    .map((u) => (u.message && u.message.recipient && u.message.recipient.chat_type === "chat" ? u.message.recipient.chat_id : u.update_type === "bot_added" && u.chat_id))
+    .find((id) => id && Number(id) < 0);
+  if (!found) throw new Error("группа не найдена: напишите в группу сообщение и повторите тест или задайте MAX_CHAT_ID");
+  return (maxChat = String(found));
 }
 
 async function sendMax(lead) {

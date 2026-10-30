@@ -80,10 +80,10 @@ const call = (body, origin = "https://site.ru", method = "POST") =>
   const urls = [];
   fn._setFetch(async (url) => {
     urls.push(url);
-    return { ok: true, text: async () => "", json: async () => ({ chats: [{ chat_id: 555, type: "dialog", title: "Личка" }, { chat_id: -777, type: "chat", title: "Ad engine leads" }] }) };
+    return { ok: true, text: async () => "", json: async () => ({ updates: [{ update_type: "message_created", message: { recipient: { chat_id: 555, chat_type: "dialog" } } }, { update_type: "message_created", message: { recipient: { chat_id: -777, chat_type: "chat" } } }] }) };
   });
   await fn.handler({ httpMethod: "POST", headers: { Origin: "https://site.ru" }, body: JSON.stringify(lead) });
   await fn.handler({ httpMethod: "POST", headers: { Origin: "https://site.ru" }, body: JSON.stringify(lead) });
-  assert.deepStrictEqual(urls, ["https://platform-api.max.ru/chats?count=100", "https://platform-api.max.ru/messages?chat_id=-777", "https://platform-api.max.ru/messages?chat_id=-777"], "группа найдена один раз");
+  assert.deepStrictEqual(urls, ["https://platform-api.max.ru/updates?limit=100&timeout=0", "https://platform-api.max.ru/messages?chat_id=-777", "https://platform-api.max.ru/messages?chat_id=-777"], "группа найдена один раз");
   console.log("Проверки MAX пройдены. Пример сообщения:\n" + text);
 })().catch((e) => { console.error(e); process.exit(1); });
