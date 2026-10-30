@@ -176,6 +176,7 @@ a { color: inherit; }
 .included p { color: var(--graphite); font-size: 15px; }
 .included a { color: var(--accent); text-underline-offset: 3px; white-space: nowrap; }
 .ico { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 6px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); }
+.ico-3d { display: block; width: 112px; height: 104px; margin: -6px 0 2px -4px; object-fit: contain; object-position: left bottom; }
 .ico svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
 /* Качество заявок */
@@ -357,6 +358,20 @@ body:has(.modal[open]) { overflow: hidden; }
 .js .quiz-next { display: inline-flex; }
 .quiz-back { justify-self: start; padding: 6px 0; border: 0; background: none; color: var(--graphite); font: 500 14px/1 var(--font); cursor: pointer; }
 .quiz-back:hover { color: var(--ink); }
+
+/* Всплывающие карточки «Новая заявка» на первом экране */
+.lead-toast { position: absolute; z-index: 2; display: flex; align-items: center; gap: 10px; padding: 10px 14px 10px 10px; border-radius: 14px; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 18px 40px -18px rgba(21, 23, 26, .35); font-size: 12.5px; line-height: 1.3; color: var(--graphite); white-space: nowrap; animation: toast-in .5s ease-out both; }
+.lead-toast b { display: grid; place-items: center; flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--ok); color: #fff; font-size: 18px; font-weight: 600; line-height: 1; }
+.lead-toast strong { display: block; color: var(--ink); font-size: 14px; font-weight: 600; }
+.lead-toast.t1 { right: -150px; top: 24%; animation-delay: .8s; }
+.lead-toast.t2 { right: -12px; bottom: -22px; animation-delay: 1.6s; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(10px) scale(.96); } }
+@media (max-width: 1400px) { .lead-toast.t1 { display: none; } }
+@media (max-width: 640px) {
+  .lead-toast.t1 { display: none; }
+  .lead-toast.t2 { right: 0; bottom: -40px; }
+}
+@media (prefers-reduced-motion: reduce) { .lead-toast { animation: none; } }
 
 @media (max-width: 1180px) {
   .nav { display: none; }
