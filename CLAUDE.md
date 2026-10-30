@@ -37,6 +37,10 @@
 - `sitemap.xml`: обе страницы, при заметных правках обновлять `lastmod`. Служебные страницы и `portfolio/` закрыты `noindex` и в robots.txt не запрещены, чтобы поисковик видел noindex.
 - Полная инструкция и скрипты (Wordstat, FAQPage, проверка head) — скилл `.claude/skills/seo-landing/`.
 
+## Процесс запуска лендинга
+
+Весь путь от брифа до публикации (вёрстка, 3D, формы, заявки на почту и в MAX, Метрика, 152-ФЗ, SEO, проверка) — скилл `.claude/skills/landing-launch/`. Настройка заявок в MAX и частые ошибки — `.claude/skills/landing-launch/references/leads-max.md`.
+
 ## Заявки и данные (152-ФЗ)
 
 - Формы шлют JSON в Yandex Cloud Function (`CONFIG.formEndpoint` в `landengine/script.js`), она отправляет письмо на Яндекс Почту. Код и инструкция — `server/lead-mail/`, тесты — `npm test` там же.
