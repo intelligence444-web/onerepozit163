@@ -15,6 +15,7 @@ LAND = "<b>LAND</b> ENGINE"
 # страница: (путь до корня сайта, знак в подвале, раздел сайта)
 PAGES = {
     "index.html": ("", AD, "ad"),
+    "thanks.html": ("", AD, "ad"),
     "landengine/index.html": ("../", LAND, "le"),
     "landengine/thanks.html": ("../", LAND, "le"),
     "landengine/privacy.html": ("../", LAND, "le"),
