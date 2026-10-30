@@ -24,6 +24,11 @@
 - После правки `styles.css` или `script.js` поднимать `?v=` во всех страницах: `landengine/index.html`, `thanks.html`, `privacy.html`, `consent.html` и корневой `404.html`.
 - Сборки нет, сервер для проверки не нужен: Playwright открывает `file:///…/landengine/index.html`.
 
+## SEO
+
+- В `<head>` обеих страниц (`index.html`, `landengine/index.html`): title, description, canonical, Open Graph, Twitter и JSON-LD (`ProfessionalService` + `FAQPage`). Меняешь вопросы в «Частых вопросах» — поправь `FAQPage` в конце `<head>` той же страницы.
+- `sitemap.xml`: обе страницы, при заметных правках обновлять `lastmod`. Служебные страницы и `portfolio/` закрыты `noindex` и в robots.txt не запрещены, чтобы поисковик видел noindex.
+
 ## Заявки и данные (152-ФЗ)
 
 - Формы шлют JSON в Yandex Cloud Function (`CONFIG.formEndpoint` в `landengine/script.js`), она отправляет письмо на Яндекс Почту. Код и инструкция — `server/lead-mail/`, тесты — `npm test` там же.
