@@ -27,8 +27,8 @@
 ## SEO
 
 - В `<head>` обеих страниц (`index.html`, `landengine/index.html`): title, description, canonical, Open Graph, Twitter и JSON-LD (`ProfessionalService` + `FAQPage`). Меняешь вопросы в «Частых вопросах» — поправь `FAQPage` в конце `<head>` той же страницы.
-- `sitemap.xml`: обе страницы, при заметных правках обновлять `lastmod`.
-- Полная инструкция и скрипты (Wordstat, FAQPage, проверка head) — скилл `.claude/skills/seo-landing/`. Служебные страницы и `portfolio/` закрыты `noindex` и в robots.txt не запрещены, чтобы поисковик видел noindex.
+- `sitemap.xml`: обе страницы, при заметных правках обновлять `lastmod`. Служебные страницы и `portfolio/` закрыты `noindex` и в robots.txt не запрещены, чтобы поисковик видел noindex.
+- Полная инструкция и скрипты (Wordstat, FAQPage, проверка head) — скилл `.claude/skills/seo-landing/`.
 
 ## Заявки и данные (152-ФЗ)
 
