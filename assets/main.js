@@ -211,7 +211,7 @@ const answer = (name) => (auditForm.querySelector(`[name=${name}]:checked`) || {
 leadForm(auditForm, () => {
   const channels = [...auditForm.querySelectorAll("[name=channels]:checked")].map((i) => i.value);
   const quiz = [
-    answer("role"),
+    answer("role") && `кто вы: ${answer("role")}`,
     answer("leads") && `заявок в месяц: ${answer("leads")}`,
     answer("manager") && `менеджер по продажам: ${answer("manager")}`,
     answer("crm") && `CRM: ${answer("crm")}`,
@@ -244,7 +244,7 @@ leadForm(modalForm, () => {
     summary: mode === "calc" ? `расчёт стоимости лида: ${city}` : need.toLowerCase(),
     fields: {
       request: need,
-      project: mode === "calc" ? [`город: ${city}`, role].filter(Boolean).join("; ") : "",
+      project: mode === "calc" ? [`город: ${city}`, role && `кто вы: ${role}`].filter(Boolean).join("; ") : "",
       source: `Попап «${modal.dataset.source}»`,
     },
   };

@@ -68,15 +68,20 @@ function maxText(lead) {
   const line = (k, v) => `${esc(k)}: <b>${esc(v)}</b>`;
   const parts = [`<b>Заявка с сайта: ${esc(String(lead.source || "форма").slice(0, 120))}</b>`];
   parts.push(["<b>Контактные данные</b>", line("Имя", lead.name), line("Телефон", lead.contact)].join("\n"));
-  const answers = rows(Object.fromEntries(ANSWERS.filter((k) => k in lead).map((k) => [k, lead[k]])));
+  const answers = rows(Object.fromEntries(ANSWERS.filter((k) => k in lead).map((k) => [k, lead[k]])))
+    // Ответы квиза приходят одной строкой «город: Орёл; кто вы: Застройщик» — раскладываем по строкам
+    .flatMap(([k, v]) => (k === LABELS.project ? v.split("; ").map((p) => {
+      const m = p.match(/^([^:]{1,40}):\s*(.+)$/);
+      return m ? [m[1][0].toUpperCase() + m[1].slice(1), m[2]] : [k, p];
+    }) : [[k, v]]));
   if (answers.length) parts.push(["<b>Ответы</b>", ...answers.map(([k, v]) => line(k, v))].join("\n"));
   const utm = utmRows(lead.utm);
   const source = [
     lead.ip && `IP: ${esc(lead.ip)}`,
     ...utm.map(([k, v]) => `${esc(k)}: ${esc(v)}`),
     lead.ym_uid && `_ym_uid: ${esc(String(lead.ym_uid).slice(0, 40))}`,
-    lead.referrer && `Пришёл с: ${esc(String(lead.referrer).slice(0, 300))}`,
-    lead.page && `Страница: ${esc(String(lead.page).split("?")[0].slice(0, 300))}`,
+    lead.referrer && `Пришёл с: ${esc(String(lead.referrer).replace(/^https?:\/\//, "").slice(0, 300))}`,
+    lead.page && `Страница: ${esc(String(lead.page).split("?")[0].replace(/^https?:\/\//, "").slice(0, 300))}`,
   ].filter(Boolean);
   parts.push([`<b>${utm.length ? "UTM-метки" : "Источник (без UTM-меток)"}</b>`, ...source].join("\n"));
   return parts.join("\n\n").slice(0, 3900);
@@ -101,11 +106,15 @@ async function maxChatId() {
 }
 
 async function sendMax(lead) {
-  const res = await maxFetch(`${MAX_API}/messages?chat_id=${encodeURIComponent(await maxChatId())}`, {
+  const send = (query) => maxFetch(`${MAX_API}/messages?chat_id=${encodeURIComponent(chat)}${query}`, {
     method: "POST",
     headers: { Authorization: process.env.MAX_TOKEN, "Content-Type": "application/json" },
     body: JSON.stringify({ text: maxText(lead), format: "html" }),
   });
+  const chat = await maxChatId();
+  // Без карточки-превью ссылки; если MAX не примет параметр, шлём без него
+  let res = await send("&disable_link_preview=true");
+  if (res.status === 400) res = await send("");
   if (!res.ok) throw new Error(`max ${res.status} ${(await res.text()).slice(0, 200)}`);
 }
 
