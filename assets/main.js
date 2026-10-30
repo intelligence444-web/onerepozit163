@@ -5,7 +5,7 @@ const CONFIG = {
   // Номер счётчика Яндекс Метрики, для цели "lead_estate" при отправке формы.
   metrikaId: 99790839,
   // Своя страница благодарности, отдельно от Land Engine
-  thanksUrl: "thanks.html?v=1",
+  thanksUrl: "thanks-estate.html",
 };
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

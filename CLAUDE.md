@@ -28,7 +28,7 @@
 - После правки `assets/main.css` или `assets/main.js` поднимать `?v=` в корневом `index.html`.
 - Подвал общий для обоих сайтов: правим только `partials/footer.html` (разметка) и `assets/footer.css` (стили), потом `python3 tools/sync_footer.py` — он вставит подвал во все страницы и обновит `?v=` у стилей. Руками подвал в страницах не трогать.
 - Не называть файлы, папки и классы со словом «ad» (`ad.css`, `ad-title`, `banner`): блокировщики рекламы их режут, и страница теряет стили.
-- После правки `styles.css` или `script.js` поднимать `?v=` во всех страницах: `landengine/index.html`, `thanks.html`, `privacy.html`, `consent.html` и корневой `404.html`.
+- После правки `styles.css` или `script.js` поднимать `?v=` во всех страницах: `landengine/index.html`, `thanks-lend.html`, `privacy.html`, `consent.html` и корневой `404.html`.
 - Сборки нет, сервер для проверки не нужен: Playwright открывает `file:///…/landengine/index.html`.
 
 ## SEO
@@ -57,7 +57,7 @@
 
 Ждём от Александра:
 - проверить, что в функции `ALLOWED_ORIGINS` есть `https://ad-engine.ru,https://www.ad-engine.ru`, и отправить тестовую заявку с домена;
-- Метрика 99790839 стоит на всех страницах (кроме `portfolio/`). Цели: `lead_estate` — заявка с главной (`assets/main.js`), `lead_lend` — с Land Engine (`landengine/script.js`). Страницы «спасибо» раздельные: корневой `thanks.html` у недвижимости, `landengine/thanks.html` у Land Engine;
+- Метрика 99790839 стоит на всех страницах (кроме `portfolio/`). Цели: `lead_estate` — заявка с главной (`assets/main.js`), `lead_lend` — с Land Engine (`landengine/script.js`). Страницы «спасибо» раздельные: `thanks-estate.html` у недвижимости, `landengine/thanks-lend.html` у Land Engine (цели «Посещение страницы» по этим адресам). Не переименовывать — на них завязаны цели;
 - Вебмастер: мета-тег стоит на главной (30.10.2026); отправить карту сайта https://ad-engine.ru/sitemap.xml и обе страницы на переобход.
 
 Идеи из разбора leadhubagency.ru на потом: блок бесплатного аудита рекламы, ветка «Уже есть сайт? Запустим трафик», этапы змейкой, видео-кейсы с цифрами окупаемости (когда будут реальные кейсы).

@@ -454,7 +454,7 @@ function leadForm(el, getLead, onSent) {
     // Страница благодарности открывается в новой вкладке. Вкладку открываем сразу, пока идёт нажатие
     // кнопки, — иначе браузер заблокирует её как всплывающее окно. Если всё же заблокировал, откроем здесь же.
     const tab = window.open("", "_blank");
-    const url = "thanks.html?v=3"; // версия в адресе, чтобы браузер не показал старую копию страницы
+    const url = "thanks-lend.html"; // свой адрес у каждого сайта — отдельные цели в Метрике
     const done = () => {
       // Имя и суть заявки страница благодарности берёт из localStorage — он общий для вкладок сайта
       try { localStorage.setItem("lead", JSON.stringify({ name: payload.name, summary: lead.summary })); } catch {}
