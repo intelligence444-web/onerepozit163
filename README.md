@@ -9,7 +9,7 @@
 - `CNAME` — домен для GitHub Pages; `404.html`, `robots.txt`, `sitemap.xml` — общие для всего домена.
 - `partials/footer.html`, `assets/footer.css`, `tools/sync_footer.py` — общий подвал главной и Land Engine. Правим шаблон и стили, затем `python3 tools/sync_footer.py` вставляет подвал во все страницы.
 - `server/lead-mail/` — функция Yandex Cloud, которая принимает заявки и шлёт их на Яндекс Почту.
-- `tools/` — скрипты для скриншотов концептов и сборки сайтов ЖК.
+- `tools/` — скрипты для скриншотов концептов и сборки сайтов ЖК, вырезки фона у 3D (`cut_3d.py`, `cut_3d_dark.py`) и перекраски картинок в фирменный изумрудный (`recolor.py`).
 
 ## Что заменить перед запуском
 

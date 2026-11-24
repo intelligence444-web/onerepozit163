@@ -51,7 +51,8 @@
 
 ## Дизайн-система
 
-- Шрифт Onest, токены в начале `landengine/styles.css`: `--accent #2747f5`, `--accent-soft`, `--ink`, `--graphite`, `--mist`, `--line`, радиусы `--r-card 20px`, `--r-control 8px`.
+- Фирменный цвет с 24.11.2026 — изумрудный (был синий): `--accent #0e7c5a`, наведение `#0a6247`, `--accent-soft #e2f3ec`. Логотип, иконки, превью для соцсетей и 3D перекрашены `tools/recolor.py` (`--dark` — для логотипа и текста на белом). Синий оставлен только там, где это чужой бренд: ссылки в макете выдачи Яндекса, VK, Telegram; фиолетовый — у MAX.
+- Шрифт Onest, токены в начале `landengine/styles.css` и `assets/main.css`: `--accent`, `--accent-soft`, `--ink`, `--graphite`, `--mist`, `--line`, радиусы `--r-card 20px`, `--r-control 8px`.
 - Иллюстрации — HTML/CSS-макеты с настоящим текстом и маленькими фото (`landengine/assets/services/`, webp 2–6 КБ), а не серые заглушки.
 - Анимации уважают `prefers-reduced-motion`.
 
