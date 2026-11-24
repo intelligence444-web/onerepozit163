@@ -157,18 +157,8 @@ a { color: inherit; }
 .channel { display: flex; flex-direction: column; gap: 12px; padding: 28px; border: 1px solid var(--line); border-radius: var(--r-card); transition: border-color .2s, transform .2s; }
 .channel:hover { border-color: #b9bfc9; transform: translateY(-2px); }
 .channel > p { color: var(--graphite); font-size: 15px; }
-/* 3D-предмет площадки сверху, маленький знак бренда рядом с названием — чтобы площадку узнавали */
+/* 3D-предмет площадки над названием */
 .ch-3d { align-self: flex-start; width: auto; height: 128px; margin: -6px 0 2px -10px; }
-.ch-title { display: flex; align-items: center; gap: 10px; }
-.ch-logo { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: 8px; color: #fff; font-weight: 700; font-size: 13px; }
-.ch-direct { background: #fc3f1d; font-size: 15px; }
-.ch-avito { grid-template-columns: repeat(2, 7px); gap: 3px; place-content: center; background: var(--ink); }
-.ch-avito i { width: 7px; height: 7px; border-radius: 50%; }
-.ch-avito i:nth-child(1) { background: #00aaff; }
-.ch-avito i:nth-child(2) { background: #a169f7; width: 5px; height: 5px; justify-self: center; align-self: center; }
-.ch-avito i:nth-child(3) { background: #97cf26; width: 5px; height: 5px; justify-self: center; align-self: center; }
-.ch-avito i:nth-child(4) { background: #ff6163; }
-.ch-vk { background: #0062d6; font-size: 10px; }
 .ch-list { display: grid; gap: 8px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14.5px; }
 .ch-list li { position: relative; padding-left: 24px; }
 .ch-list li::before { content: ""; position: absolute; left: 2px; top: .5em; width: 10px; height: 5px; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); }
